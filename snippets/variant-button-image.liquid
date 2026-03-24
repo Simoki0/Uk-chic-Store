@@ -4,7 +4,7 @@
 -%}
 
 <div class="variant-wrapper variant-wrapper--image-swatches js" data-type="button">
-  <label class="variant__label ozchic-variant-label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
+  <label class="variant__label ukchic-variant-label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
     for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}">
     {{ option.name }}
     {%- if is_color -%}
@@ -74,16 +74,16 @@
 
         <label
           for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
-          class="ozchic-image-swatch{% unless product_available %} disabled{% endunless %}{% if option.selected_value == value %} is-active{% endif %}"
+          class="ukchic-image-swatch{% unless product_available %} disabled{% endunless %}{% if option.selected_value == value %} is-active{% endif %}"
           data-swatch-value="{{ value | escape }}"
           title="{{ value | escape }}">
           {%- if variant_image_src != blank -%}
             <img src="{{ variant_image_src }}" alt="{{ value | escape }}" loading="lazy">
           {%- else -%}
-            <span class="ozchic-image-swatch__color" style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %} background-image: url({{ color_image }});{% endif %}"></span>
+            <span class="ukchic-image-swatch__color" style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %} background-image: url({{ color_image }});{% endif %}"></span>
           {%- endif -%}
           {%- unless product_available -%}
-            <span class="ozchic-image-swatch__soldout"></span>
+            <span class="ukchic-image-swatch__soldout"></span>
           {%- endunless -%}
         </label>
       </div>
@@ -96,7 +96,7 @@
   margin-bottom: 24px !important;
 }
 
-.variant-wrapper--image-swatches .ozchic-variant-label {
+.variant-wrapper--image-swatches .ukchic-variant-label {
   font-family: 'Jost', sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
@@ -107,7 +107,7 @@
   letter-spacing: 0.5px !important;
 }
 
-.variant-wrapper--image-swatches .ozchic-variant-label .variant__label-info {
+.variant-wrapper--image-swatches .ukchic-variant-label .variant__label-info {
   font-weight: 400 !important;
   color: #666 !important;
   text-transform: none !important;
@@ -138,7 +138,7 @@
   padding: 0 !important;
 }
 
-label.ozchic-image-swatch {
+label.ukchic-image-swatch {
   display: block !important;
   width: 54px !important;
   height: 54px !important;
@@ -158,7 +158,7 @@ label.ozchic-image-swatch {
   transition: border-color 0.2s ease !important;
 }
 
-label.ozchic-image-swatch img {
+label.ukchic-image-swatch img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
@@ -166,17 +166,17 @@ label.ozchic-image-swatch img {
   border-radius: 2px !important;
 }
 
-label.ozchic-image-swatch:hover {
+label.ukchic-image-swatch:hover {
   border-color: #1e3a5f !important;
 }
 
-.variant-input--image-swatch input[type="radio"]:checked + label.ozchic-image-swatch,
-label.ozchic-image-swatch.is-active {
+.variant-input--image-swatch input[type="radio"]:checked + label.ukchic-image-swatch,
+label.ukchic-image-swatch.is-active {
   border-color: #1e3a5f !important;
   box-shadow: 0 0 0 1px #1e3a5f !important;
 }
 
-label.ozchic-image-swatch .ozchic-image-swatch__color {
+label.ukchic-image-swatch .ukchic-image-swatch__color {
   display: block !important;
   width: 100% !important;
   height: 100% !important;
@@ -184,12 +184,12 @@ label.ozchic-image-swatch .ozchic-image-swatch__color {
   background-position: center !important;
 }
 
-label.ozchic-image-swatch.disabled {
+label.ukchic-image-swatch.disabled {
   opacity: 0.4 !important;
   cursor: not-allowed !important;
 }
 
-label.ozchic-image-swatch .ozchic-image-swatch__soldout {
+label.ukchic-image-swatch .ukchic-image-swatch__soldout {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;

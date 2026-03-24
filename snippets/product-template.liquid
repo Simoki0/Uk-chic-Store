@@ -33,7 +33,7 @@
 -%}
 
 <div id="ProductSection-{{ section_id }}"
-  class="product-section ozchic-product"
+  class="product-section ukchic-product"
   data-section-id="{{ section_id }}"
   data-product-id="{{ product.id }}"
   data-section-type="product"
@@ -71,12 +71,12 @@
 
         <div class="grid__item {{ product_description_width }}">
 
-          <div class="product-single__meta ozchic-product-meta">
+          <div class="product-single__meta ukchic-product-meta">
             
             {%- comment -%} PRODUCT HEADER {%- endcomment -%}
             <div class="product-block product-block--header">
               {%- if settings.vendor_enable -%}
-                <div class="product-single__vendor ozchic-vendor">
+                <div class="product-single__vendor ukchic-vendor">
                   {%- assign vendor_handle = product.vendor | handleize -%}
                   {%- if collections[vendor_handle] != empty -%}
                     <a href="{{ routes.collections_url }}/{{ collections[vendor_handle].handle }}">
@@ -89,11 +89,11 @@
               {%- endif -%}
 
               {%- if isModal -%}
-                <p class="h2 product-single__title ozchic-product-title">
+                <p class="h2 product-single__title ukchic-product-title">
                   {{ product.title }}
                 </p>
               {%- else -%}
-                <h1 class="h2 product-single__title ozchic-product-title">
+                <h1 class="h2 product-single__title ukchic-product-title">
                   {%- unless product.empty? -%}
                     {{ product.title }}
                   {%- else -%}
@@ -103,34 +103,22 @@
               {%- endif -%}
 
               {%- comment -%} RATING BADGE - Under Title {%- endcomment -%}
-              <div class="ozchic-rating-badge">
-                <div class="ozchic-aus-badge">
-                  <svg class="ozchic-aus-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-                    <rect fill="#00008B" width="60" height="30"/>
-                    <g>
-                      <path d="M0,0 L24,15 M24,0 L0,15" stroke="#fff" stroke-width="3"/>
-                      <path d="M0,0 L24,15 M24,0 L0,15" stroke="#C8102E" stroke-width="1.5"/>
-                      <path d="M12,0 V15 M0,7.5 H24" stroke="#fff" stroke-width="5"/>
-                      <path d="M12,0 V15 M0,7.5 H24" stroke="#C8102E" stroke-width="3"/>
-                    </g>
-                    <g fill="#fff" transform="translate(12,22)">
-                      <polygon points="0,-4 1,-1.2 4,-1.2 1.6,0.6 2.5,3.5 0,1.5 -2.5,3.5 -1.6,0.6 -4,-1.2 -1,-1.2"/>
-                    </g>
-                    <g fill="#fff">
-                      <polygon points="45,6 45.8,8.5 48.5,8.5 46.3,10 47.1,12.5 45,11 42.9,12.5 43.7,10 41.5,8.5 44.2,8.5" transform="scale(0.7) translate(20,-2)"/>
-                      <polygon points="52,12 52.6,14 55,14 53.2,15.2 53.8,17.2 52,16 50.2,17.2 50.8,15.2 49,14 51.4,14" transform="scale(0.6) translate(38,2)"/>
-                      <polygon points="52,20 52.5,21.5 54,21.5 52.8,22.5 53.3,24 52,23 50.7,24 51.2,22.5 50,21.5 51.5,21.5" transform="scale(0.55) translate(42,10)"/>
-                      <polygon points="45,24 45.5,25.5 47,25.5 45.8,26.5 46.3,28 45,27 43.7,28 44.2,26.5 43,25.5 44.5,25.5" transform="scale(0.5) translate(42,22)"/>
-                      <polygon points="38,18 38.4,19.2 39.8,19.2 38.7,20 39.1,21.2 38,20.4 36.9,21.2 37.3,20 36.2,19.2 37.6,19.2" transform="scale(0.55) translate(22,12)"/>
-                    </g>
+              <div class="ukchic-rating-badge">
+                <div class="ukchic-uk-badge">
+                  <svg class="ukchic-uk-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="#00247D" width="60" height="30"/>
+                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+                    <path d="M0,0 L60,30 M60,0 L0,30" stroke="#CF142B" stroke-width="2"/>
+                    <path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/>
+                    <path d="M30,0 V30 M0,15 H60" stroke="#CF142B" stroke-width="6"/>
                   </svg>
-                  <span class="ozchic-aus-text">Australian Owned</span>
+                  <span class="ukchic-uk-text">UK Owned</span>
                 </div>
-                <div class="ozchic-rating-row"><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><span class="ozchic-review-text"><span class="ozchic-review-count" id="ozchic-review-count">1,247</span> verified reviews</span></div>
+                <div class="ukchic-rating-row"><svg class="ukchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ukchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ukchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ukchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ukchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><span class="ukchic-review-text"><span class="ukchic-review-count" id="ukchic-review-count">1,247</span> verified reviews</span></div>
               </div>
 
               {%- if sku_enable -%}
-                <p data-sku class="product-single__sku ozchic-sku">
+                <p data-sku class="product-single__sku ukchic-sku">
                   {%- if current_variant.sku -%}
                     SKU: {{ current_variant.sku }}
                   {%- endif -%}
@@ -145,9 +133,9 @@
                   {%- when '@app' -%}
                     {% render block %}
                   {%- when 'separator' -%}
-                    <div class="product-block"><hr class="ozchic-separator"></div>
+                    <div class="product-block"><hr class="ukchic-separator"></div>
                   {%- when 'text' -%}
-                    <div {{ block.shopify_attributes }} class="product-block ozchic-text-block">
+                    <div {{ block.shopify_attributes }} class="product-block ukchic-text-block">
                       {{ block.settings.text }}
                     </div>
                   {%- when 'tab' -%}
@@ -171,10 +159,10 @@
                     </div>
                     
                   {%- when 'price' -%}
-                    <div class="product-block product-block--price ozchic-price-block" {{ block.shopify_attributes }}>
+                    <div class="product-block product-block--price ukchic-price-block" {{ block.shopify_attributes }}>
                       {%- comment -%} PRICE SECTION {%- endcomment -%}
-                      <div class="ozchic-price-wrapper">
-                        <span data-product-price class="ozchic-price-current {% if on_sale %}on-sale{% endif %}">
+                      <div class="ukchic-price-wrapper">
+                        <span data-product-price class="ukchic-price-current {% if on_sale %}on-sale{% endif %}">
                           {%- unless product.empty? -%}
                             {{ current_variant.price | money }}
                           {%- else -%}
@@ -184,25 +172,25 @@
 
                         {%- if product.compare_at_price_max > product.price -%}
                           {%- if current_variant.compare_at_price -%}
-                            <span data-compare-price class="ozchic-price-compare">
+                            <span data-compare-price class="ukchic-price-compare">
                               {{ current_variant.compare_at_price | money }}
                             </span>
                           {%- endif -%}
                         {%- endif -%}
 
                         {%- if on_sale -%}
-                          <div class="ozchic-sale-badge">
+                          <div class="ukchic-sale-badge">
                             <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-                            <div class="ozchic-sale-text">
-                              <span class="ozchic-sale-label">SUMMER SALE</span>
-                              <span class="ozchic-sale-percent">SAVE {{ discount_percent }}%</span>
+                            <div class="ukchic-sale-text">
+                              <span class="ukchic-sale-label">SUMMER SALE</span>
+                              <span class="ukchic-sale-percent">SAVE {{ discount_percent }}%</span>
                             </div>
                           </div>
                         {%- endif -%}
                       </div>
 
                       {%- comment -%} UNIT PRICE {%- endcomment -%}
-                      <div data-unit-price-wrapper class="product__unit-price ozchic-unit-price{% unless current_variant.unit_price_measurement %} hide{% endunless %}">
+                      <div data-unit-price-wrapper class="product__unit-price ukchic-unit-price{% unless current_variant.unit_price_measurement %} hide{% endunless %}">
                         {%- capture unit_price_base_unit -%}
                           <span data-unit-base>
                             {%- if current_variant.unit_price_measurement -%}
@@ -217,7 +205,7 @@
                       </div>
 
                       {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
-                        <div class="product__policies rte ozchic-policies">
+                        <div class="product__policies rte ukchic-policies">
                           {%- if shop.taxes_included -%}
                             {{ 'products.product.include_taxes' | t }}
                           {%- endif -%}
@@ -229,16 +217,16 @@
                     </div>
                     
                   {%- when 'quantity_selector' -%}
-                    <div class="product-block ozchic-quantity-block" {{ block.shopify_attributes }}>
-                      <div class="product__quantity ozchic-quantity">
+                    <div class="product-block ukchic-quantity-block" {{ block.shopify_attributes }}>
+                      <div class="product__quantity ukchic-quantity">
                         {% assign qty_id = section_id | append: product.id %}
-                        <label for="Quantity-{{ qty_id }}" class="ozchic-quantity-label">{{ 'products.product.quantity' | t }}</label>
+                        <label for="Quantity-{{ qty_id }}" class="ukchic-quantity-label">{{ 'products.product.quantity' | t }}</label>
                         {%- render 'quantity-input', form_id: form_id, id: qty_id, qty: 1, min: 1 -%}
                       </div>
                     </div>
                     
                   {%- when 'variant_picker' -%}
-                    <div class="product-block ozchic-variant-block" {{ block.shopify_attributes }}>
+                    <div class="product-block ukchic-variant-block" {{ block.shopify_attributes }}>
                       {% unless product.has_only_default_variant %}
                         {%- for option in product.options_with_values -%}
 
@@ -314,7 +302,7 @@
                     </div>
                     
                   {%- when 'buy_buttons' -%}
-                    <div class="product-block ozchic-buy-block" {{ block.shopify_attributes }}>
+                    <div class="product-block ukchic-buy-block" {{ block.shopify_attributes }}>
                       {%- unless product.empty? -%}
                         <div class="product-block">
                           {%- render 'product-form',
@@ -337,7 +325,7 @@
 
                   {%- when 'sales_point' -%}
                     {%- unless block.settings.text == blank -%}
-                      <div class="product-block product-block--sales-point ozchic-sales-point" {{ block.shopify_attributes }}>
+                      <div class="product-block product-block--sales-point ukchic-sales-point" {{ block.shopify_attributes }}>
                         <ul class="sales-points">
                           <li class="sales-point">
                             <span class="icon-and-text">
@@ -363,11 +351,11 @@
                       </div>
                     {%- endunless -%}
                   {%- when 'inventory_status' -%}
-                    <div class="product-block product-block--sales-point ozchic-inventory" {{ block.shopify_attributes }}>
+                    <div class="product-block product-block--sales-point ukchic-inventory" {{ block.shopify_attributes }}>
                       {%- render 'product-inventory', product: product, current_variant: current_variant, block: block -%}
                     </div>
                   {%- when 'share' -%}
-                    <div class="product-block ozchic-share" {{ block.shopify_attributes }}>
+                    <div class="product-block ukchic-share" {{ block.shopify_attributes }}>
                       {%- render 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product -%}
                     </div>
                   {%- when 'trust_badge' -%}
@@ -408,13 +396,13 @@
 </div>
 
 {%- comment -%} STICKY ADD TO CART FOR MOBILE {%- endcomment -%}
-<div class="ozchic-sticky-atc" id="ozchic-sticky-atc">
-  <div class="ozchic-sticky-atc-inner">
-    <div class="ozchic-sticky-atc-info">
-      <span class="ozchic-sticky-atc-title">{{ product.title | truncate: 30 }}</span>
-      <span class="ozchic-sticky-atc-price">{{ current_variant.price | money }}</span>
+<div class="ukchic-sticky-atc" id="ukchic-sticky-atc">
+  <div class="ukchic-sticky-atc-inner">
+    <div class="ukchic-sticky-atc-info">
+      <span class="ukchic-sticky-atc-title">{{ product.title | truncate: 30 }}</span>
+      <span class="ukchic-sticky-atc-price">{{ current_variant.price | money }}</span>
     </div>
-    <button type="button" class="ozchic-sticky-atc-btn" id="ozchic-sticky-atc-btn">
+    <button type="button" class="ukchic-sticky-atc-btn" id="ukchic-sticky-atc-btn">
       Add to Cart
     </button>
   </div>
@@ -422,27 +410,27 @@
 
 <style>
 /* ============================================
-   OZ-CHIC PRODUCT PAGE STYLES
+   UK-CHIC PRODUCT PAGE STYLES
    ============================================ */
 
-.ozchic-product {
-  --ozchic-navy: #1e3a5f;
-  --ozchic-navy-light: #2a4a73;
-  --ozchic-gold: #c9a961;
-  --ozchic-gold-light: #d4ba7a;
-  --ozchic-cream: #faf8f5;
-  --ozchic-text: #333333;
-  --ozchic-text-light: #666666;
-  --ozchic-success: #22c55e;
-  --ozchic-error: #ef4444;
+.ukchic-product {
+  --ukchic-navy: #1e3a5f;
+  --ukchic-navy-light: #2a4a73;
+  --ukchic-gold: #c9a961;
+  --ukchic-gold-light: #d4ba7a;
+  --ukchic-cream: #faf8f5;
+  --ukchic-text: #333333;
+  --ukchic-text-light: #666666;
+  --ukchic-success: #22c55e;
+  --ukchic-error: #ef4444;
 }
 
 /* Product Title */
-.ozchic-product-title {
+.ukchic-product-title {
   font-family: 'Cormorant Garamond', Georgia, serif !important;
   font-size: clamp(24px, 5vw, 36px) !important;
   font-weight: 600 !important;
-  color: var(--ozchic-navy) !important;
+  color: var(--ukchic-navy) !important;
   line-height: 1.2 !important;
   margin-bottom: 0 !important;
   margin-top: 5px !important;
@@ -461,7 +449,7 @@
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
   }
-  .product-single__meta.ozchic-product-meta {
+  .product-single__meta.ukchic-product-meta {
     padding-top: 15px !important;
     margin-top: 0 !important;
   }
@@ -481,81 +469,81 @@
   .thumbnails-wrapper {
     margin-bottom: 10px !important;
   }
-  .product-section.ozchic-product .grid {
+  .product-section.ukchic-product .grid {
     row-gap: 15px !important;
   }
-  .product-section.ozchic-product .page-width {
+  .product-section.ukchic-product .page-width {
     padding-top: 0 !important;
   }
 }
 
 /* Vendor Badge */
-.ozchic-vendor {
+.ukchic-vendor {
   display: inline-block;
   font-family: 'Jost', sans-serif;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--ozchic-gold);
+  color: var(--ukchic-gold);
   margin-bottom: 10px;
   padding-bottom: 8px;
-  border-bottom: 2px solid var(--ozchic-gold);
+  border-bottom: 2px solid var(--ukchic-gold);
 }
 
-.ozchic-vendor a {
-  color: var(--ozchic-gold);
+.ukchic-vendor a {
+  color: var(--ukchic-gold);
   text-decoration: none;
 }
 
-.ozchic-vendor a:hover {
+.ukchic-vendor a:hover {
   text-decoration: underline;
 }
 
 /* SKU */
-.ozchic-sku {
+.ukchic-sku {
   font-family: 'Jost', sans-serif;
   font-size: 12px;
-  color: var(--ozchic-text-light);
+  color: var(--ukchic-text-light);
   margin-top: 8px;
 }
 
 /* Rating Stars */
-.ozchic-product-rating {
+.ukchic-product-rating {
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 12px 0 16px;
 }
 
-.ozchic-stars {
+.ukchic-stars {
   display: flex;
   gap: 3px;
 }
 
-.ozchic-stars svg {
+.ukchic-stars svg {
   width: 18px;
   height: 18px;
 }
 
-.ozchic-stars svg.star-filled {
-  fill: var(--ozchic-gold);
+.ukchic-stars svg.star-filled {
+  fill: var(--ukchic-gold);
 }
 
-.ozchic-stars svg.star-empty {
+.ukchic-stars svg.star-empty {
   fill: none;
-  stroke: var(--ozchic-gold);
+  stroke: var(--ukchic-gold);
   stroke-width: 1.5;
 }
 
-.ozchic-rating-count {
+.ukchic-rating-count {
   font-family: 'Jost', sans-serif;
   font-size: 14px;
-  color: var(--ozchic-text-light);
+  color: var(--ukchic-text-light);
 }
 
 /* Rating Badge */
-.ozchic-rating-badge {
+.ukchic-rating-badge {
   display: flex !important;
   flex-direction: column !important;
   gap: 4px !important;
@@ -563,13 +551,13 @@
   margin-bottom: 0 !important;
 }
 
-.ozchic-aus-badge {
+.ukchic-uk-badge {
   display: inline-flex !important;
   align-items: center !important;
   gap: 6px !important;
 }
 
-.ozchic-aus-flag {
+.ukchic-uk-flag {
   width: 22px !important;
   height: 11px !important;
   border-radius: 2px !important;
@@ -577,7 +565,7 @@
   flex-shrink: 0 !important;
 }
 
-.ozchic-aus-text {
+.ukchic-uk-text {
   font-family: 'Jost', -apple-system, sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
@@ -585,13 +573,13 @@
   line-height: 1 !important;
 }
 
-.ozchic-rating-row {
+.ukchic-rating-row {
   display: inline !important;
   white-space: nowrap !important;
   font-size: 0 !important;
 }
 
-.ozchic-star {
+.ukchic-star {
   width: 14px !important;
   height: 14px !important;
   fill: #c9a961 !important;
@@ -600,7 +588,7 @@
   margin-right: 1px !important;
 }
 
-.ozchic-review-text {
+.ukchic-review-text {
   font-family: 'Jost', -apple-system, sans-serif !important;
   font-size: 13px !important;
   color: #666 !important;
@@ -609,20 +597,20 @@
   margin-left: 6px !important;
 }
 
-.ozchic-review-count {
+.ukchic-review-count {
   font-weight: 600 !important;
   color: #1e3a5f !important;
 }
 
 /* Price Block */
-.ozchic-price-block {
+.ukchic-price-block {
   padding: 16px 0 !important;
   border-top: 1px solid #eee !important;
   border-bottom: none !important;
   margin: 12px 0 0 0 !important;
 }
 
-.ozchic-price-wrapper {
+.ukchic-price-wrapper {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -630,19 +618,19 @@
   gap: 10px !important;
 }
 
-.ozchic-price-current {
+.ukchic-price-current {
   font-family: 'Jost', sans-serif !important;
   font-size: 26px !important;
   font-weight: 700 !important;
-  color: var(--ozchic-navy) !important;
+  color: var(--ukchic-navy) !important;
   line-height: 1 !important;
 }
 
-.ozchic-price-current.on-sale {
-  color: var(--ozchic-navy) !important;
+.ukchic-price-current.on-sale {
+  color: var(--ukchic-navy) !important;
 }
 
-.ozchic-price-compare {
+.ukchic-price-compare {
   font-family: 'Jost', sans-serif !important;
   font-size: 16px !important;
   font-weight: 400 !important;
@@ -651,7 +639,7 @@
   line-height: 1 !important;
 }
 
-.ozchic-sale-badge {
+.ukchic-sale-badge {
   display: inline-flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -663,21 +651,21 @@
   white-space: nowrap !important;
 }
 
-.ozchic-sale-badge svg {
+.ukchic-sale-badge svg {
   width: 12px !important;
   height: 12px !important;
   fill: #c9a961 !important;
   flex-shrink: 0 !important;
 }
 
-.ozchic-sale-text {
+.ukchic-sale-text {
   display: inline-flex !important;
   flex-direction: row !important;
   align-items: center !important;
   gap: 4px !important;
 }
 
-.ozchic-sale-label {
+.ukchic-sale-label {
   font-family: 'Jost', sans-serif !important;
   font-size: 10px !important;
   font-weight: 600 !important;
@@ -685,7 +673,7 @@
   color: #fff !important;
 }
 
-.ozchic-sale-percent {
+.ukchic-sale-percent {
   font-family: 'Jost', sans-serif !important;
   font-size: 11px !important;
   font-weight: 700 !important;
@@ -693,37 +681,37 @@
 }
 
 @media (max-width: 400px) {
-  .ozchic-price-wrapper {
+  .ukchic-price-wrapper {
     flex-wrap: wrap !important;
   }
-  .ozchic-price-current {
+  .ukchic-price-current {
     font-size: 24px !important;
   }
 }
 
 /* Unit Price */
-.ozchic-unit-price {
+.ukchic-unit-price {
   font-family: 'Jost', sans-serif;
   font-size: 13px;
-  color: var(--ozchic-text-light);
+  color: var(--ukchic-text-light);
   margin-top: 8px;
 }
 
 /* Policies */
-.ozchic-policies {
+.ukchic-policies {
   font-family: 'Jost', sans-serif;
   font-size: 12px;
-  color: var(--ozchic-text-light);
+  color: var(--ukchic-text-light);
   margin-top: 8px;
 }
 
-.ozchic-policies a {
-  color: var(--ozchic-navy);
+.ukchic-policies a {
+  color: var(--ukchic-navy);
   text-decoration: underline;
 }
 
 /* Separator */
-.ozchic-separator {
+.ukchic-separator {
   border: none;
   height: 1px;
   background: rgba(30, 58, 95, 0.1);
@@ -731,57 +719,57 @@
 }
 
 /* Quantity */
-.ozchic-quantity-block {
+.ukchic-quantity-block {
   margin: 16px 0;
 }
 
-.ozchic-quantity-label {
+.ukchic-quantity-label {
   font-family: 'Jost', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: var(--ozchic-navy);
+  color: var(--ukchic-navy);
   display: block;
   margin-bottom: 8px;
 }
 
 /* Variant Block */
-.ozchic-variant-block {
+.ukchic-variant-block {
   margin: 16px 0;
 }
 
 /* Sales Points */
-.ozchic-sales-point .icon-and-text {
+.ukchic-sales-point .icon-and-text {
   display: flex;
   align-items: center;
   gap: 10px;
   font-family: 'Jost', sans-serif;
   font-size: 14px;
-  color: var(--ozchic-text);
+  color: var(--ukchic-text);
 }
 
-.ozchic-sales-point .icon {
+.ukchic-sales-point .icon {
   width: 24px;
   height: 24px;
 }
 
-.ozchic-sales-point .icon .cls-1 {
-  stroke: var(--ozchic-navy);
+.ukchic-sales-point .icon .cls-1 {
+  stroke: var(--ukchic-navy);
 }
 
 /* Inventory */
-.ozchic-inventory {
+.ukchic-inventory {
   margin: 12px 0;
 }
 
 /* Share */
-.ozchic-share {
+.ukchic-share {
   margin: 16px 0;
   padding-top: 16px;
   border-top: 1px solid rgba(30, 58, 95, 0.1);
 }
 
 /* Sticky Add to Cart (Mobile) */
-.ozchic-sticky-atc {
+.ukchic-sticky-atc {
   position: fixed;
   bottom: -100px;
   left: 0;
@@ -794,11 +782,11 @@
   display: none;
 }
 
-.ozchic-sticky-atc.visible {
+.ukchic-sticky-atc.visible {
   bottom: 0;
 }
 
-.ozchic-sticky-atc-inner {
+.ukchic-sticky-atc-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -807,28 +795,28 @@
   margin: 0 auto;
 }
 
-.ozchic-sticky-atc-info {
+.ukchic-sticky-atc-info {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.ozchic-sticky-atc-title {
+.ukchic-sticky-atc-title {
   font-family: 'Jost', sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: var(--ozchic-navy);
+  color: var(--ukchic-navy);
 }
 
-.ozchic-sticky-atc-price {
+.ukchic-sticky-atc-price {
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px;
   font-weight: 600;
-  color: var(--ozchic-navy);
+  color: var(--ukchic-navy);
 }
 
-.ozchic-sticky-atc-btn {
-  background: var(--ozchic-navy);
+.ukchic-sticky-atc-btn {
+  background: var(--ukchic-navy);
   color: #ffffff;
   font-family: 'Jost', sans-serif;
   font-size: 14px;
@@ -842,48 +830,48 @@
   white-space: nowrap;
 }
 
-.ozchic-sticky-atc-btn:hover {
-  background: var(--ozchic-gold);
+.ukchic-sticky-atc-btn:hover {
+  background: var(--ukchic-gold);
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
-  .ozchic-sticky-atc {
+  .ukchic-sticky-atc {
     display: block;
   }
 
-  .ozchic-product-title {
+  .ukchic-product-title {
     font-size: 24px !important;
   }
 
-  .ozchic-price-current {
+  .ukchic-price-current {
     font-size: 28px;
   }
 }
 
 @media (max-width: 480px) {
-  .ozchic-price-wrapper {
+  .ukchic-price-wrapper {
     gap: 8px;
   }
   
-  .ozchic-price-current {
+  .ukchic-price-current {
     font-size: 26px;
   }
   
-  .ozchic-price-compare {
+  .ukchic-price-compare {
     font-size: 16px;
   }
   
-  .ozchic-discount-badge {
+  .ukchic-discount-badge {
     font-size: 11px;
     padding: 4px 10px;
   }
   
-  .ozchic-trust-badge span {
+  .ukchic-trust-badge span {
     font-size: 10px;
   }
   
-  .ozchic-sticky-atc-btn {
+  .ukchic-sticky-atc-btn {
     padding: 12px 20px;
     font-size: 13px;
   }
@@ -893,8 +881,8 @@
 <script>
 (function() {
   // Sticky Add to Cart functionality
-  const stickyATC = document.getElementById('ozchic-sticky-atc');
-  const stickyBtn = document.getElementById('ozchic-sticky-atc-btn');
+  const stickyATC = document.getElementById('ukchic-sticky-atc');
+  const stickyBtn = document.getElementById('ukchic-sticky-atc-btn');
   const addToCartForm = document.querySelector('[data-product-form]');
   const addToCartBtn = addToCartForm ? addToCartForm.querySelector('[type="submit"]') : null;
 
@@ -925,14 +913,14 @@
         // Remove active class from all swatches in this group
         const fieldset = this.closest('fieldset');
         if (fieldset) {
-          fieldset.querySelectorAll('.ozchic-image-swatch').forEach(swatch => {
+          fieldset.querySelectorAll('.ukchic-image-swatch').forEach(swatch => {
             swatch.classList.remove('is-active');
           });
         }
 
         // Add active class to selected swatch
         const label = this.nextElementSibling;
-        if (label && label.classList.contains('ozchic-image-swatch')) {
+        if (label && label.classList.contains('ukchic-image-swatch')) {
           label.classList.add('is-active');
         }
 
@@ -955,13 +943,13 @@
       input.addEventListener('change', function() {
         const fieldset = this.closest('fieldset');
         if (fieldset) {
-          fieldset.querySelectorAll('.ozchic-size-btn').forEach(btn => {
+          fieldset.querySelectorAll('.ukchic-size-btn').forEach(btn => {
             btn.classList.remove('is-active');
           });
         }
 
         const label = this.nextElementSibling;
-        if (label && label.classList.contains('ozchic-size-btn')) {
+        if (label && label.classList.contains('ukchic-size-btn')) {
           label.classList.add('is-active');
         }
 
@@ -978,11 +966,11 @@
 
   // Review Count Generator
   function initReviewCount() {
-    var el = document.getElementById('ozchic-review-count');
+    var el = document.getElementById('ukchic-review-count');
     if (!el) return;
     var path = window.location.pathname;
     var stored = {};
-    try { stored = JSON.parse(sessionStorage.getItem('ozReviews') || '{}'); } catch(e) {}
+    try { stored = JSON.parse(sessionStorage.getItem('ukReviews') || '{}'); } catch(e) {}
     if (!stored[path]) {
       var count = Math.floor(Math.random() * 1200) + 800;
       var d = count % 10;
@@ -990,7 +978,7 @@
       else if (d > 5 && d < 7) count += (7 - d);
       else if (d > 7) count = count - d + 15;
       stored[path] = count;
-      sessionStorage.setItem('ozReviews', JSON.stringify(stored));
+      sessionStorage.setItem('ukReviews', JSON.stringify(stored));
     }
     el.textContent = stored[path].toLocaleString();
   }

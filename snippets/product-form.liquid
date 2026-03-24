@@ -1,11 +1,11 @@
-{% form 'product', product, id: form_id, class: 'product-single__form ozchic-product-form' %}
+{% form 'product', product, id: form_id, class: 'product-single__form ukchic-product-form' %}
   {%- assign enable_dynamic_buttons = false -%}
   {% if show_dynamic_checkout and template != 'product.preorder' %}
     {%- assign enable_dynamic_buttons = true -%}
   {% endif %}
 
   {% if enable_dynamic_buttons %}
-    <div class="payment-buttons ozchic-payment-buttons">
+    <div class="payment-buttons ukchic-payment-buttons">
   {% endif %}
 
     {%- liquid
@@ -24,9 +24,9 @@
       {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
       name="add"
       data-add-to-cart
-      class="btn btn--full add-to-cart ozchic-add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups.size == 0 %} add-to-cart--secondary{% endif %}"
+      class="btn btn--full add-to-cart ukchic-add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups.size == 0 %} add-to-cart--secondary{% endif %}"
       {% unless current_variant.available %} disabled="disabled"{% endunless %}>
-      <span class="ozchic-atc-icon">
+      <span class="ukchic-atc-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M6 6h15l-1.5 9h-12z"></path>
           <circle cx="9" cy="20" r="1"></circle>
@@ -34,7 +34,7 @@
           <path d="M6 6L5 3H2"></path>
         </svg>
       </span>
-      <span data-add-to-cart-text data-default-text="{{ default_text }}" class="ozchic-atc-text">
+      <span data-add-to-cart-text data-default-text="{{ default_text }}" class="ukchic-atc-text">
         {{ button_text }}
       </span>
     </button>
@@ -76,18 +76,18 @@
 {% endform %}
 
 <style>
-.ozchic-product-form {
+.ukchic-product-form {
   margin: 0;
 }
 
-.ozchic-add-to-cart {
+.ukchic-add-to-cart {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   width: 100%;
   padding: 16px 32px;
-  background: var(--ozchic-navy, #1e3a5f);
+  background: var(--ukchic-navy, #1e3a5f);
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -96,7 +96,7 @@
   overflow: hidden;
 }
 
-.ozchic-add-to-cart::before {
+.ukchic-add-to-cart::before {
   content: '';
   position: absolute;
   top: 0;
@@ -107,50 +107,50 @@
   transition: left 0.5s ease;
 }
 
-.ozchic-add-to-cart:hover::before {
+.ukchic-add-to-cart:hover::before {
   left: 100%;
 }
 
-.ozchic-add-to-cart:hover {
-  background: var(--ozchic-gold, #c9a961);
+.ukchic-add-to-cart:hover {
+  background: var(--ukchic-gold, #c9a961);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
 }
 
-.ozchic-add-to-cart:active {
+.ukchic-add-to-cart:active {
   transform: translateY(0);
 }
 
-.ozchic-add-to-cart[disabled] {
+.ukchic-add-to-cart[disabled] {
   background: #ccc;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-.ozchic-add-to-cart[disabled]:hover {
+.ukchic-add-to-cart[disabled]:hover {
   background: #ccc;
   transform: none;
   box-shadow: none;
 }
 
-.ozchic-add-to-cart[disabled]::before {
+.ukchic-add-to-cart[disabled]::before {
   display: none;
 }
 
-.ozchic-atc-icon {
+.ukchic-atc-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.ozchic-atc-icon svg {
+.ukchic-atc-icon svg {
   width: 22px;
   height: 22px;
   stroke: #ffffff;
 }
 
-.ozchic-atc-text {
+.ukchic-atc-text {
   font-family: 'Jost', sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -159,31 +159,31 @@
   color: #ffffff;
 }
 
-.ozchic-payment-buttons {
+.ukchic-payment-buttons {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.ozchic-payment-buttons .shopify-payment-button {
+.ukchic-payment-buttons .shopify-payment-button {
   margin-top: 0;
 }
 
-.ozchic-payment-buttons .shopify-payment-button__button {
+.ukchic-payment-buttons .shopify-payment-button__button {
   border-radius: 8px;
   min-height: 52px;
 }
 
 @media (max-width: 768px) {
-  .ozchic-add-to-cart {
+  .ukchic-add-to-cart {
     padding: 14px 24px;
   }
 
-  .ozchic-atc-text {
+  .ukchic-atc-text {
     font-size: 14px;
   }
 
-  .ozchic-atc-icon svg {
+  .ukchic-atc-icon svg {
     width: 20px;
     height: 20px;
   }

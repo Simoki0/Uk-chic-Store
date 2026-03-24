@@ -1,53 +1,38 @@
 {%- comment -%}
   Product Rating & Trust Badge
-  Place this snippet where you want to show the rating and Australian badge
+  Place this snippet where you want to show the rating and UK badge
 {%- endcomment -%}
 
-<div class="ozchic-rating-badge">
-  <div class="ozchic-badge-row">
-    <div class="ozchic-aus-badge">
-      <svg class="ozchic-aus-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
-        <rect fill="#00008B" width="60" height="30"/>
-        <!-- Union Jack -->
-        <g>
-          <path d="M0,0 L24,15 M24,0 L0,15" stroke="#fff" stroke-width="3"/>
-          <path d="M0,0 L24,15 M24,0 L0,15" stroke="#C8102E" stroke-width="1.5"/>
-          <path d="M12,0 V15 M0,7.5 H24" stroke="#fff" stroke-width="5"/>
-          <path d="M12,0 V15 M0,7.5 H24" stroke="#C8102E" stroke-width="3"/>
-        </g>
-        <!-- Commonwealth Star -->
-        <g fill="#fff" transform="translate(12,22)">
-          <polygon points="0,-4 1,-1.2 4,-1.2 1.6,0.6 2.5,3.5 0,1.5 -2.5,3.5 -1.6,0.6 -4,-1.2 -1,-1.2"/>
-        </g>
-        <!-- Southern Cross -->
-        <g fill="#fff">
-          <polygon points="45,6 45.8,8.5 48.5,8.5 46.3,10 47.1,12.5 45,11 42.9,12.5 43.7,10 41.5,8.5 44.2,8.5" transform="scale(0.7) translate(20,-2)"/>
-          <polygon points="52,12 52.6,14 55,14 53.2,15.2 53.8,17.2 52,16 50.2,17.2 50.8,15.2 49,14 51.4,14" transform="scale(0.6) translate(38,2)"/>
-          <polygon points="52,20 52.5,21.5 54,21.5 52.8,22.5 53.3,24 52,23 50.7,24 51.2,22.5 50,21.5 51.5,21.5" transform="scale(0.55) translate(42,10)"/>
-          <polygon points="45,24 45.5,25.5 47,25.5 45.8,26.5 46.3,28 45,27 43.7,28 44.2,26.5 43,25.5 44.5,25.5" transform="scale(0.5) translate(42,22)"/>
-          <polygon points="38,18 38.4,19.2 39.8,19.2 38.7,20 39.1,21.2 38,20.4 36.9,21.2 37.3,20 36.2,19.2 37.6,19.2" transform="scale(0.55) translate(22,12)"/>
-        </g>
+<div class="ukchic-rating-badge">
+  <div class="ukchic-badge-row">
+    <div class="ukchic-uk-badge">
+      <svg class="ukchic-uk-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+        <rect fill="#00247D" width="60" height="30"/>
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+        <path d="M0,0 L60,30 M60,0 L0,30" stroke="#CF142B" stroke-width="2"/>
+        <path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/>
+        <path d="M30,0 V30 M0,15 H60" stroke="#CF142B" stroke-width="6"/>
       </svg>
-      <span class="ozchic-aus-text">Australian Owned</span>
+      <span class="ukchic-uk-text">UK Owned</span>
     </div>
   </div>
 
-  <div class="ozchic-badge-row ozchic-rating-row">
-    <div class="ozchic-stars-wrap">
+  <div class="ukchic-badge-row ukchic-rating-row">
+    <div class="ukchic-stars-wrap">
       {%- for i in (1..5) -%}
-        <svg class="ozchic-star" viewBox="0 0 20 20">
+        <svg class="ukchic-star" viewBox="0 0 20 20">
           <path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/>
         </svg>
       {%- endfor -%}
     </div>
-    <span class="ozchic-review-text">
-      <span class="ozchic-review-count" data-review-count>1,247</span> verified reviews
+    <span class="ukchic-review-text">
+      <span class="ukchic-review-count" data-review-count>1,247</span> verified reviews
     </span>
   </div>
 </div>
 
 <style>
-.ozchic-rating-badge {
+.ukchic-rating-badge {
   display: flex !important;
   flex-direction: column !important;
   gap: 8px !important;
@@ -55,13 +40,13 @@
   margin: 12px 0 16px !important;
 }
 
-.ozchic-badge-row {
+.ukchic-badge-row {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
 }
 
-.ozchic-aus-badge {
+.ukchic-uk-badge {
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
@@ -69,7 +54,7 @@
   padding: 0 !important;
 }
 
-.ozchic-aus-flag {
+.ukchic-uk-flag {
   width: 28px !important;
   height: 14px !important;
   border-radius: 2px !important;
@@ -77,7 +62,7 @@
   flex-shrink: 0 !important;
 }
 
-.ozchic-aus-text {
+.ukchic-uk-text {
   font-family: 'Jost', -apple-system, sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
@@ -85,50 +70,50 @@
   letter-spacing: 0.3px !important;
 }
 
-.ozchic-rating-row {
+.ukchic-rating-row {
   gap: 10px !important;
 }
 
-.ozchic-stars-wrap {
+.ukchic-stars-wrap {
   display: flex !important;
   align-items: center !important;
   gap: 2px !important;
 }
 
-.ozchic-star {
+.ukchic-star {
   width: 16px !important;
   height: 16px !important;
   fill: #1e3a5f !important;
 }
 
-.ozchic-review-text {
+.ukchic-review-text {
   font-family: 'Jost', -apple-system, sans-serif !important;
   font-size: 13px !important;
   color: #666 !important;
   line-height: 1 !important;
 }
 
-.ozchic-review-count {
+.ukchic-review-count {
   font-weight: 600 !important;
   color: #1e3a5f !important;
 }
 
 @media (max-width: 480px) {
-  .ozchic-aus-flag {
+  .ukchic-uk-flag {
     width: 24px !important;
     height: 12px !important;
   }
 
-  .ozchic-aus-text {
+  .ukchic-uk-text {
     font-size: 12px !important;
   }
 
-  .ozchic-star {
+  .ukchic-star {
     width: 14px !important;
     height: 14px !important;
   }
 
-  .ozchic-review-text {
+  .ukchic-review-text {
     font-size: 12px !important;
   }
 }
@@ -144,7 +129,7 @@
     let stored = {};
 
     try {
-      stored = JSON.parse(sessionStorage.getItem('ozchicReviews') || '{}');
+      stored = JSON.parse(sessionStorage.getItem('ukchicReviews') || '{}');
     } catch(e) {}
 
     if (!stored[path]) {
@@ -156,7 +141,7 @@
       else if (lastDigit > 7) count = count - lastDigit + 5 + 10;
 
       stored[path] = count;
-      sessionStorage.setItem('ozchicReviews', JSON.stringify(stored));
+      sessionStorage.setItem('ukchicReviews', JSON.stringify(stored));
     }
 
     countEl.textContent = stored[path].toLocaleString();

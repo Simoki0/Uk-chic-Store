@@ -1,30 +1,30 @@
 {% comment %}
   ============================================
-  OZ-CHIC COLLECTION LIST SECTION - FIXED V2
-  Place this in: sections/ozchic-collection-list.liquid
+  UK-CHIC COLLECTION LIST SECTION - FIXED V2
+  Place this in: sections/ukchic-collection-list.liquid
   ============================================
 {% endcomment %}
 
 {% if section.settings.divider %}<div class="section--divider">{% endif %}
 
-<section class="ozchic-collections-section">
-  <div class="ozchic-collections-container">
+<section class="ukchic-collections-section">
+  <div class="ukchic-collections-container">
 
     {% if section.settings.title != blank or section.settings.tagline != blank %}
-      <div class="ozchic-collections-header">
+      <div class="ukchic-collections-header">
         {% if section.settings.tagline != blank %}
-          <span class="ozchic-collections-tagline">{{ section.settings.tagline }}</span>
+          <span class="ukchic-collections-tagline">{{ section.settings.tagline }}</span>
         {% endif %}
         {% if section.settings.title != blank %}
-          <h2 class="ozchic-collections-title">{{ section.settings.title }}</h2>
+          <h2 class="ukchic-collections-title">{{ section.settings.title }}</h2>
         {% endif %}
         {% if section.settings.subtitle != blank %}
-          <p class="ozchic-collections-subtitle">{{ section.settings.subtitle }}</p>
+          <p class="ukchic-collections-subtitle">{{ section.settings.subtitle }}</p>
         {% endif %}
       </div>
     {% endif %}
 
-    <div class="ozchic-collections-grid {% if section.settings.enable_gutter %}has-gutter{% endif %}">
+    <div class="ukchic-collections-grid {% if section.settings.enable_gutter %}has-gutter{% endif %}">
 
       {%- assign isEmpty = true -%}
 
@@ -38,19 +38,19 @@
         {% comment %} Determine grid size class {% endcomment %}
         {% case block.settings.size %}
           {% when 'square-small' %}
-            {%- assign grid_class = 'ozchic-collection-card--small' -%}
+            {%- assign grid_class = 'ukchic-collection-card--small' -%}
           {% when 'wide' %}
-            {%- assign grid_class = 'ozchic-collection-card--wide' -%}
+            {%- assign grid_class = 'ukchic-collection-card--wide' -%}
           {% when 'tall' %}
-            {%- assign grid_class = 'ozchic-collection-card--tall' -%}
+            {%- assign grid_class = 'ukchic-collection-card--tall' -%}
           {% when 'square-large' %}
-            {%- assign grid_class = 'ozchic-collection-card--large' -%}
+            {%- assign grid_class = 'ukchic-collection-card--large' -%}
         {% endcase %}
 
         {% assign background_position = block.settings.focal_point %}
 
-        <a href="{{ collection.url }}" class="ozchic-collection-card {{ grid_class }}" {{ block.shopify_attributes }}>
-          <div class="ozchic-collection-image" style="background-position: {{ background_position }};">
+        <a href="{{ collection.url }}" class="ukchic-collection-card {{ grid_class }}" {{ block.shopify_attributes }}>
+          <div class="ukchic-collection-image" style="background-position: {{ background_position }};">
             {% if collection.image %}
               <img
                 src="{{ collection.image | image_url: width: 800 }}"
@@ -68,15 +68,15 @@
                 height="800"
               >
             {% else %}
-              <div class="ozchic-collection-placeholder">
+              <div class="ukchic-collection-placeholder">
                 {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
               </div>
             {% endif %}
-            <div class="ozchic-collection-overlay"></div>
+            <div class="ukchic-collection-overlay"></div>
           </div>
 
-          <div class="ozchic-collection-content">
-            <h3 class="ozchic-collection-name">
+          <div class="ukchic-collection-content">
+            <h3 class="ukchic-collection-name">
               {% if collection.title != blank %}
                 {{ collection.title }}
               {% else %}
@@ -84,9 +84,9 @@
               {% endif %}
             </h3>
             {% if section.settings.show_count %}
-              <span class="ozchic-collection-count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'Product', 'Products' }}</span>
+              <span class="ukchic-collection-count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'Product', 'Products' }}</span>
             {% endif %}
-            <span class="ozchic-collection-cta">
+            <span class="ukchic-collection-cta">
               Shop Now
               <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </span>
@@ -96,7 +96,7 @@
       {% endfor %}
 
       {% if isEmpty %}
-        <div class="ozchic-collections-empty">
+        <div class="ukchic-collections-empty">
           <p>{{ 'home_page.onboarding.no_content' | t }}</p>
         </div>
       {% endif %}
@@ -109,61 +109,61 @@
 
 <style>
   /* ============================================
-     OZ-CHIC COLLECTION LIST - CSS FIXED V2
+     UK-CHIC COLLECTION LIST - CSS FIXED V2
      ============================================ */
 
-  .ozchic-collections-section {
-    --ozchic-navy: #1e3a5f;
-    --ozchic-navy-light: #2a4a73;
-    --ozchic-gold: #c9a961;
-    --ozchic-gold-light: #d4ba7a;
-    --ozchic-cream: #faf8f5;
-    --ozchic-text: #333333;
-    --ozchic-text-light: #666666;
+  .ukchic-collections-section {
+    --ukchic-navy: #1e3a5f;
+    --ukchic-navy-light: #2a4a73;
+    --ukchic-gold: #c9a961;
+    --ukchic-gold-light: #d4ba7a;
+    --ukchic-cream: #faf8f5;
+    --ukchic-text: #333333;
+    --ukchic-text-light: #666666;
   }
 
-  .ozchic-collections-section {
-    background: linear-gradient(180deg, #ffffff 0%, var(--ozchic-cream) 100%);
+  .ukchic-collections-section {
+    background: linear-gradient(180deg, #ffffff 0%, var(--ukchic-cream) 100%);
     padding: 70px 20px;
     font-family: 'Jost', sans-serif;
   }
 
-  .ozchic-collections-container {
+  .ukchic-collections-container {
     max-width: 1200px;
     margin: 0 auto;
   }
 
   /* Section Header */
-  .ozchic-collections-header {
+  .ukchic-collections-header {
     text-align: center;
     margin-bottom: 50px;
   }
 
-  .ozchic-collections-tagline {
+  .ukchic-collections-tagline {
     display: inline-block;
     font-family: 'Jost', sans-serif;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--ozchic-gold);
+    color: var(--ukchic-gold);
     margin-bottom: 12px;
   }
 
-  .ozchic-collections-title {
+  .ukchic-collections-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(28px, 5vw, 42px);
     font-weight: 500;
-    color: var(--ozchic-navy);
+    color: var(--ukchic-navy);
     margin: 0 0 12px 0;
     letter-spacing: 0.5px;
   }
 
-  .ozchic-collections-subtitle {
+  .ukchic-collections-subtitle {
     font-family: 'Jost', sans-serif;
     font-size: 16px;
     font-weight: 300;
-    color: var(--ozchic-text-light);
+    color: var(--ukchic-text-light);
     margin: 0;
     max-width: 600px;
     margin-left: auto;
@@ -171,73 +171,73 @@
   }
 
   /* Collections Grid - Desktop */
-  .ozchic-collections-grid {
+  .ukchic-collections-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 280px;
     gap: 4px;
   }
 
-  .ozchic-collections-grid.has-gutter {
+  .ukchic-collections-grid.has-gutter {
     gap: 20px;
     grid-auto-rows: 300px;
   }
 
   /* Collection Card */
-  .ozchic-collection-card {
+  .ukchic-collection-card {
     position: relative;
     display: block;
     text-decoration: none;
     border-radius: 12px;
     overflow: hidden;
-    background: var(--ozchic-navy);
+    background: var(--ukchic-navy);
   }
 
-  .ozchic-collections-grid:not(.has-gutter) .ozchic-collection-card {
+  .ukchic-collections-grid:not(.has-gutter) .ukchic-collection-card {
     border-radius: 0;
   }
 
   /* Card Size Variations - Desktop */
-  .ozchic-collection-card--small {
+  .ukchic-collection-card--small {
     grid-column: span 1;
     grid-row: span 1;
   }
 
-  .ozchic-collection-card--wide {
+  .ukchic-collection-card--wide {
     grid-column: span 2;
     grid-row: span 1;
   }
 
-  .ozchic-collection-card--tall {
+  .ukchic-collection-card--tall {
     grid-column: span 1;
     grid-row: span 2;
   }
 
-  .ozchic-collection-card--large {
+  .ukchic-collection-card--large {
     grid-column: span 2;
     grid-row: span 2;
   }
 
   /* Collection Image */
-  .ozchic-collection-image {
+  .ukchic-collection-image {
     position: absolute;
     inset: 0;
     overflow: hidden;
   }
 
-  .ozchic-collection-image img {
+  .ukchic-collection-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
   }
 
-  .ozchic-collection-card:hover .ozchic-collection-image img {
+  .ukchic-collection-card:hover .ukchic-collection-image img {
     transform: scale(1.08);
   }
 
   /* Overlay */
-  .ozchic-collection-overlay {
+  .ukchic-collection-overlay {
     position: absolute;
     inset: 0;
     background: linear-gradient(
@@ -249,7 +249,7 @@
     transition: background 0.3s ease;
   }
 
-  .ozchic-collection-card:hover .ozchic-collection-overlay {
+  .ukchic-collection-card:hover .ukchic-collection-overlay {
     background: linear-gradient(
       180deg,
       rgba(30, 58, 95, 0.1) 0%,
@@ -259,23 +259,23 @@
   }
 
   /* Placeholder */
-  .ozchic-collection-placeholder {
+  .ukchic-collection-placeholder {
     width: 100%;
     height: 100%;
-    background: var(--ozchic-cream);
+    background: var(--ukchic-cream);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .ozchic-collection-placeholder .placeholder-svg {
+  .ukchic-collection-placeholder .placeholder-svg {
     width: 60%;
     height: 60%;
     opacity: 0.3;
   }
 
   /* Collection Content */
-  .ozchic-collection-content {
+  .ukchic-collection-content {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -287,7 +287,7 @@
     align-items: flex-start;
   }
 
-  .ozchic-collection-name {
+  .ukchic-collection-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: 24px;
     font-weight: 500;
@@ -297,12 +297,12 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
-  .ozchic-collection-card--large .ozchic-collection-name,
-  .ozchic-collection-card--wide .ozchic-collection-name {
+  .ukchic-collection-card--large .ukchic-collection-name,
+  .ukchic-collection-card--wide .ukchic-collection-name {
     font-size: 32px;
   }
 
-  .ozchic-collection-count {
+  .ukchic-collection-count {
     font-family: 'Jost', sans-serif;
     font-size: 13px;
     font-weight: 400;
@@ -310,14 +310,14 @@
     margin-bottom: 12px;
   }
 
-  .ozchic-collection-cta {
+  .ukchic-collection-cta {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     font-family: 'Jost', sans-serif;
     font-size: 13px;
     font-weight: 500;
-    color: var(--ozchic-gold);
+    color: var(--ukchic-gold);
     letter-spacing: 0.5px;
     text-transform: uppercase;
     opacity: 0;
@@ -325,30 +325,30 @@
     transition: all 0.3s ease;
   }
 
-  .ozchic-collection-cta svg {
+  .ukchic-collection-cta svg {
     width: 16px;
     height: 16px;
-    stroke: var(--ozchic-gold);
+    stroke: var(--ukchic-gold);
     stroke-width: 2;
     fill: none;
     transition: transform 0.3s ease;
   }
 
-  .ozchic-collection-card:hover .ozchic-collection-cta {
+  .ukchic-collection-card:hover .ukchic-collection-cta {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .ozchic-collection-card:hover .ozchic-collection-cta svg {
+  .ukchic-collection-card:hover .ukchic-collection-cta svg {
     transform: translateX(4px);
   }
 
   /* Empty State */
-  .ozchic-collections-empty {
+  .ukchic-collections-empty {
     grid-column: 1 / -1;
     text-align: center;
     padding: 60px 20px;
-    color: var(--ozchic-text-light);
+    color: var(--ukchic-text-light);
     font-family: 'Jost', sans-serif;
   }
 
@@ -356,16 +356,16 @@
      RESPONSIVE - TABLET
      ============================================ */
   @media (max-width: 1024px) {
-    .ozchic-collections-grid {
+    .ukchic-collections-grid {
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: 260px;
     }
 
-    .ozchic-collections-grid.has-gutter {
+    .ukchic-collections-grid.has-gutter {
       gap: 16px;
     }
 
-    .ozchic-collection-card--tall {
+    .ukchic-collection-card--tall {
       grid-row: span 2;
     }
   }
@@ -374,99 +374,99 @@
      RESPONSIVE - MOBILE (FIXED V2)
      ============================================ */
   @media (max-width: 600px) {
-    .ozchic-collections-section {
+    .ukchic-collections-section {
       padding: 40px 16px;
       background: #fff;
     }
 
-    .ozchic-collections-header {
+    .ukchic-collections-header {
       margin-bottom: 20px;
       text-align: left;
     }
 
-    .ozchic-collections-tagline {
+    .ukchic-collections-tagline {
       font-size: 10px;
       margin-bottom: 6px;
     }
 
-    .ozchic-collections-title {
+    .ukchic-collections-title {
       font-size: 22px;
       margin-bottom: 6px;
     }
 
-    .ozchic-collections-subtitle {
+    .ukchic-collections-subtitle {
       font-size: 13px;
       margin-left: 0;
     }
 
     /* Mobile Grid - 2 columns, taller cards */
-    .ozchic-collections-grid {
+    .ukchic-collections-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: 220px;
       gap: 12px;
     }
 
-    .ozchic-collections-grid.has-gutter {
+    .ukchic-collections-grid.has-gutter {
       gap: 12px;
       grid-auto-rows: 220px;
     }
 
     /* Reset all sizes on mobile */
-    .ozchic-collection-card--small,
-    .ozchic-collection-card--wide,
-    .ozchic-collection-card--tall,
-    .ozchic-collection-card--large {
+    .ukchic-collection-card--small,
+    .ukchic-collection-card--wide,
+    .ukchic-collection-card--tall,
+    .ukchic-collection-card--large {
       grid-column: span 1;
       grid-row: span 1;
     }
 
     /* Make first card span full width as featured */
-    .ozchic-collection-card:first-child {
+    .ukchic-collection-card:first-child {
       grid-column: span 2;
       height: 180px;
     }
 
-    .ozchic-collection-card {
+    .ukchic-collection-card {
       border-radius: 8px;
     }
 
-    .ozchic-collection-content {
+    .ukchic-collection-content {
       padding: 12px;
     }
 
     /* Smaller titles on mobile */
-    .ozchic-collection-name {
+    .ukchic-collection-name {
       font-size: 15px;
       margin-bottom: 0;
       line-height: 1.3;
     }
 
     /* First card title slightly larger */
-    .ozchic-collection-card:first-child .ozchic-collection-name {
+    .ukchic-collection-card:first-child .ukchic-collection-name {
       font-size: 20px;
     }
 
     /* Hide product count on mobile */
-    .ozchic-collection-count {
+    .ukchic-collection-count {
       display: none;
     }
 
     /* Always show CTA on mobile, smaller */
-    .ozchic-collection-cta {
+    .ukchic-collection-cta {
       opacity: 1;
       transform: translateY(0);
       font-size: 10px;
       margin-top: 4px;
     }
 
-    .ozchic-collection-cta svg {
+    .ukchic-collection-cta svg {
       width: 12px;
       height: 12px;
     }
 
     /* Lighter overlay on mobile */
-    .ozchic-collection-overlay {
+    .ukchic-collection-overlay {
       background: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0) 0%,
@@ -480,37 +480,37 @@
      RESPONSIVE - SMALL MOBILE
      ============================================ */
   @media (max-width: 380px) {
-    .ozchic-collections-section {
+    .ukchic-collections-section {
       padding: 30px 12px;
     }
 
-    .ozchic-collections-grid {
+    .ukchic-collections-grid {
       grid-auto-rows: 180px;
       gap: 10px;
     }
 
-    .ozchic-collections-grid.has-gutter {
+    .ukchic-collections-grid.has-gutter {
       gap: 10px;
       grid-auto-rows: 180px;
     }
 
-    .ozchic-collection-card:first-child {
+    .ukchic-collection-card:first-child {
       height: 160px;
     }
 
-    .ozchic-collection-content {
+    .ukchic-collection-content {
       padding: 10px;
     }
 
-    .ozchic-collection-name {
+    .ukchic-collection-name {
       font-size: 14px;
     }
 
-    .ozchic-collection-card:first-child .ozchic-collection-name {
+    .ukchic-collection-card:first-child .ukchic-collection-name {
       font-size: 18px;
     }
 
-    .ozchic-collection-cta {
+    .ukchic-collection-cta {
       font-size: 9px;
     }
   }
@@ -519,8 +519,8 @@
 
 {% schema %}
 {
-  "name": "Oz-Chic Collection List",
-  "class": "index-section ozchic-section",
+  "name": "UK-Chic Collection List",
+  "class": "index-section ukchic-section",
   "max_blocks": 15,
   "settings": [
     {
@@ -561,7 +561,7 @@
     }
   ],
   "presets": [{
-    "name": "Oz-Chic Collection List",
+    "name": "UK-Chic Collection List",
     "category": "Collection",
     "blocks": [
       {

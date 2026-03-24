@@ -3,7 +3,7 @@
 -%}
 
 <div class="variant-wrapper variant-wrapper--size js" data-type="button">
-  <label class="variant__label ozchic-variant-label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
+  <label class="variant__label ukchic-variant-label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
     for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}">
     {{ option.name }}
     <span class="variant__label-info">
@@ -44,15 +44,15 @@
           data-index="option{{ option_index }}"
           name="{{ option.name }}"
           data-variant-input
-          class="ozchic-size-input{% unless size_available %} disabled{% endunless %}"
+          class="ukchic-size-input{% unless size_available %} disabled{% endunless %}"
           id="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}">
 
         <label
           for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
-          class="ozchic-size-btn{% unless size_available %} soldout{% endunless %}{% if option.selected_value == value %} is-active{% endif %}"
+          class="ukchic-size-btn{% unless size_available %} soldout{% endunless %}{% if option.selected_value == value %} is-active{% endif %}"
           data-size-value="{{ value | escape }}"
           title="{{ value | escape }}">
-          <span class="ozchic-size-text">{{ value | escape }}</span>
+          <span class="ukchic-size-text">{{ value | escape }}</span>
         </label>
       </div>
     {%- endfor -%}
@@ -64,7 +64,7 @@
   margin-bottom: 24px !important;
 }
 
-.variant-wrapper--size .ozchic-variant-label {
+.variant-wrapper--size .ukchic-variant-label {
   font-family: 'Jost', sans-serif !important;
   font-size: 13px !important;
   font-weight: 600 !important;
@@ -75,7 +75,7 @@
   letter-spacing: 0.5px !important;
 }
 
-.variant-wrapper--size .ozchic-variant-label .variant__label-info {
+.variant-wrapper--size .ukchic-variant-label .variant__label-info {
   font-weight: 400 !important;
   color: #666 !important;
   text-transform: none !important;
@@ -97,7 +97,7 @@
   padding: 0 !important;
 }
 
-.variant-input--size input[type="radio"].ozchic-size-input {
+.variant-input--size input[type="radio"].ukchic-size-input {
   position: absolute !important;
   opacity: 0 !important;
   width: 0 !important;
@@ -106,7 +106,7 @@
   padding: 0 !important;
 }
 
-label.ozchic-size-btn {
+label.ukchic-size-btn {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -123,7 +123,7 @@ label.ozchic-size-btn {
   margin: 0 !important;
 }
 
-span.ozchic-size-text {
+span.ukchic-size-text {
   font-family: 'Jost', sans-serif !important;
   font-size: 13px !important;
   font-weight: 500 !important;
@@ -133,31 +133,31 @@ span.ozchic-size-text {
   text-align: center !important;
 }
 
-label.ozchic-size-btn:hover:not(.soldout) {
+label.ukchic-size-btn:hover:not(.soldout) {
   background: #1e3a5f !important;
 }
 
-label.ozchic-size-btn:hover:not(.soldout) span.ozchic-size-text {
+label.ukchic-size-btn:hover:not(.soldout) span.ukchic-size-text {
   color: #fff !important;
 }
 
-.variant-input--size input[type="radio"]:checked + label.ozchic-size-btn,
-label.ozchic-size-btn.is-active {
+.variant-input--size input[type="radio"]:checked + label.ukchic-size-btn,
+label.ukchic-size-btn.is-active {
   background: #1e3a5f !important;
 }
 
-.variant-input--size input[type="radio"]:checked + label.ozchic-size-btn span.ozchic-size-text,
-label.ozchic-size-btn.is-active span.ozchic-size-text {
+.variant-input--size input[type="radio"]:checked + label.ukchic-size-btn span.ukchic-size-text,
+label.ukchic-size-btn.is-active span.ukchic-size-text {
   color: #fff !important;
 }
 
-label.ozchic-size-btn.soldout {
+label.ukchic-size-btn.soldout {
   border-color: #ddd !important;
   background: #fafafa !important;
   cursor: not-allowed !important;
 }
 
-label.ozchic-size-btn.soldout span.ozchic-size-text {
+label.ukchic-size-btn.soldout span.ukchic-size-text {
   color: #bbb !important;
 }
 </style>

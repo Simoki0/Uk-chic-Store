@@ -1,7 +1,7 @@
 {% comment %}
   ============================================
-  OZ-CHIC - YOU MIGHT ALSO LIKE SECTION
-  Place this in: sections/ozchic-recommendations.liquid
+  UK-CHIC - YOU MIGHT ALSO LIKE SECTION
+  Place this in: sections/ukchic-recommendations.liquid
   ============================================
 {% endcomment %}
 
@@ -11,17 +11,17 @@
 {% assign products_shown = 0 %}
 
 {% if current_collection %}
-<section class="ozchic-recommendations">
-  <div class="ozchic-recommendations-container">
+<section class="ukchic-recommendations">
+  <div class="ukchic-recommendations-container">
     
     <!-- Header -->
-    <div class="ozchic-recommendations-header">
-      <span class="ozchic-recommendations-tagline">Curated For You</span>
-      <h2 class="ozchic-recommendations-title">You Might Also Like</h2>
+    <div class="ukchic-recommendations-header">
+      <span class="ukchic-recommendations-tagline">Curated For You</span>
+      <h2 class="ukchic-recommendations-title">You Might Also Like</h2>
     </div>
     
     <!-- Products Grid -->
-    <div class="ozchic-products-grid">
+    <div class="ukchic-products-grid">
       
       {% comment %} Loop through collection products sorted by best-selling {% endcomment %}
       {% for rec_product in current_collection.products limit: 20 %}
@@ -39,22 +39,22 @@
           {% endif %}
           
           <!-- Product Card -->
-          <a href="{{ rec_product.url }}" class="ozchic-product-card">
+          <a href="{{ rec_product.url }}" class="ukchic-product-card">
             
             {% comment %} Badge - Sale or Sold Out {% endcomment %}
             {% if rec_product.available == false %}
-              <span class="ozchic-product-badge ozchic-badge-soldout">Sold Out</span>
+              <span class="ukchic-product-badge ukchic-badge-soldout">Sold Out</span>
             {% elsif on_sale %}
-              <span class="ozchic-product-badge">-{{ discount_percent }}%</span>
+              <span class="ukchic-product-badge">-{{ discount_percent }}%</span>
             {% endif %}
             
             <!-- Wishlist Button -->
-            <button class="ozchic-wishlist-btn" aria-label="Add to wishlist" data-product-id="{{ rec_product.id }}">
+            <button class="ukchic-wishlist-btn" aria-label="Add to wishlist" data-product-id="{{ rec_product.id }}">
               <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             </button>
             
             <!-- Product Image -->
-            <div class="ozchic-product-image">
+            <div class="ukchic-product-image">
               {% if rec_product.featured_image %}
                 <img 
                   src="{{ rec_product.featured_image | image_url: width: 400 }}" 
@@ -68,20 +68,20 @@
               {% endif %}
               
               {% if rec_product.available %}
-                <button type="button" class="ozchic-quick-add" data-product-url="{{ rec_product.url }}">
+                <button type="button" class="ukchic-quick-add" data-product-url="{{ rec_product.url }}">
                   Quick View
                 </button>
               {% endif %}
             </div>
             
             <!-- Product Info -->
-            <div class="ozchic-product-info">
-              <h3 class="ozchic-product-name">{{ rec_product.title }}</h3>
+            <div class="ukchic-product-info">
+              <h3 class="ukchic-product-name">{{ rec_product.title }}</h3>
               
-              <div class="ozchic-product-price">
-                <span class="ozchic-price-current">{{ rec_product.price | money }}</span>
+              <div class="ukchic-product-price">
+                <span class="ukchic-price-current">{{ rec_product.price | money }}</span>
                 {% if on_sale %}
-                  <span class="ozchic-price-original">{{ rec_product.compare_at_price | money }}</span>
+                  <span class="ukchic-price-original">{{ rec_product.compare_at_price | money }}</span>
                 {% endif %}
               </div>
               
@@ -89,8 +89,8 @@
               {% if rec_product.metafields.reviews.rating.value != blank %}
                 {% assign rating = rec_product.metafields.reviews.rating.value | round: 1 %}
                 {% assign rating_count = rec_product.metafields.reviews.rating_count.value %}
-                <div class="ozchic-product-rating">
-                  <div class="ozchic-rating-stars">
+                <div class="ukchic-product-rating">
+                  <div class="ukchic-rating-stars">
                     {% for i in (1..5) %}
                       {% if i <= rating %}
                         <svg viewBox="0 0 24 24" class="star-filled"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
@@ -99,7 +99,7 @@
                       {% endif %}
                     {% endfor %}
                   </div>
-                  <span class="ozchic-rating-count">({{ rating_count }})</span>
+                  <span class="ukchic-rating-count">({{ rating_count }})</span>
                 </div>
               {% endif %}
             </div>
@@ -116,65 +116,65 @@
 
 <style>
   /* ============================================
-     OZ-CHIC YOU MIGHT ALSO LIKE - CSS
+     UK-CHIC YOU MIGHT ALSO LIKE - CSS
      ============================================ */
   
-  .ozchic-recommendations {
-    --ozchic-navy: #1e3a5f;
-    --ozchic-navy-light: #2a4a73;
-    --ozchic-gold: #c9a961;
-    --ozchic-gold-light: #d4ba7a;
-    --ozchic-cream: #faf8f5;
-    --ozchic-text: #333333;
-    --ozchic-text-light: #666666;
+  .ukchic-recommendations {
+    --ukchic-navy: #1e3a5f;
+    --ukchic-navy-light: #2a4a73;
+    --ukchic-gold: #c9a961;
+    --ukchic-gold-light: #d4ba7a;
+    --ukchic-cream: #faf8f5;
+    --ukchic-text: #333333;
+    --ukchic-text-light: #666666;
   }
   
-  .ozchic-recommendations {
-    background: linear-gradient(180deg, #ffffff 0%, var(--ozchic-cream) 100%);
+  .ukchic-recommendations {
+    background: linear-gradient(180deg, #ffffff 0%, var(--ukchic-cream) 100%);
     padding: 70px 20px;
     font-family: 'Jost', sans-serif;
   }
   
-  .ozchic-recommendations-container {
+  .ukchic-recommendations-container {
     max-width: 1200px;
     margin: 0 auto;
   }
   
   /* Section Header */
-  .ozchic-recommendations-header {
+  .ukchic-recommendations-header {
     text-align: center;
     margin-bottom: 50px;
   }
   
-  .ozchic-recommendations-tagline {
+  .ukchic-recommendations-tagline {
     display: inline-block;
     font-family: 'Jost', sans-serif;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: var(--ozchic-gold);
+    color: var(--ukchic-gold);
     margin-bottom: 12px;
   }
   
-  .ozchic-recommendations-title {
+  .ukchic-recommendations-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(28px, 5vw, 40px);
     font-weight: 500;
-    color: var(--ozchic-navy);
+    color: var(--ukchic-navy);
     margin: 0;
     letter-spacing: 0.5px;
   }
   
   /* Products Grid */
-  .ozchic-products-grid {
+  .ukchic-products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
   }
   
   /* Product Card */
-  .ozchic-product-card {
+  .ukchic-product-card {
     background: #ffffff;
     border-radius: 16px;
     overflow: hidden;
@@ -185,17 +185,17 @@
     display: block;
   }
   
-  .ozchic-product-card:hover {
+  .ukchic-product-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 35px rgba(30, 58, 95, 0.12);
   }
   
   /* Sale Badge */
-  .ozchic-product-badge {
+  .ukchic-product-badge {
     position: absolute;
     top: 14px;
     left: 14px;
-    background: var(--ozchic-gold);
+    background: var(--ukchic-gold);
     color: #ffffff;
     font-family: 'Jost', sans-serif;
     font-size: 11px;
@@ -207,12 +207,12 @@
     z-index: 2;
   }
   
-  .ozchic-badge-soldout {
-    background: var(--ozchic-text-light);
+  .ukchic-badge-soldout {
+    background: var(--ukchic-text-light);
   }
   
   /* Wishlist Button */
-  .ozchic-wishlist-btn {
+  .ukchic-wishlist-btn {
     position: absolute;
     top: 14px;
     right: 14px;
@@ -230,51 +230,51 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
   
-  .ozchic-wishlist-btn:hover {
-    background: var(--ozchic-navy);
+  .ukchic-wishlist-btn:hover {
+    background: var(--ukchic-navy);
     transform: scale(1.1);
   }
   
-  .ozchic-wishlist-btn svg {
+  .ukchic-wishlist-btn svg {
     width: 18px;
     height: 18px;
-    stroke: var(--ozchic-navy);
+    stroke: var(--ukchic-navy);
     stroke-width: 1.8;
     fill: none;
     transition: all 0.3s ease;
   }
   
-  .ozchic-wishlist-btn:hover svg {
+  .ukchic-wishlist-btn:hover svg {
     stroke: #ffffff;
   }
   
   /* Product Image */
-  .ozchic-product-image {
+  .ukchic-product-image {
     position: relative;
     width: 100%;
     aspect-ratio: 3 / 4;
     overflow: hidden;
-    background: var(--ozchic-cream);
+    background: var(--ukchic-cream);
   }
   
-  .ozchic-product-image img {
+  .ukchic-product-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
   }
   
-  .ozchic-product-card:hover .ozchic-product-image img {
+  .ukchic-product-card:hover .ukchic-product-image img {
     transform: scale(1.08);
   }
   
   /* Quick Add Button */
-  .ozchic-quick-add {
+  .ukchic-quick-add {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: var(--ozchic-navy);
+    background: var(--ukchic-navy);
     color: #ffffff;
     font-family: 'Jost', sans-serif;
     font-size: 13px;
@@ -289,25 +289,25 @@
     transition: all 0.3s ease;
   }
   
-  .ozchic-product-card:hover .ozchic-quick-add {
+  .ukchic-product-card:hover .ukchic-quick-add {
     transform: translateY(0);
   }
   
-  .ozchic-quick-add:hover {
-    background: var(--ozchic-gold);
+  .ukchic-quick-add:hover {
+    background: var(--ukchic-gold);
   }
   
   /* Product Info */
-  .ozchic-product-info {
+  .ukchic-product-info {
     padding: 20px;
     text-align: center;
   }
   
-  .ozchic-product-name {
+  .ukchic-product-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: 18px;
     font-weight: 500;
-    color: var(--ozchic-navy);
+    color: var(--ukchic-navy);
     margin: 0 0 8px 0;
     line-height: 1.3;
     transition: color 0.3s ease;
@@ -317,34 +317,34 @@
     overflow: hidden;
   }
   
-  .ozchic-product-card:hover .ozchic-product-name {
-    color: var(--ozchic-gold);
+  .ukchic-product-card:hover .ukchic-product-name {
+    color: var(--ukchic-gold);
   }
   
-  .ozchic-product-price {
+  .ukchic-product-price {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
   }
   
-  .ozchic-price-current {
+  .ukchic-price-current {
     font-family: 'Jost', sans-serif;
     font-size: 17px;
     font-weight: 500;
-    color: var(--ozchic-navy);
+    color: var(--ukchic-navy);
   }
   
-  .ozchic-price-original {
+  .ukchic-price-original {
     font-family: 'Jost', sans-serif;
     font-size: 14px;
     font-weight: 400;
-    color: var(--ozchic-text-light);
+    color: var(--ukchic-text-light);
     text-decoration: line-through;
   }
   
   /* Product Rating */
-  .ozchic-product-rating {
+  .ukchic-product-rating {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -352,42 +352,42 @@
     margin-top: 10px;
   }
   
-  .ozchic-rating-stars {
+  .ukchic-rating-stars {
     display: flex;
     gap: 2px;
   }
   
-  .ozchic-rating-stars svg {
+  .ukchic-rating-stars svg {
     width: 14px;
     height: 14px;
   }
   
-  .ozchic-rating-stars svg.star-filled {
-    fill: var(--ozchic-gold);
+  .ukchic-rating-stars svg.star-filled {
+    fill: var(--ukchic-gold);
   }
   
-  .ozchic-rating-stars svg.star-empty {
+  .ukchic-rating-stars svg.star-empty {
     fill: none;
-    stroke: var(--ozchic-gold);
+    stroke: var(--ukchic-gold);
     stroke-width: 1.5;
   }
   
-  .ozchic-rating-count {
+  .ukchic-rating-count {
     font-family: 'Jost', sans-serif;
     font-size: 12px;
-    color: var(--ozchic-text-light);
+    color: var(--ukchic-text-light);
   }
   
   /* Placeholder SVG styling */
-  .ozchic-product-image .placeholder-svg {
+  .ukchic-product-image .placeholder-svg {
     width: 100%;
     height: 100%;
-    background: var(--ozchic-cream);
+    background: var(--ukchic-cream);
   }
   
   /* Responsive - Tablet */
   @media (max-width: 1024px) {
-    .ozchic-products-grid {
+    .ukchic-products-grid {
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
     }
@@ -395,32 +395,32 @@
   
   /* Responsive - Small Tablet */
   @media (max-width: 768px) {
-    .ozchic-recommendations {
+    .ukchic-recommendations {
       padding: 50px 16px;
     }
     
-    .ozchic-recommendations-header {
+    .ukchic-recommendations-header {
       margin-bottom: 40px;
     }
     
-    .ozchic-products-grid {
+    .ukchic-products-grid {
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
     }
     
-    .ozchic-product-info {
+    .ukchic-product-info {
       padding: 16px;
     }
     
-    .ozchic-product-name {
+    .ukchic-product-name {
       font-size: 16px;
     }
     
-    .ozchic-price-current {
+    .ukchic-price-current {
       font-size: 15px;
     }
     
-    .ozchic-quick-add {
+    .ukchic-quick-add {
       transform: translateY(0);
       position: relative;
       margin-top: -1px;
@@ -431,50 +431,50 @@
   
   /* Responsive - Mobile */
   @media (max-width: 480px) {
-    .ozchic-products-grid {
+    .ukchic-products-grid {
       gap: 12px;
     }
     
-    .ozchic-product-badge {
+    .ukchic-product-badge {
       font-size: 10px;
       padding: 5px 10px;
       top: 10px;
       left: 10px;
     }
     
-    .ozchic-wishlist-btn {
+    .ukchic-wishlist-btn {
       width: 32px;
       height: 32px;
       top: 10px;
       right: 10px;
     }
     
-    .ozchic-wishlist-btn svg {
+    .ukchic-wishlist-btn svg {
       width: 15px;
       height: 15px;
     }
     
-    .ozchic-product-info {
+    .ukchic-product-info {
       padding: 14px 12px;
     }
     
-    .ozchic-product-name {
+    .ukchic-product-name {
       font-size: 14px;
     }
     
-    .ozchic-price-current {
+    .ukchic-price-current {
       font-size: 14px;
     }
     
-    .ozchic-price-original {
+    .ukchic-price-original {
       font-size: 12px;
     }
     
-    .ozchic-product-rating {
+    .ukchic-product-rating {
       margin-top: 8px;
     }
     
-    .ozchic-rating-stars svg {
+    .ukchic-rating-stars svg {
       width: 12px;
       height: 12px;
     }
@@ -484,7 +484,7 @@
 <script>
 (function() {
   // Wishlist toggle functionality
-  const wishlistBtns = document.querySelectorAll('.ozchic-wishlist-btn');
+  const wishlistBtns = document.querySelectorAll('.ukchic-wishlist-btn');
   
   wishlistBtns.forEach(btn => {
     btn.addEventListener('click', function(e) {
@@ -499,14 +499,14 @@
         svg.style.stroke = '';
       } else {
         svg.setAttribute('fill', 'currentColor');
-        svg.style.stroke = 'var(--ozchic-gold)';
-        svg.style.color = 'var(--ozchic-gold)';
+        svg.style.stroke = 'var(--ukchic-gold)';
+        svg.style.color = 'var(--ukchic-gold)';
       }
     });
   });
   
   // Quick View functionality - customize based on your theme
-  const quickAddBtns = document.querySelectorAll('.ozchic-quick-add');
+  const quickAddBtns = document.querySelectorAll('.ukchic-quick-add');
   
   quickAddBtns.forEach(btn => {
     btn.addEventListener('click', function(e) {
@@ -527,7 +527,7 @@
 
 {% schema %}
 {
-  "name": "Oz-Chic Recommendations",
+  "name": "UK-Chic Recommendations",
   "settings": [
     {
       "type": "text",
@@ -553,7 +553,7 @@
   ],
   "presets": [
     {
-      "name": "Oz-Chic Recommendations"
+      "name": "UK-Chic Recommendations"
     }
   ]
 }

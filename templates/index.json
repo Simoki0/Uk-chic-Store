@@ -1,1 +1,436 @@
-{"sections":{"advanced_content_9xUctk":{"type":"advanced-content","blocks":{"liquid_dTL7xT":{"type":"liquid","settings":{"code":"<style>\n/* FIXED Z-INDEX - Mobile menu now appears above announcement bar */\n\n.ukchic-announcement-bar {\n  --ukchic-navy: #1e3a5f;\n  --ukchic-gold: #c9a961;\n  background: linear-gradient(135deg, #1a3352 0%, var(--ukchic-navy) 50%, #1a3352 100%) !important;\n  padding: 16px 30px !important;\n  text-align: center;\n  position: relative;\n  overflow: visible !important;\n  margin: 0 !important;\n  width: 100% !important;\n  display: block !important;\n  box-sizing: border-box !important;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;\n\n  /* FIXED: Lower z-index so mobile menu appears above */\n  z-index: 10 !important;\n}\n\n.ukchic-announcement-bar::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: -100%;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(90deg, transparent 0%, rgba(201, 169, 97, 0.12) 50%, transparent 100%);\n  animation: ukchic-shimmer 3s ease-in-out infinite;\n  pointer-events: none;\n}\n\n@keyframes ukchic-shimmer {\n  0% { left: -100%; opacity: 0; }\n  50% { opacity: 1; }\n  100% { left: 100%; opacity: 0; }\n}\n\n.ukchic-announcement-content {\n  display: flex !important;\n  align-items: center;\n  justify-content: center;\n  gap: 16px;\n  position: relative;\n  z-index: 1;\n  margin: 0 !important;\n  padding: 0 !important;\n  flex-wrap: wrap;\n}\n\n.ukchic-announcement-text {\n  font-family: 'Jost', sans-serif;\n  font-size: 18px !important;\n  font-weight: 400;\n  color: #ffffff !important;\n  letter-spacing: 0.5px;\n  line-height: 1.3;\n  margin: 0 !important;\n  padding: 0 !important;\n  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);\n}\n\n.ukchic-announcement-text strong {\n  color: var(--ukchic-gold) !important;\n  font-weight: 600;\n  font-size: 19px;\n  letter-spacing: 0.8px;\n}\n\n.ukchic-announcement-divider {\n  width: 1px;\n  height: 20px;\n  background: rgba(255, 255, 255, 0.3);\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\n.ukchic-announcement-urgency {\n  font-family: 'Jost', sans-serif;\n  font-size: 14px !important;\n  font-weight: 600;\n  color: var(--ukchic-gold) !important;\n  letter-spacing: 1.5px;\n  text-transform: uppercase;\n  line-height: 1.3;\n  margin: 0 !important;\n  padding: 5px 14px !important;\n  background: rgba(201, 169, 97, 0.12);\n  border-radius: 16px;\n  border: 1px solid rgba(201, 169, 97, 0.25);\n  animation: ukchic-pulse 2s ease-in-out infinite;\n}\n\n@keyframes ukchic-pulse {\n  0%, 100% { opacity: 1; }\n  50% { opacity: 0.85; }\n}\n\n/* Remove gap from wrappers */\nbody #shopify-section-advanced_content_9xUctk,\nbody .main-content > .shopify-section:first-child {\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\nbody #shopify-section-advanced_content_9xUctk .index-section,\nbody #shopify-section-advanced_content_9xUctk .custom-content,\nbody #shopify-section-advanced_content_9xUctk .custom__item,\nbody #shopify-section-advanced_content_9xUctk .custom__item-inner,\nbody #shopify-section-advanced_content_9xUctk .rte,\nbody #shopify-section-advanced_content_9xUctk .rte > * {\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\n/* Make next section sit flush */\n.ukchic-announcement-bar + *,\n#shopify-section-advanced_content_9xUctk + .shopify-section,\n.main-content > .shopify-section:first-child + .shopify-section {\n  margin-top: 0 !important;\n  padding-top: 0 !important;\n}\n\n/* Desktop Large: 1200px+ - PERFECT (NO CHANGE) */\n@media only screen and (min-width: 1200px) {\n  .ukchic-announcement-bar {\n    padding: 18px 40px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 18px;\n  }\n  .ukchic-announcement-text {\n    font-size: 19px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 20px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 15px !important;\n    padding: 6px 16px !important;\n  }\n  .ukchic-announcement-divider {\n    height: 22px;\n  }\n}\n\n/* Tablet: 768px - 1199px - SLIGHTLY SMALLER */\n@media only screen and (min-width: 768px) and (max-width: 1199px) {\n  .ukchic-announcement-bar {\n    padding: 15px 30px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 15px;\n  }\n  .ukchic-announcement-text {\n    font-size: 17px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 18px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 13px !important;\n    padding: 5px 13px !important;\n  }\n  .ukchic-announcement-divider {\n    height: 19px;\n  }\n}\n\n/* Mobile Large: 481px - 767px - BALANCED */\n@media only screen and (min-width: 481px) and (max-width: 767px) {\n  .ukchic-announcement-bar {\n    padding: 11px 22px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 11px;\n  }\n  .ukchic-announcement-text {\n    font-size: 14px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 15px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 11px !important;\n    padding: 4px 10px !important;\n    letter-spacing: 1.2px;\n  }\n  .ukchic-announcement-divider {\n    height: 16px;\n  }\n}\n\n/* Mobile: 361px - 480px - COMFORTABLE */\n@media only screen and (min-width: 361px) and (max-width: 480px) {\n  .ukchic-announcement-bar {\n    padding: 10px 20px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 10px;\n  }\n  .ukchic-announcement-text {\n    font-size: 13px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 14px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 10px !important;\n    padding: 4px 9px !important;\n    letter-spacing: 1px;\n  }\n  .ukchic-announcement-divider {\n    height: 15px;\n  }\n}\n\n/* Mobile Small: up to 360px - COMPACT BUT READABLE */\n@media only screen and (max-width: 360px) {\n  .ukchic-announcement-bar {\n    padding: 9px 18px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 9px;\n  }\n  .ukchic-announcement-text {\n    font-size: 12px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 13px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 10px !important;\n    padding: 3px 8px !important;\n    letter-spacing: 0.9px;\n  }\n  .ukchic-announcement-divider {\n    height: 14px;\n  }\n}\n</style>\n\n<div class=\"ukchic-announcement-bar\">\n  <div class=\"ukchic-announcement-content\">\n    <span class=\"ukchic-announcement-text\">\n      <strong>Summer Sale</strong> Up To 70% Off\n    </span>\n    <span class=\"ukchic-announcement-divider\"></span>\n    <span class=\"ukchic-announcement-urgency\">Ends Today</span>\n  </div>\n</div>","width":"100%","alignment":"center"}}},"block_order":["liquid_dTL7xT"],"custom_css":[],"name":"Custom content","settings":{"full_width":true,"space_around":false}},"slideshow_pmnwqw":{"type":"slideshow","blocks":{"image_atkXDz":{"type":"image","settings":{"title":"Welcome to Ukchic","title_size":82,"subheading":"We are always there for you with beautiful fashion items","link":"shopify://collections","link_text":"Experience our collections","text_align":"vertical-center horizontal-center","image":"shopify://shop_images/Gemini_Generated_Image_svzjljsvzjljsvzj.png","image_mobile":"shopify://shop_images/freepik__create-a-professional-fashion-photoshoot-featuring__51872.png","overlay_opacity":0,"focal_point":"center center"}}},"block_order":["image_atkXDz"],"custom_css":[],"name":"Hero (optional slideshow)","settings":{"section_height":"650px","mobile_height":"500px","parallax":false,"style":"arrows","autoplay":true,"autoplay_speed":5}},"featured-collections":{"type":"featured-collections","blocks":{"1499789718857-0":{"type":"collection","settings":{"collection":"womens","focal_point":"center center","size":"square-large"}},"collection_rt76CN":{"type":"collection","settings":{"collection":"womens-tops","focal_point":"center center","size":"wide"}},"1499789718857-5":{"type":"collection","settings":{"collection":"sandals","focal_point":"center center","size":"wide"}}},"block_order":["1499789718857-0","collection_rt76CN","1499789718857-5"],"custom_css":["{margin-top: -20px;}"],"settings":{"tagline":"Explore","title":"Our Collections","subtitle":"Discover our curated selection of vintage-inspired fashion","show_count":true,"divider":false,"enable_gutter":true}},"featured_collections_pzXDzf":{"type":"featured-collections","blocks":{"collection_NBhgtV":{"type":"collection","settings":{"collection":"womens-tops","focal_point":"center center","size":"square-large"}},"collection_fKtphR":{"type":"collection","disabled":true,"settings":{"collection":"womens-jackets-blazers","focal_point":"center center","size":"square-large"}},"collection_TkCYtM":{"type":"collection","disabled":true,"settings":{"collection":"womens-pants-shorts-skirts","focal_point":"center center","size":"square-small"}},"collection_DW9HLK":{"type":"collection","disabled":true,"settings":{"collection":"womens-jumpsuits-sets","focal_point":"center center","size":"square-small"}},"collection_4P9pTR":{"type":"collection","disabled":true,"settings":{"collection":"womens-dresses","focal_point":"center center","size":"square-small"}},"collection_XKmHGk":{"type":"collection","disabled":true,"settings":{"collection":"womens-tops-shirts","focal_point":"center center","size":"square-small"}}},"block_order":["collection_NBhgtV","collection_fKtphR","collection_TkCYtM","collection_DW9HLK","collection_4P9pTR","collection_XKmHGk"],"disabled":true,"settings":{"tagline":"Explore","title":"Women Tops","subtitle":"Discover our curated selection of vintage-inspired fashion","show_count":true,"divider":false,"enable_gutter":false}},"best_sellers_yKpfP3":{"type":"best-sellers","name":"Best Sellers","settings":{"heading":"Women's Dresses","collection":"womens","products_to_show":4,"products_per_row":4,"show_view_all":true,"divider":false}},"featured_collection_U4q7jH":{"type":"featured-collection","disabled":true,"name":"Featured collection","settings":{}},"featured_collections_9geVHN":{"type":"featured-collections","blocks":{"collection_aQ9XQW":{"type":"collection","settings":{"collection":"mens-sweaters-cardigans","focal_point":"center center","size":"tall"}},"collection_RGRzmU":{"type":"collection","settings":{"collection":"mens-jackets","focal_point":"center center","size":"tall"}},"collection_aadp3n":{"type":"collection","settings":{"collection":"mens-pants-shorts","focal_point":"center center","size":"square-small"}},"collection_9Jwfkm":{"type":"collection","settings":{"collection":"mens-sets","focal_point":"center center","size":"square-small"}},"collection_tCrcpK":{"type":"collection","settings":{"collection":"mens-shirts-polos","focal_point":"center center","size":"square-small"}},"collection_jRjAbQ":{"type":"collection","settings":{"collection":"mens-shoes","focal_point":"center center","size":"square-small"}}},"block_order":["collection_aQ9XQW","collection_RGRzmU","collection_aadp3n","collection_9Jwfkm","collection_tCrcpK","collection_jRjAbQ"],"disabled":true,"settings":{"tagline":"Explore","title":"Men's collections","subtitle":"Discover our curated selection of vintage-inspired fashion","show_count":true,"divider":false,"enable_gutter":true}},"featured_collection_CR7xHW":{"type":"featured-collection","disabled":true,"name":"Featured collection","settings":{}},"advanced_content_rytPWR":{"type":"advanced-content","blocks":{"liquid_gdmEdy":{"type":"liquid","settings":{"code":"<section class=\"ukchic-reviews-section\" style=\"padding:60px 20px;font-family:Jost,sans-serif;text-align:center;\"><div class=\"ukchic-reviews-container\" style=\"max-width:1200px;margin:0 auto;\"><div class=\"ukchic-reviews-header\"><h2 style=\"font-family:Cormorant Garamond,serif;font-size:clamp(28px,5vw,42px);font-weight:500;color:#1e3a5f;margin-bottom:12px;\">What Our Customers Say</h2><p style=\"font-size:16px;color:#666;font-weight:300;\">Reviews coming soon</p></div></div></section>","width":"100%","alignment":"center"}}},"block_order":["liquid_gdmEdy"],"custom_css":["{margin-top: -50px;}"],"name":"Custom content","settings":{"full_width":true,"space_around":false}},"best_sellers_p44RYC":{"type":"best-sellers","name":"Best Sellers","settings":{"heading":"Women's Tops","collection":"womens-tops","products_to_show":4,"products_per_row":4,"show_view_all":true,"divider":false}},"advanced_content_kxCDdq":{"type":"advanced-content","blocks":{"liquid_KbJNhr":{"type":"liquid","settings":{"code":"<style>\n.ukchic-trust-section{--ukchic-navy:#1e3a5f;--ukchic-gold:#c9a961;--ukchic-gold-light:#d4ba7a;--ukchic-cream:#faf8f5;--ukchic-text-light:#666;background:linear-gradient(180deg,var(--ukchic-cream) 0%,#fff 100%);padding:60px 20px;font-family:'Jost',sans-serif}\n.ukchic-trust-container{max-width:1200px;margin:0 auto}\n.ukchic-trust-header{text-align:center;margin-bottom:50px}\n.ukchic-trust-tagline{display:inline-block;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ukchic-gold);margin-bottom:12px}\n.ukchic-trust-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,36px);font-weight:500;color:var(--ukchic-navy)}\n.ukchic-trust-blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}\n.ukchic-trust-block{text-align:center;padding:40px 30px;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(30,58,95,0.06);transition:all 0.3s;position:relative;overflow:hidden}\n.ukchic-trust-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ukchic-gold),var(--ukchic-gold-light));opacity:0;transition:opacity 0.3s}\n.ukchic-trust-block:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(30,58,95,0.1)}\n.ukchic-trust-block:hover::before{opacity:1}\n.ukchic-trust-icon{width:80px;height:80px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--ukchic-cream) 0%,rgba(201,169,97,0.1) 100%);border-radius:50%;position:relative}\n.ukchic-trust-icon::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid rgba(201,169,97,0.2)}\n.ukchic-trust-icon svg{width:36px;height:36px;fill:none;stroke:var(--ukchic-navy);stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:round}\n.ukchic-trust-block-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ukchic-navy);margin-bottom:12px}\n.ukchic-trust-block-text{font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:var(--ukchic-text-light);line-height:1.7}\n@media(max-width:900px){.ukchic-trust-blocks{gap:20px}.ukchic-trust-block{padding:30px 20px}.ukchic-trust-icon{width:70px;height:70px;margin-bottom:20px}.ukchic-trust-icon svg{width:32px;height:32px}.ukchic-trust-block-title{font-size:18px}.ukchic-trust-block-text{font-size:14px}}\n@media(max-width:768px){.ukchic-trust-section{padding:50px 16px}.ukchic-trust-blocks{grid-template-columns:1fr;gap:16px}.ukchic-trust-block{display:flex;align-items:center;text-align:left;padding:24px;gap:20px}.ukchic-trust-block::before{width:3px;height:100%;right:auto}.ukchic-trust-icon{width:60px;height:60px;min-width:60px;margin:0}.ukchic-trust-icon svg{width:28px;height:28px}.ukchic-trust-block-title{font-size:17px;margin-bottom:6px}.ukchic-trust-block-text{font-size:14px;line-height:1.5}}\n</style>\n<section class=\"ukchic-trust-section\">\n<div class=\"ukchic-trust-container\">\n<div class=\"ukchic-trust-header\">\n<span class=\"ukchic-trust-tagline\">Why Choose UK-Chic</span>\n<h2 class=\"ukchic-trust-title\">Shopping Made Simple</h2>\n</div>\n<div class=\"ukchic-trust-blocks\">\n<div class=\"ukchic-trust-block\">\n<div class=\"ukchic-trust-icon\"><svg viewBox=\"0 0 100 100\"><path d=\"m44.36 67.09-2.17.01h20.46V28.83H22.27v3.93m0 23.71V67.1h8.78l-2.18-.01\"></path><path d=\"M36.62 59.5a5.83 5.83 0 0 0-5.84 5.83 5.84 5.84 0 0 0 11.68 0 5.84 5.84 0 0 0-5.84-5.83Zm41.38 0a5.84 5.84 0 0 0-5.85 5.83 5.84 5.84 0 0 0 11.68 0A5.83 5.83 0 0 0 78 59.5Z\"></path><path d=\"m70.26 67.09 2.17.01h-9.78V34.03h12.31l15.06 15.06h4.67V67.1H83.57l2.18-.01\"></path><path d=\"M66.95 49.1V38h5.49l11.04 11.03-16.53.07zm-38.69-4.57H5.31m27.5-6.72h-15.3m15.3 13.44h-15.3\"></path></svg></div>\n<div class=\"ukchic-trust-block-content\"><h3 class=\"ukchic-trust-block-title\">Free Shipping</h3><p class=\"ukchic-trust-block-text\">We strive for maximum comfort for our customers and offer free shipping throughout all of the United Kingdom.</p></div>\n</div>\n<div class=\"ukchic-trust-block\">\n<div class=\"ukchic-trust-icon\"><svg viewBox=\"0 0 100 100\"><circle cx=\"60.82\" cy=\"54.12\" r=\"4.26\"></circle><path d=\"M46.92 78.41a28 28 0 1 0-14.08-24.28\"></path><path d=\"M32.84 54.13a28 28 0 1 1 14.08 24.28m-12.78-9.04H11.19m27.51-6.72H23.4m15.3 13.44H23.4\"></path><path d=\"M32.84 54.13a28 28 0 1 1 14.08 24.28m13.9-61.47v14.24m-17.98 1.51 3.08 3.99M33.27 49.27l4.96.87m13.02 30.28 1.72-4.73m17.42 4.73-1.72-4.73m16.39-7.57L80.7 65.6m7.68-16.33-4.88 1.31m-4.69-17.89-3.08 4.03M60.82 49.87V39.6M54.4 16.94h12.84\"></path></svg></div>\n<div class=\"ukchic-trust-block-content\"><h3 class=\"ukchic-trust-block-title\">30 Day Return Right</h3><p class=\"ukchic-trust-block-text\">After receiving your order, you have 30 days to decide whether you want to keep the product or easily return it.</p></div>\n</div>\n<div class=\"ukchic-trust-block\">\n<div class=\"ukchic-trust-icon\"><svg viewBox=\"0 0 100 100\"><path d=\"M88.78 28.25v47.18h-9.42v10.58L62.91 75.43H32.55V28.25h56.23zM41.85 42.53h37.51m-37.51 9.3h37.51m-37.51 9.31h26.58\"></path><path d=\"M67.45 13.99v14.26h-34.9v35.83l-11.91 7.67V61.16h-9.42V13.99h56.23z\"></path></svg></div>\n<div class=\"ukchic-trust-block-content\"><h3 class=\"ukchic-trust-block-title\">Customer Service</h3><p class=\"ukchic-trust-block-text\">Our team is always ready to answer your questions and help you.</p></div>\n</div>\n</div>\n</div>\n</section>","width":"100%","alignment":"center"}}},"block_order":["liquid_KbJNhr"],"custom_css":["{margin-top: -50px;}"],"name":"Custom content","settings":{"full_width":true,"space_around":false}},"advanced_content_DKQhwF":{"type":"advanced-content","blocks":{"liquid_CfPBWF":{"type":"liquid","settings":{"code":"<style>\n.ukchic-contact-section{--ukchic-navy:#1e3a5f;--ukchic-gold:#c9a961;--ukchic-gold-light:#d4ba7a;--ukchic-cream:#faf8f5;--ukchic-text-light:#666;position:relative;width:100%;min-height:520px;display:flex;align-items:center;font-family:'Jost',sans-serif;overflow:hidden}\n.ukchic-contact-bg{position:absolute;inset:0;background-image:url('https://cdn.shopify.com/s/files/1/0621/1000/7367/files/Black-Streak-Lama_1_1.jpg?v=1753824871');background-size:cover;background-position:center}\n.ukchic-contact-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(30,58,95,0.4) 0%,rgba(30,58,95,0.15) 100%)}\n.ukchic-contact-container{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:60px 40px}\n.ukchic-contact-card{max-width:520px;background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);border-radius:20px;padding:50px 45px;box-shadow:0 20px 60px rgba(30,58,95,0.2);position:relative;overflow:hidden}\n.ukchic-contact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--ukchic-navy),var(--ukchic-gold),var(--ukchic-navy))}\n.ukchic-contact-card::after{content:'';position:absolute;bottom:-30px;right:-50px;width:150px;height:150px;background:linear-gradient(135deg,rgba(201,169,97,0.1) 0%,transparent 70%);border-radius:50%;pointer-events:none}\n.ukchic-contact-header{margin-bottom:30px}\n.ukchic-contact-tagline{display:inline-block;font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--ukchic-gold);margin-bottom:14px}\n.ukchic-contact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,38px);font-weight:500;color:var(--ukchic-navy);margin:0 0 16px 0;line-height:1.2}\n.ukchic-contact-subtitle{font-family:'Jost',sans-serif;font-size:16px;font-weight:300;color:var(--ukchic-text-light);line-height:1.6;margin:0}\n.ukchic-contact-methods{display:flex;flex-direction:column;gap:16px}\n.ukchic-contact-method{display:flex;align-items:center;gap:16px;padding:18px 20px;background:linear-gradient(135deg,var(--ukchic-cream) 0%,rgba(201,169,97,0.08) 100%);border-radius:12px;transition:all 0.3s;text-decoration:none;border:1px solid rgba(201,169,97,0.15)}\n.ukchic-contact-method:hover{transform:translateX(6px);background:linear-gradient(135deg,rgba(201,169,97,0.15) 0%,rgba(201,169,97,0.08) 100%);border-color:rgba(201,169,97,0.3);box-shadow:0 4px 15px rgba(30,58,95,0.08)}\n.ukchic-contact-icon{width:48px;height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;background:var(--ukchic-navy);border-radius:50%;transition:all 0.3s}\n.ukchic-contact-method:hover .ukchic-contact-icon{background:var(--ukchic-gold);transform:scale(1.05)}\n.ukchic-contact-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}\n.ukchic-contact-details{display:flex;flex-direction:column;gap:2px}\n.ukchic-contact-label{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--ukchic-text-light)}\n.ukchic-contact-value{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--ukchic-navy)}\n.ukchic-contact-arrow{margin-left:auto;opacity:0;transform:translateX(-10px);transition:all 0.3s}\n.ukchic-contact-arrow svg{width:20px;height:20px;stroke:var(--ukchic-gold);stroke-width:2;fill:none}\n.ukchic-contact-method:hover .ukchic-contact-arrow{opacity:1;transform:translateX(0)}\n@media(max-width:768px){.ukchic-contact-section{min-height:480px}.ukchic-contact-container{padding:40px 20px}.ukchic-contact-card{padding:40px 30px;border-radius:16px}.ukchic-contact-title{font-size:28px}.ukchic-contact-method{padding:16px 18px;gap:14px}.ukchic-contact-icon{width:44px;height:44px;min-width:44px}.ukchic-contact-value{font-size:18px}.ukchic-contact-arrow{display:none}}\n@media(max-width:480px){.ukchic-contact-section{min-height:450px}.ukchic-contact-container{padding:30px 16px}.ukchic-contact-card{padding:35px 24px}.ukchic-contact-header{margin-bottom:24px}.ukchic-contact-title{font-size:26px}.ukchic-contact-methods{gap:12px}.ukchic-contact-method{padding:14px 16px;gap:12px}.ukchic-contact-icon{width:40px;height:40px;min-width:40px}.ukchic-contact-label{font-size:11px}.ukchic-contact-value{font-size:16px}}\n</style>\n<section class=\"ukchic-contact-section\">\n<div class=\"ukchic-contact-bg\"></div>\n<div class=\"ukchic-contact-container\">\n<div class=\"ukchic-contact-card\">\n<div class=\"ukchic-contact-header\">\n<span class=\"ukchic-contact-tagline\">Get In Touch</span>\n<h2 class=\"ukchic-contact-title\">We're Always Here for You</h2>\n<p class=\"ukchic-contact-subtitle\">Have a question? We'd love to hear from you. Reach out anytime.</p>\n</div>\n<div class=\"ukchic-contact-methods\">\n<a href=\"mailto:contact@Ukchic.com\" class=\"ukchic-contact-method\">\n<div class=\"ukchic-contact-icon\"><svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><polyline points=\"22,6 12,13 2,6\"/></svg></div>\n<div class=\"ukchic-contact-details\"><span class=\"ukchic-contact-label\">Email Us</span><span class=\"ukchic-contact-value\">contact@Ukchic.com</span></div>\n<div class=\"ukchic-contact-arrow\"><svg viewBox=\"0 0 24 24\"><polyline points=\"9 18 15 12 9 6\"/></svg></div>\n</a>\n<a href=\"tel:\" class=\"ukchic-contact-method\">\n<div class=\"ukchic-contact-icon\"><svg viewBox=\"0 0 24 24\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg></div>\n<div class=\"ukchic-contact-details\"><span class=\"ukchic-contact-label\">Call Us</span><span class=\"ukchic-contact-value\">+1 (307) 400-1660</span></div>\n<div class=\"ukchic-contact-arrow\"><svg viewBox=\"0 0 24 24\"><polyline points=\"9 18 15 12 9 6\"/></svg></div>\n</a>\n</div>\n</div>\n</div>\n</section>","width":"100%","alignment":"top-middle"}}},"block_order":["liquid_CfPBWF"],"custom_css":["{margin-bottom: -20px;}"],"name":"Custom content","settings":{"full_width":true,"space_around":false}},"slideshow_a4aLQE":{"type":"slideshow","blocks":{"image_HRWNnB":{"type":"image","settings":{"title":"","title_size":88,"subheading":"Bring your brand to life","link":"","link_text":"Optional button","text_align":"vertical-bottom horizontal-left","overlay_opacity":0,"focal_point":"center center"}}},"block_order":["image_HRWNnB"],"disabled":true,"custom_css":[],"name":"Hero (optional slideshow)","settings":{"section_height":"550px","mobile_height":"300px","parallax":true,"style":"minimal","autoplay":true,"autoplay_speed":5}},"advanced_content_yM6RQp":{"type":"advanced-content","blocks":{"liquid_iPmzKc":{"type":"liquid","settings":{"code":"<div class=\"contact-section\">\n  <div class=\"contact-container\">\n    <div class=\"background-image\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0621/1000/7367/files/Black-Streak-Lama_1_1.jpg?v=1753824871\" alt=\"Kontakt os\" loading=\"lazy\">\n    </div>\n    <div class=\"contact-content\">\n      <div class=\"contact-text\">\n        <h2>Vi er altid der for dig!</h2>\n        <p>Du kan kontakte os på forskellige måder - tøv ikke med at kontakte os:</p>\n        <div class=\"contact-info\">\n          <p>✉️ <a href=\"mailto:info@werner-mode.de\">info@werner-mode.de</a></p>\n          <p>💬 <a href=\"https://werner-mode.de/pages/faq\">FAQ</a></p>\n          <p>📱 <a href=\"tel:+31613663848\">+316 13663848</a></p>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n.contact-section {\n  position: relative;\n  width: 100%;\n  min-height: 500px;\n  overflow: hidden;\n}\n\n.contact-container {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  min-height: 500px;\n}\n\n.background-image {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1;\n}\n\n.background-image img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  display: block;\n}\n\n.contact-content {\n  position: relative;\n  z-index: 2;\n  display: flex;\n  align-items: center;\n  min-height: 500px;\n  padding: 40px 20px;\n}\n\n.contact-text {\n  max-width: 600px;\n  background: white;\n  padding: 40px;\n  border-radius: 10px;\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);\n  color: #333;\n}\n\n.contact-text h2 {\n  font-size: 2.5rem;\n  font-weight: bold;\n  margin-bottom: 20px;\n  color: #333;\n  line-height: 1.2;\n}\n\n.contact-text > p {\n  font-size: 1.2rem;\n  margin-bottom: 30px;\n  color: #333;\n  line-height: 1.4;\n}\n\n.contact-info {\n  font-size: 1.1rem;\n}\n\n.contact-info p {\n  margin-bottom: 15px;\n  color: #333;\n  display: flex;\n  align-items: center;\n  gap: 10px;\n}\n\n.contact-info a {\n  color: #0066cc;\n  text-decoration: underline;\n  transition: color 0.3s ease;\n}\n\n.contact-info a:hover {\n  color: #004499;\n}\n\n/* Mobile responsive */\n@media screen and (max-width: 768px) {\n  .contact-section {\n    min-height: 400px;\n  }\n  \n  .contact-container {\n    min-height: 400px;\n  }\n  \n  .contact-content {\n    min-height: 400px;\n    padding: 30px 15px;\n  }\n  \n  .contact-text {\n    padding: 30px 25px;\n  }\n  \n  .contact-text h2 {\n    font-size: 2rem;\n    margin-bottom: 15px;\n  }\n  \n  .contact-text > p {\n    font-size: 1rem;\n    margin-bottom: 20px;\n  }\n  \n  .contact-info {\n    font-size: 1rem;\n  }\n  \n  .contact-info p {\n    margin-bottom: 12px;\n  }\n}\n\n@media screen and (max-width: 480px) {\n  .contact-text {\n    padding: 25px 20px;\n  }\n  \n  .contact-text h2 {\n    font-size: 1.8rem;\n  }\n  \n  .contact-text > p {\n    font-size: 0.95rem;\n  }\n  \n  .contact-info {\n    font-size: 0.95rem;\n  }\n}\n</style>","width":"100%","alignment":"center"}}},"block_order":["liquid_iPmzKc"],"disabled":true,"custom_css":[],"name":"Custom content","settings":{"full_width":true,"space_around":false}}},"order":["advanced_content_9xUctk","slideshow_pmnwqw","featured-collections","featured_collections_pzXDzf","best_sellers_yKpfP3","featured_collection_U4q7jH","featured_collections_9geVHN","featured_collection_CR7xHW","advanced_content_rytPWR","best_sellers_p44RYC","advanced_content_kxCDdq","advanced_content_DKQhwF","slideshow_a4aLQE","advanced_content_yM6RQp"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "advanced_content_9xUctk": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_dTL7xT": {
+          "type": "liquid",
+          "settings": {
+            "code": "<style>\n/* FIXED Z-INDEX - Mobile menu now appears above announcement bar */\n\n.ukchic-announcement-bar {\n  --ukchic-navy: #1e3a5f;\n  --ukchic-gold: #c9a961;\n  background: linear-gradient(135deg, #1a3352 0%, var(--ukchic-navy) 50%, #1a3352 100%) !important;\n  padding: 16px 30px !important;\n  text-align: center;\n  position: relative;\n  overflow: visible !important;\n  margin: 0 !important;\n  width: 100% !important;\n  display: block !important;\n  box-sizing: border-box !important;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;\n\n  /* FIXED: Lower z-index so mobile menu appears above */\n  z-index: 10 !important;\n}\n\n.ukchic-announcement-bar::before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: -100%;\n  width: 100%;\n  height: 100%;\n  background: linear-gradient(90deg, transparent 0%, rgba(201, 169, 97, 0.12) 50%, transparent 100%);\n  animation: ukchic-shimmer 3s ease-in-out infinite;\n  pointer-events: none;\n}\n\n@keyframes ukchic-shimmer {\n  0% { left: -100%; opacity: 0; }\n  50% { opacity: 1; }\n  100% { left: 100%; opacity: 0; }\n}\n\n.ukchic-announcement-content {\n  display: flex !important;\n  align-items: center;\n  justify-content: center;\n  gap: 16px;\n  position: relative;\n  z-index: 1;\n  margin: 0 !important;\n  padding: 0 !important;\n  flex-wrap: wrap;\n}\n\n.ukchic-announcement-text {\n  font-family: 'Jost', sans-serif;\n  font-size: 18px !important;\n  font-weight: 400;\n  color: #ffffff !important;\n  letter-spacing: 0.5px;\n  line-height: 1.3;\n  margin: 0 !important;\n  padding: 0 !important;\n  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);\n}\n\n.ukchic-announcement-text strong {\n  color: var(--ukchic-gold) !important;\n  font-weight: 600;\n  font-size: 19px;\n  letter-spacing: 0.8px;\n}\n\n.ukchic-announcement-divider {\n  width: 1px;\n  height: 20px;\n  background: rgba(255, 255, 255, 0.3);\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\n.ukchic-announcement-urgency {\n  font-family: 'Jost', sans-serif;\n  font-size: 14px !important;\n  font-weight: 600;\n  color: var(--ukchic-gold) !important;\n  letter-spacing: 1.5px;\n  text-transform: uppercase;\n  line-height: 1.3;\n  margin: 0 !important;\n  padding: 5px 14px !important;\n  background: rgba(201, 169, 97, 0.12);\n  border-radius: 16px;\n  border: 1px solid rgba(201, 169, 97, 0.25);\n  animation: ukchic-pulse 2s ease-in-out infinite;\n}\n\n@keyframes ukchic-pulse {\n  0%, 100% { opacity: 1; }\n  50% { opacity: 0.85; }\n}\n\n/* Remove gap from wrappers */\nbody #shopify-section-advanced_content_9xUctk,\nbody .main-content > .shopify-section:first-child {\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\nbody #shopify-section-advanced_content_9xUctk .index-section,\nbody #shopify-section-advanced_content_9xUctk .custom-content,\nbody #shopify-section-advanced_content_9xUctk .custom__item,\nbody #shopify-section-advanced_content_9xUctk .custom__item-inner,\nbody #shopify-section-advanced_content_9xUctk .rte,\nbody #shopify-section-advanced_content_9xUctk .rte > * {\n  margin: 0 !important;\n  padding: 0 !important;\n}\n\n/* Make next section sit flush */\n.ukchic-announcement-bar + *,\n#shopify-section-advanced_content_9xUctk + .shopify-section,\n.main-content > .shopify-section:first-child + .shopify-section {\n  margin-top: 0 !important;\n  padding-top: 0 !important;\n}\n\n/* Desktop Large: 1200px+ - PERFECT (NO CHANGE) */\n@media only screen and (min-width: 1200px) {\n  .ukchic-announcement-bar {\n    padding: 18px 40px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 18px;\n  }\n  .ukchic-announcement-text {\n    font-size: 19px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 20px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 15px !important;\n    padding: 6px 16px !important;\n  }\n  .ukchic-announcement-divider {\n    height: 22px;\n  }\n}\n\n/* Tablet: 768px - 1199px - SLIGHTLY SMALLER */\n@media only screen and (min-width: 768px) and (max-width: 1199px) {\n  .ukchic-announcement-bar {\n    padding: 15px 30px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 15px;\n  }\n  .ukchic-announcement-text {\n    font-size: 17px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 18px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 13px !important;\n    padding: 5px 13px !important;\n  }\n  .ukchic-announcement-divider {\n    height: 19px;\n  }\n}\n\n/* Mobile Large: 481px - 767px - BALANCED */\n@media only screen and (min-width: 481px) and (max-width: 767px) {\n  .ukchic-announcement-bar {\n    padding: 11px 22px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 11px;\n  }\n  .ukchic-announcement-text {\n    font-size: 14px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 15px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 11px !important;\n    padding: 4px 10px !important;\n    letter-spacing: 1.2px;\n  }\n  .ukchic-announcement-divider {\n    height: 16px;\n  }\n}\n\n/* Mobile: 361px - 480px - COMFORTABLE */\n@media only screen and (min-width: 361px) and (max-width: 480px) {\n  .ukchic-announcement-bar {\n    padding: 10px 20px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 10px;\n  }\n  .ukchic-announcement-text {\n    font-size: 13px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 14px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 10px !important;\n    padding: 4px 9px !important;\n    letter-spacing: 1px;\n  }\n  .ukchic-announcement-divider {\n    height: 15px;\n  }\n}\n\n/* Mobile Small: up to 360px - COMPACT BUT READABLE */\n@media only screen and (max-width: 360px) {\n  .ukchic-announcement-bar {\n    padding: 9px 18px !important;\n  }\n  .ukchic-announcement-content {\n    gap: 9px;\n  }\n  .ukchic-announcement-text {\n    font-size: 12px !important;\n  }\n  .ukchic-announcement-text strong {\n    font-size: 13px;\n  }\n  .ukchic-announcement-urgency {\n    font-size: 10px !important;\n    padding: 3px 8px !important;\n    letter-spacing: 0.9px;\n  }\n  .ukchic-announcement-divider {\n    height: 14px;\n  }\n}\n</style>\n\n<div class=\"ukchic-announcement-bar\">\n  <div class=\"ukchic-announcement-content\">\n    <span class=\"ukchic-announcement-text\">\n      <strong>Summer Sale</strong> Up To 70% Off\n    </span>\n    <span class=\"ukchic-announcement-divider\"></span>\n    <span class=\"ukchic-announcement-urgency\">Ends Today</span>\n  </div>\n</div>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_dTL7xT"
+      ],
+      "custom_css": [],
+      "name": "Custom content",
+      "settings": {
+        "full_width": true,
+        "space_around": false
+      }
+    },
+    "slideshow_pmnwqw": {
+      "type": "slideshow",
+      "blocks": {
+        "image_atkXDz": {
+          "type": "image",
+          "settings": {
+            "title": "Welcome to Ukchic",
+            "title_size": 82,
+            "subheading": "We are always there for you with beautiful fashion items",
+            "link": "shopify://collections",
+            "link_text": "Experience our collections",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/large-fall-leaf-in-hand_1.jpg",
+            "overlay_opacity": 0,
+            "focal_point": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "image_atkXDz"
+      ],
+      "custom_css": [],
+      "name": "Hero (optional slideshow)",
+      "settings": {
+        "section_height": "650px",
+        "mobile_height": "500px",
+        "parallax": false,
+        "style": "arrows",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "featured-collections": {
+      "type": "featured-collections",
+      "blocks": {
+        "1499789718857-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "womens",
+            "focal_point": "center center",
+            "size": "square-large"
+          }
+        },
+        "collection_rt76CN": {
+          "type": "collection",
+          "settings": {
+            "collection": "womens-tops",
+            "focal_point": "center center",
+            "size": "wide"
+          }
+        },
+        "1499789718857-5": {
+          "type": "collection",
+          "settings": {
+            "collection": "sandals",
+            "focal_point": "center center",
+            "size": "wide"
+          }
+        }
+      },
+      "block_order": [
+        "1499789718857-0",
+        "collection_rt76CN",
+        "1499789718857-5"
+      ],
+      "custom_css": [
+        "{margin-top: -20px;}"
+      ],
+      "settings": {
+        "tagline": "Explore",
+        "title": "Our Collections",
+        "subtitle": "Discover our curated selection of vintage-inspired fashion",
+        "show_count": true,
+        "divider": false,
+        "enable_gutter": true
+      }
+    },
+    "featured_collections_pzXDzf": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_NBhgtV": {
+          "type": "collection",
+          "settings": {
+            "collection": "womens-tops",
+            "focal_point": "center center",
+            "size": "square-large"
+          }
+        },
+        "collection_fKtphR": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "womens-jackets-blazers",
+            "focal_point": "center center",
+            "size": "square-large"
+          }
+        },
+        "collection_TkCYtM": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "womens-pants-shorts-skirts",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        },
+        "collection_DW9HLK": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "womens-jumpsuits-sets",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        },
+        "collection_4P9pTR": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "womens-dresses",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        },
+        "collection_XKmHGk": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "womens-tops-shirts",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        }
+      },
+      "block_order": [
+        "collection_NBhgtV",
+        "collection_fKtphR",
+        "collection_TkCYtM",
+        "collection_DW9HLK",
+        "collection_4P9pTR",
+        "collection_XKmHGk"
+      ],
+      "disabled": true,
+      "settings": {
+        "tagline": "Explore",
+        "title": "Women Tops",
+        "subtitle": "Discover our curated selection of vintage-inspired fashion",
+        "show_count": true,
+        "divider": false,
+        "enable_gutter": false
+      }
+    },
+    "best_sellers_yKpfP3": {
+      "type": "best-sellers",
+      "name": "Best Sellers",
+      "settings": {
+        "heading": "Women's Dresses",
+        "collection": "womens",
+        "products_to_show": 4,
+        "products_per_row": 4,
+        "show_view_all": true,
+        "divider": false
+      }
+    },
+    "featured_collection_U4q7jH": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "Featured collection",
+      "settings": {}
+    },
+    "featured_collections_9geVHN": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_aQ9XQW": {
+          "type": "collection",
+          "settings": {
+            "collection": "mens-sweaters-cardigans",
+            "focal_point": "center center",
+            "size": "tall"
+          }
+        },
+        "collection_RGRzmU": {
+          "type": "collection",
+          "settings": {
+            "collection": "mens-jackets",
+            "focal_point": "center center",
+            "size": "tall"
+          }
+        },
+        "collection_aadp3n": {
+          "type": "collection",
+          "settings": {
+            "collection": "mens-pants-shorts",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        },
+        "collection_9Jwfkm": {
+          "type": "collection",
+          "settings": {
+            "collection": "mens-sets",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        },
+        "collection_tCrcpK": {
+          "type": "collection",
+          "settings": {
+            "collection": "mens-shirts-polos",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        },
+        "collection_jRjAbQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "mens-shoes",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
+        }
+      },
+      "block_order": [
+        "collection_aQ9XQW",
+        "collection_RGRzmU",
+        "collection_aadp3n",
+        "collection_9Jwfkm",
+        "collection_tCrcpK",
+        "collection_jRjAbQ"
+      ],
+      "disabled": true,
+      "settings": {
+        "tagline": "Explore",
+        "title": "Men's collections",
+        "subtitle": "Discover our curated selection of vintage-inspired fashion",
+        "show_count": true,
+        "divider": false,
+        "enable_gutter": true
+      }
+    },
+    "featured_collection_CR7xHW": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "Featured collection",
+      "settings": {}
+    },
+    "advanced_content_rytPWR": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_gdmEdy": {
+          "type": "liquid",
+          "settings": {
+            "code": "<section class=\"ukchic-reviews-section\" style=\"padding:60px 20px;font-family:Jost,sans-serif;text-align:center;\"><div class=\"ukchic-reviews-container\" style=\"max-width:1200px;margin:0 auto;\"><div class=\"ukchic-reviews-header\"><h2 style=\"font-family:Cormorant Garamond,serif;font-size:clamp(28px,5vw,42px);font-weight:500;color:#1e3a5f;margin-bottom:12px;\">What Our Customers Say</h2><p style=\"font-size:16px;color:#666;font-weight:300;\">Reviews coming soon</p></div></div></section>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_gdmEdy"
+      ],
+      "custom_css": [
+        "{margin-top: -50px;}"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "full_width": true,
+        "space_around": false
+      }
+    },
+    "best_sellers_p44RYC": {
+      "type": "best-sellers",
+      "name": "Best Sellers",
+      "settings": {
+        "heading": "Women's Tops",
+        "collection": "womens-tops",
+        "products_to_show": 4,
+        "products_per_row": 4,
+        "show_view_all": true,
+        "divider": false
+      }
+    },
+    "advanced_content_kxCDdq": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_KbJNhr": {
+          "type": "liquid",
+          "settings": {
+            "code": "<style>\n.ukchic-trust-section{--ukchic-navy:#1e3a5f;--ukchic-gold:#c9a961;--ukchic-gold-light:#d4ba7a;--ukchic-cream:#faf8f5;--ukchic-text-light:#666;background:linear-gradient(180deg,var(--ukchic-cream) 0%,#fff 100%);padding:60px 20px;font-family:'Jost',sans-serif}\n.ukchic-trust-container{max-width:1200px;margin:0 auto}\n.ukchic-trust-header{text-align:center;margin-bottom:50px}\n.ukchic-trust-tagline{display:inline-block;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ukchic-gold);margin-bottom:12px}\n.ukchic-trust-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,36px);font-weight:500;color:var(--ukchic-navy)}\n.ukchic-trust-blocks{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}\n.ukchic-trust-block{text-align:center;padding:40px 30px;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(30,58,95,0.06);transition:all 0.3s;position:relative;overflow:hidden}\n.ukchic-trust-block::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ukchic-gold),var(--ukchic-gold-light));opacity:0;transition:opacity 0.3s}\n.ukchic-trust-block:hover{transform:translateY(-4px);box-shadow:0 8px 30px rgba(30,58,95,0.1)}\n.ukchic-trust-block:hover::before{opacity:1}\n.ukchic-trust-icon{width:80px;height:80px;margin:0 auto 24px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--ukchic-cream) 0%,rgba(201,169,97,0.1) 100%);border-radius:50%;position:relative}\n.ukchic-trust-icon::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid rgba(201,169,97,0.2)}\n.ukchic-trust-icon svg{width:36px;height:36px;fill:none;stroke:var(--ukchic-navy);stroke-width:1.5px;stroke-linecap:round;stroke-linejoin:round}\n.ukchic-trust-block-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--ukchic-navy);margin-bottom:12px}\n.ukchic-trust-block-text{font-family:'Jost',sans-serif;font-size:15px;font-weight:300;color:var(--ukchic-text-light);line-height:1.7}\n@media(max-width:900px){.ukchic-trust-blocks{gap:20px}.ukchic-trust-block{padding:30px 20px}.ukchic-trust-icon{width:70px;height:70px;margin-bottom:20px}.ukchic-trust-icon svg{width:32px;height:32px}.ukchic-trust-block-title{font-size:18px}.ukchic-trust-block-text{font-size:14px}}\n@media(max-width:768px){.ukchic-trust-section{padding:50px 16px}.ukchic-trust-blocks{grid-template-columns:1fr;gap:16px}.ukchic-trust-block{display:flex;align-items:center;text-align:left;padding:24px;gap:20px}.ukchic-trust-block::before{width:3px;height:100%;right:auto}.ukchic-trust-icon{width:60px;height:60px;min-width:60px;margin:0}.ukchic-trust-icon svg{width:28px;height:28px}.ukchic-trust-block-title{font-size:17px;margin-bottom:6px}.ukchic-trust-block-text{font-size:14px;line-height:1.5}}\n</style>\n<section class=\"ukchic-trust-section\">\n<div class=\"ukchic-trust-container\">\n<div class=\"ukchic-trust-header\">\n<span class=\"ukchic-trust-tagline\">Why Choose UK-Chic</span>\n<h2 class=\"ukchic-trust-title\">Shopping Made Simple</h2>\n</div>\n<div class=\"ukchic-trust-blocks\">\n<div class=\"ukchic-trust-block\">\n<div class=\"ukchic-trust-icon\"><svg viewBox=\"0 0 100 100\"><path d=\"m44.36 67.09-2.17.01h20.46V28.83H22.27v3.93m0 23.71V67.1h8.78l-2.18-.01\"></path><path d=\"M36.62 59.5a5.83 5.83 0 0 0-5.84 5.83 5.84 5.84 0 0 0 11.68 0 5.84 5.84 0 0 0-5.84-5.83Zm41.38 0a5.84 5.84 0 0 0-5.85 5.83 5.84 5.84 0 0 0 11.68 0A5.83 5.83 0 0 0 78 59.5Z\"></path><path d=\"m70.26 67.09 2.17.01h-9.78V34.03h12.31l15.06 15.06h4.67V67.1H83.57l2.18-.01\"></path><path d=\"M66.95 49.1V38h5.49l11.04 11.03-16.53.07zm-38.69-4.57H5.31m27.5-6.72h-15.3m15.3 13.44h-15.3\"></path></svg></div>\n<div class=\"ukchic-trust-block-content\"><h3 class=\"ukchic-trust-block-title\">Free Shipping</h3><p class=\"ukchic-trust-block-text\">We strive for maximum comfort for our customers and offer free shipping throughout all of the United Kingdom.</p></div>\n</div>\n<div class=\"ukchic-trust-block\">\n<div class=\"ukchic-trust-icon\"><svg viewBox=\"0 0 100 100\"><circle cx=\"60.82\" cy=\"54.12\" r=\"4.26\"></circle><path d=\"M46.92 78.41a28 28 0 1 0-14.08-24.28\"></path><path d=\"M32.84 54.13a28 28 0 1 1 14.08 24.28m-12.78-9.04H11.19m27.51-6.72H23.4m15.3 13.44H23.4\"></path><path d=\"M32.84 54.13a28 28 0 1 1 14.08 24.28m13.9-61.47v14.24m-17.98 1.51 3.08 3.99M33.27 49.27l4.96.87m13.02 30.28 1.72-4.73m17.42 4.73-1.72-4.73m16.39-7.57L80.7 65.6m7.68-16.33-4.88 1.31m-4.69-17.89-3.08 4.03M60.82 49.87V39.6M54.4 16.94h12.84\"></path></svg></div>\n<div class=\"ukchic-trust-block-content\"><h3 class=\"ukchic-trust-block-title\">30 Day Return Right</h3><p class=\"ukchic-trust-block-text\">After receiving your order, you have 30 days to decide whether you want to keep the product or easily return it.</p></div>\n</div>\n<div class=\"ukchic-trust-block\">\n<div class=\"ukchic-trust-icon\"><svg viewBox=\"0 0 100 100\"><path d=\"M88.78 28.25v47.18h-9.42v10.58L62.91 75.43H32.55V28.25h56.23zM41.85 42.53h37.51m-37.51 9.3h37.51m-37.51 9.31h26.58\"></path><path d=\"M67.45 13.99v14.26h-34.9v35.83l-11.91 7.67V61.16h-9.42V13.99h56.23z\"></path></svg></div>\n<div class=\"ukchic-trust-block-content\"><h3 class=\"ukchic-trust-block-title\">Customer Service</h3><p class=\"ukchic-trust-block-text\">Our team is always ready to answer your questions and help you.</p></div>\n</div>\n</div>\n</div>\n</section>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_KbJNhr"
+      ],
+      "custom_css": [
+        "{margin-top: -50px;}"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "full_width": true,
+        "space_around": false
+      }
+    },
+    "advanced_content_DKQhwF": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_CfPBWF": {
+          "type": "liquid",
+          "settings": {
+            "code": "<style>\n.ukchic-contact-section{--ukchic-navy:#1e3a5f;--ukchic-gold:#c9a961;--ukchic-gold-light:#d4ba7a;--ukchic-cream:#faf8f5;--ukchic-text-light:#666;position:relative;width:100%;min-height:520px;display:flex;align-items:center;font-family:'Jost',sans-serif;overflow:hidden}\n.ukchic-contact-bg{position:absolute;inset:0;background-image:url('https://cdn.shopify.com/s/files/1/0621/1000/7367/files/Black-Streak-Lama_1_1.jpg?v=1753824871');background-size:cover;background-position:center}\n.ukchic-contact-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(30,58,95,0.4) 0%,rgba(30,58,95,0.15) 100%)}\n.ukchic-contact-container{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:60px 40px}\n.ukchic-contact-card{max-width:520px;background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);border-radius:20px;padding:50px 45px;box-shadow:0 20px 60px rgba(30,58,95,0.2);position:relative;overflow:hidden}\n.ukchic-contact-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--ukchic-navy),var(--ukchic-gold),var(--ukchic-navy))}\n.ukchic-contact-card::after{content:'';position:absolute;bottom:-30px;right:-50px;width:150px;height:150px;background:linear-gradient(135deg,rgba(201,169,97,0.1) 0%,transparent 70%);border-radius:50%;pointer-events:none}\n.ukchic-contact-header{margin-bottom:30px}\n.ukchic-contact-tagline{display:inline-block;font-size:11px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--ukchic-gold);margin-bottom:14px}\n.ukchic-contact-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,38px);font-weight:500;color:var(--ukchic-navy);margin:0 0 16px 0;line-height:1.2}\n.ukchic-contact-subtitle{font-family:'Jost',sans-serif;font-size:16px;font-weight:300;color:var(--ukchic-text-light);line-height:1.6;margin:0}\n.ukchic-contact-methods{display:flex;flex-direction:column;gap:16px}\n.ukchic-contact-method{display:flex;align-items:center;gap:16px;padding:18px 20px;background:linear-gradient(135deg,var(--ukchic-cream) 0%,rgba(201,169,97,0.08) 100%);border-radius:12px;transition:all 0.3s;text-decoration:none;border:1px solid rgba(201,169,97,0.15)}\n.ukchic-contact-method:hover{transform:translateX(6px);background:linear-gradient(135deg,rgba(201,169,97,0.15) 0%,rgba(201,169,97,0.08) 100%);border-color:rgba(201,169,97,0.3);box-shadow:0 4px 15px rgba(30,58,95,0.08)}\n.ukchic-contact-icon{width:48px;height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;background:var(--ukchic-navy);border-radius:50%;transition:all 0.3s}\n.ukchic-contact-method:hover .ukchic-contact-icon{background:var(--ukchic-gold);transform:scale(1.05)}\n.ukchic-contact-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}\n.ukchic-contact-details{display:flex;flex-direction:column;gap:2px}\n.ukchic-contact-label{font-family:'Jost',sans-serif;font-size:12px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--ukchic-text-light)}\n.ukchic-contact-value{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--ukchic-navy)}\n.ukchic-contact-arrow{margin-left:auto;opacity:0;transform:translateX(-10px);transition:all 0.3s}\n.ukchic-contact-arrow svg{width:20px;height:20px;stroke:var(--ukchic-gold);stroke-width:2;fill:none}\n.ukchic-contact-method:hover .ukchic-contact-arrow{opacity:1;transform:translateX(0)}\n@media(max-width:768px){.ukchic-contact-section{min-height:480px}.ukchic-contact-container{padding:40px 20px}.ukchic-contact-card{padding:40px 30px;border-radius:16px}.ukchic-contact-title{font-size:28px}.ukchic-contact-method{padding:16px 18px;gap:14px}.ukchic-contact-icon{width:44px;height:44px;min-width:44px}.ukchic-contact-value{font-size:18px}.ukchic-contact-arrow{display:none}}\n@media(max-width:480px){.ukchic-contact-section{min-height:450px}.ukchic-contact-container{padding:30px 16px}.ukchic-contact-card{padding:35px 24px}.ukchic-contact-header{margin-bottom:24px}.ukchic-contact-title{font-size:26px}.ukchic-contact-methods{gap:12px}.ukchic-contact-method{padding:14px 16px;gap:12px}.ukchic-contact-icon{width:40px;height:40px;min-width:40px}.ukchic-contact-label{font-size:11px}.ukchic-contact-value{font-size:16px}}\n</style>\n<section class=\"ukchic-contact-section\">\n<div class=\"ukchic-contact-bg\"></div>\n<div class=\"ukchic-contact-container\">\n<div class=\"ukchic-contact-card\">\n<div class=\"ukchic-contact-header\">\n<span class=\"ukchic-contact-tagline\">Get In Touch</span>\n<h2 class=\"ukchic-contact-title\">We're Always Here for You</h2>\n<p class=\"ukchic-contact-subtitle\">Have a question? We'd love to hear from you. Reach out anytime.</p>\n</div>\n<div class=\"ukchic-contact-methods\">\n<a href=\"mailto:contact@Ukchic.com\" class=\"ukchic-contact-method\">\n<div class=\"ukchic-contact-icon\"><svg viewBox=\"0 0 24 24\"><rect x=\"2\" y=\"4\" width=\"20\" height=\"16\" rx=\"2\"/><polyline points=\"22,6 12,13 2,6\"/></svg></div>\n<div class=\"ukchic-contact-details\"><span class=\"ukchic-contact-label\">Email Us</span><span class=\"ukchic-contact-value\">contact@Ukchic.com</span></div>\n<div class=\"ukchic-contact-arrow\"><svg viewBox=\"0 0 24 24\"><polyline points=\"9 18 15 12 9 6\"/></svg></div>\n</a>\n<a href=\"tel:\" class=\"ukchic-contact-method\">\n<div class=\"ukchic-contact-icon\"><svg viewBox=\"0 0 24 24\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg></div>\n<div class=\"ukchic-contact-details\"><span class=\"ukchic-contact-label\">Call Us</span><span class=\"ukchic-contact-value\">+1 (307) 400-1660</span></div>\n<div class=\"ukchic-contact-arrow\"><svg viewBox=\"0 0 24 24\"><polyline points=\"9 18 15 12 9 6\"/></svg></div>\n</a>\n</div>\n</div>\n</div>\n</section>",
+            "width": "100%",
+            "alignment": "top-middle"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_CfPBWF"
+      ],
+      "custom_css": [
+        "{margin-bottom: -20px;}"
+      ],
+      "name": "Custom content",
+      "settings": {
+        "full_width": true,
+        "space_around": false
+      }
+    },
+    "slideshow_a4aLQE": {
+      "type": "slideshow",
+      "blocks": {
+        "image_HRWNnB": {
+          "type": "image",
+          "settings": {
+            "title": "",
+            "title_size": 88,
+            "subheading": "Bring your brand to life",
+            "link": "",
+            "link_text": "Optional button",
+            "text_align": "vertical-bottom horizontal-left",
+            "overlay_opacity": 0,
+            "focal_point": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "image_HRWNnB"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Hero (optional slideshow)",
+      "settings": {
+        "section_height": "550px",
+        "mobile_height": "300px",
+        "parallax": true,
+        "style": "minimal",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "advanced_content_yM6RQp": {
+      "type": "advanced-content",
+      "blocks": {
+        "liquid_iPmzKc": {
+          "type": "liquid",
+          "settings": {
+            "code": "<div class=\"contact-section\">\n  <div class=\"contact-container\">\n    <div class=\"background-image\">\n      <img src=\"https://cdn.shopify.com/s/files/1/0621/1000/7367/files/Black-Streak-Lama_1_1.jpg?v=1753824871\" alt=\"Kontakt os\" loading=\"lazy\">\n    </div>\n    <div class=\"contact-content\">\n      <div class=\"contact-text\">\n        <h2>Vi er altid der for dig!</h2>\n        <p>Du kan kontakte os på forskellige måder - tøv ikke med at kontakte os:</p>\n        <div class=\"contact-info\">\n          <p>✉️ <a href=\"mailto:info@werner-mode.de\">info@werner-mode.de</a></p>\n          <p>💬 <a href=\"https://werner-mode.de/pages/faq\">FAQ</a></p>\n          <p>📱 <a href=\"tel:+31613663848\">+316 13663848</a></p>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n.contact-section {\n  position: relative;\n  width: 100%;\n  min-height: 500px;\n  overflow: hidden;\n}\n\n.contact-container {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  min-height: 500px;\n}\n\n.background-image {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1;\n}\n\n.background-image img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  display: block;\n}\n\n.contact-content {\n  position: relative;\n  z-index: 2;\n  display: flex;\n  align-items: center;\n  min-height: 500px;\n  padding: 40px 20px;\n}\n\n.contact-text {\n  max-width: 600px;\n  background: white;\n  padding: 40px;\n  border-radius: 10px;\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);\n  color: #333;\n}\n\n.contact-text h2 {\n  font-size: 2.5rem;\n  font-weight: bold;\n  margin-bottom: 20px;\n  color: #333;\n  line-height: 1.2;\n}\n\n.contact-text > p {\n  font-size: 1.2rem;\n  margin-bottom: 30px;\n  color: #333;\n  line-height: 1.4;\n}\n\n.contact-info {\n  font-size: 1.1rem;\n}\n\n.contact-info p {\n  margin-bottom: 15px;\n  color: #333;\n  display: flex;\n  align-items: center;\n  gap: 10px;\n}\n\n.contact-info a {\n  color: #0066cc;\n  text-decoration: underline;\n  transition: color 0.3s ease;\n}\n\n.contact-info a:hover {\n  color: #004499;\n}\n\n/* Mobile responsive */\n@media screen and (max-width: 768px) {\n  .contact-section {\n    min-height: 400px;\n  }\n  \n  .contact-container {\n    min-height: 400px;\n  }\n  \n  .contact-content {\n    min-height: 400px;\n    padding: 30px 15px;\n  }\n  \n  .contact-text {\n    padding: 30px 25px;\n  }\n  \n  .contact-text h2 {\n    font-size: 2rem;\n    margin-bottom: 15px;\n  }\n  \n  .contact-text > p {\n    font-size: 1rem;\n    margin-bottom: 20px;\n  }\n  \n  .contact-info {\n    font-size: 1rem;\n  }\n  \n  .contact-info p {\n    margin-bottom: 12px;\n  }\n}\n\n@media screen and (max-width: 480px) {\n  .contact-text {\n    padding: 25px 20px;\n  }\n  \n  .contact-text h2 {\n    font-size: 1.8rem;\n  }\n  \n  .contact-text > p {\n    font-size: 0.95rem;\n  }\n  \n  .contact-info {\n    font-size: 0.95rem;\n  }\n}\n</style>",
+            "width": "100%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_iPmzKc"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "Custom content",
+      "settings": {
+        "full_width": true,
+        "space_around": false
+      }
+    }
+  },
+  "order": [
+    "advanced_content_9xUctk",
+    "slideshow_pmnwqw",
+    "featured-collections",
+    "featured_collections_pzXDzf",
+    "best_sellers_yKpfP3",
+    "featured_collection_U4q7jH",
+    "featured_collections_9geVHN",
+    "featured_collection_CR7xHW",
+    "advanced_content_rytPWR",
+    "best_sellers_p44RYC",
+    "advanced_content_kxCDdq",
+    "advanced_content_DKQhwF",
+    "slideshow_a4aLQE",
+    "advanced_content_yM6RQp"
+  ]
+}

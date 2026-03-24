@@ -876,7 +876,7 @@
 body,html{
   padding:0;
   margin:0;
-  overflow-x:hidden;
+  overflow-x:clip;
   max-width:100%;
 }
 
@@ -1058,7 +1058,7 @@ html[dir=rtl] .grid--small-gutters .grid__item{
 
 .grid--flush-bottom{
   margin-bottom:-30px;
-  overflow:auto
+  overflow:visible
 }
 
 .grid--flush-bottom>.grid__item{
@@ -1292,7 +1292,7 @@ body,html{
 .main-content{
   display:block;
   min-height:300px;
-  overflow-x:hidden
+  overflow-x:clip
 }
 
 @media only screen and (min-width:590px){
@@ -2935,10 +2935,6 @@ html{
 }
 
 @supports(scrollbar-gutter:stable){
-  html{
-    scrollbar-gutter:stable;
-    --scrollbar-width:0px;
-  }
   .js-drawer-open{
     padding-right:0;
   }

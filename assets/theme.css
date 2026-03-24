@@ -1058,7 +1058,7 @@ html[dir=rtl] .grid--small-gutters .grid__item{
 
 .grid--flush-bottom{
   margin-bottom:-30px;
-  overflow:auto
+  overflow:visible
 }
 
 .grid--flush-bottom>.grid__item{

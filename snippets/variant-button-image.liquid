@@ -1,0 +1,200 @@
+{%- liquid
+  assign swatch_file_extension = 'png'
+  assign option_index = forloop.index
+-%}
+
+<div class="variant-wrapper variant-wrapper--image-swatches js" data-type="button">
+  <label class="variant__label ozchic-variant-label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
+    for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}">
+    {{ option.name }}
+    {%- if is_color -%}
+      <span class="variant__label-info">
+        &mdash;
+        <span data-variant-color-label data-index="{{ forloop.index0 }}" data-option-index="{{ color_option_index }}">{{ option.selected_value }}</span>
+      </span>
+    {%- endif -%}
+  </label>
+
+  <fieldset class="variant-input-wrap variant-input-wrap--image-swatches"
+    name="{{ option.name }}"
+    data-index="option{{ option_index }}"
+    data-handle="{{ option.name | handleize }}"
+    id="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}">
+    <legend class="hide">{{ option.name }}</legend>
+
+    {%- for value in option.values -%}
+      {%- liquid
+        assign product_available = true
+        assign variant_image = nil
+        assign variant_image_src = nil
+
+        if product.options.size == 1
+          assign product_available = product.variants[forloop.index0].available
+        endif
+
+        for variant in product.variants
+          assign option_position = 'option' | append: option_index
+          assign variant_option_value = variant[option_position]
+          if variant_option_value == value and variant.featured_image != blank
+            assign variant_image = variant.featured_image
+            assign variant_image_src = variant_image | img_url: '150x150', crop: 'center'
+            break
+          endif
+        endfor
+
+        if variant_image_src == blank
+          assign value_handle = value | handle
+          for image in product.images
+            assign image_alt_handle = image.alt | handle
+            if image_alt_handle contains value_handle
+              assign variant_image = image
+              assign variant_image_src = image | img_url: '150x150', crop: 'center'
+              break
+            endif
+          endfor
+        endif
+
+        assign color_file_name = value | handle | append: '.' | append: swatch_file_extension
+        assign color_image = color_file_name | file_img_url: '50x50' | prepend: 'https:' | split: '?' | first
+        assign color_swatch_fallback = value | split: ' ' | last | handle
+      -%}
+
+      <div class="variant-input variant-input--image-swatch" data-index="option{{ option_index }}" data-value="{{ value | escape }}">
+        <input type="radio"
+          {% if option.selected_value == value %} checked="checked"{% endif %}
+          form="{{ form_id }}"
+          value="{{ value | escape }}"
+          data-index="option{{ option_index }}"
+          name="{{ option.name }}"
+          data-variant-input
+          class="variant__input--image-swatch{% unless product_available %} disabled{% endunless %}"
+          data-color-name="{{ value | escape }}"
+          data-color-index="{{ color_option_index }}"
+          id="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}">
+
+        <label
+          for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
+          class="ozchic-image-swatch{% unless product_available %} disabled{% endunless %}{% if option.selected_value == value %} is-active{% endif %}"
+          data-swatch-value="{{ value | escape }}"
+          title="{{ value | escape }}">
+          {%- if variant_image_src != blank -%}
+            <img src="{{ variant_image_src }}" alt="{{ value | escape }}" loading="lazy">
+          {%- else -%}
+            <span class="ozchic-image-swatch__color" style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %} background-image: url({{ color_image }});{% endif %}"></span>
+          {%- endif -%}
+          {%- unless product_available -%}
+            <span class="ozchic-image-swatch__soldout"></span>
+          {%- endunless -%}
+        </label>
+      </div>
+    {%- endfor -%}
+  </fieldset>
+</div>
+
+<style>
+.variant-wrapper.variant-wrapper--image-swatches {
+  margin-bottom: 24px !important;
+}
+
+.variant-wrapper--image-swatches .ozchic-variant-label {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1e3a5f !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.variant-wrapper--image-swatches .ozchic-variant-label .variant__label-info {
+  font-weight: 400 !important;
+  color: #666 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.variant-input-wrap.variant-input-wrap--image-swatches {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.variant-input.variant-input--image-swatch {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.variant-input--image-swatch input[type="radio"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+label.ozchic-image-swatch {
+  display: block !important;
+  width: 54px !important;
+  height: 54px !important;
+  min-width: 54px !important;
+  min-height: 54px !important;
+  max-width: 54px !important;
+  max-height: 54px !important;
+  border: 2px solid #ddd !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  background: #fff !important;
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease !important;
+}
+
+label.ozchic-image-swatch img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  border-radius: 2px !important;
+}
+
+label.ozchic-image-swatch:hover {
+  border-color: #1e3a5f !important;
+}
+
+.variant-input--image-swatch input[type="radio"]:checked + label.ozchic-image-swatch,
+label.ozchic-image-swatch.is-active {
+  border-color: #1e3a5f !important;
+  box-shadow: 0 0 0 1px #1e3a5f !important;
+}
+
+label.ozchic-image-swatch .ozchic-image-swatch__color {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+label.ozchic-image-swatch.disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+}
+
+label.ozchic-image-swatch .ozchic-image-swatch__soldout {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: linear-gradient(135deg, transparent 45%, rgba(0,0,0,0.4) 45%, rgba(0,0,0,0.4) 55%, transparent 55%) !important;
+}
+</style>

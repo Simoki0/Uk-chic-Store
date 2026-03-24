@@ -1,0 +1,163 @@
+{%- liquid
+  assign option_index = forloop.index
+-%}
+
+<div class="variant-wrapper variant-wrapper--size js" data-type="button">
+  <label class="variant__label ozchic-variant-label{% if option.name == 'Default' or option.name == 'Title' %} hidden-label{% endif %}{% unless variant_labels %} hidden-label{% endunless %}"
+    for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}">
+    {{ option.name }}
+    <span class="variant__label-info">
+      &mdash;
+      <span data-variant-size-label data-index="{{ forloop.index0 }}">{{ option.selected_value }}</span>
+    </span>
+  </label>
+
+  <fieldset class="variant-input-wrap variant-input-wrap--size"
+    name="{{ option.name }}"
+    data-index="option{{ option_index }}"
+    data-handle="{{ option.name | handleize }}"
+    id="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ forloop.index0 }}">
+    <legend class="hide">{{ option.name }}</legend>
+
+    {%- for value in option.values -%}
+      {%- liquid
+        assign product_available = true
+        if product.options.size == 1
+          assign product_available = product.variants[forloop.index0].available
+        endif
+
+        assign size_available = false
+        for variant in product.variants
+          assign option_position = 'option' | append: option_index
+          if variant[option_position] == value and variant.available
+            assign size_available = true
+            break
+          endif
+        endfor
+      -%}
+
+      <div class="variant-input variant-input--size" data-index="option{{ option_index }}" data-value="{{ value | escape }}">
+        <input type="radio"
+          {% if option.selected_value == value %} checked="checked"{% endif %}
+          form="{{ form_id }}"
+          value="{{ value | escape }}"
+          data-index="option{{ option_index }}"
+          name="{{ option.name }}"
+          data-variant-input
+          class="ozchic-size-input{% unless size_available %} disabled{% endunless %}"
+          id="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}">
+
+        <label
+          for="ProductSelect-{{ section_id }}-{{ product.id }}-option-{{ option.name | handleize }}-{{ value | url_encode }}"
+          class="ozchic-size-btn{% unless size_available %} soldout{% endunless %}{% if option.selected_value == value %} is-active{% endif %}"
+          data-size-value="{{ value | escape }}"
+          title="{{ value | escape }}">
+          <span class="ozchic-size-text">{{ value | escape }}</span>
+        </label>
+      </div>
+    {%- endfor -%}
+  </fieldset>
+</div>
+
+<style>
+.variant-wrapper.variant-wrapper--size {
+  margin-bottom: 24px !important;
+}
+
+.variant-wrapper--size .ozchic-variant-label {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1e3a5f !important;
+  margin-bottom: 12px !important;
+  display: block !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.variant-wrapper--size .ozchic-variant-label .variant__label-info {
+  font-weight: 400 !important;
+  color: #666 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.variant-input-wrap.variant-input-wrap--size {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 6px !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.variant-input.variant-input--size {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.variant-input--size input[type="radio"].ozchic-size-input {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+label.ozchic-size-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  padding: 0 14px !important;
+  border: 1.5px solid #1e3a5f !important;
+  border-radius: 4px !important;
+  background: #fff !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+}
+
+span.ozchic-size-text {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #1e3a5f !important;
+  line-height: 1 !important;
+  display: block !important;
+  text-align: center !important;
+}
+
+label.ozchic-size-btn:hover:not(.soldout) {
+  background: #1e3a5f !important;
+}
+
+label.ozchic-size-btn:hover:not(.soldout) span.ozchic-size-text {
+  color: #fff !important;
+}
+
+.variant-input--size input[type="radio"]:checked + label.ozchic-size-btn,
+label.ozchic-size-btn.is-active {
+  background: #1e3a5f !important;
+}
+
+.variant-input--size input[type="radio"]:checked + label.ozchic-size-btn span.ozchic-size-text,
+label.ozchic-size-btn.is-active span.ozchic-size-text {
+  color: #fff !important;
+}
+
+label.ozchic-size-btn.soldout {
+  border-color: #ddd !important;
+  background: #fafafa !important;
+  cursor: not-allowed !important;
+}
+
+label.ozchic-size-btn.soldout span.ozchic-size-text {
+  color: #bbb !important;
+}
+</style>

@@ -1,0 +1,560 @@
+{% comment %}
+  ============================================
+  OZ-CHIC - YOU MIGHT ALSO LIKE SECTION
+  Place this in: sections/ozchic-recommendations.liquid
+  ============================================
+{% endcomment %}
+
+{% comment %} Get the current product's first collection {% endcomment %}
+{% assign current_collection = product.collections.first %}
+{% assign products_to_show = 4 %}
+{% assign products_shown = 0 %}
+
+{% if current_collection %}
+<section class="ozchic-recommendations">
+  <div class="ozchic-recommendations-container">
+    
+    <!-- Header -->
+    <div class="ozchic-recommendations-header">
+      <span class="ozchic-recommendations-tagline">Curated For You</span>
+      <h2 class="ozchic-recommendations-title">You Might Also Like</h2>
+    </div>
+    
+    <!-- Products Grid -->
+    <div class="ozchic-products-grid">
+      
+      {% comment %} Loop through collection products sorted by best-selling {% endcomment %}
+      {% for rec_product in current_collection.products limit: 20 %}
+        {% comment %} Skip the current product {% endcomment %}
+        {% if rec_product.id != product.id and products_shown < products_to_show %}
+          {% assign products_shown = products_shown | plus: 1 %}
+          
+          {% comment %} Calculate discount percentage if on sale {% endcomment %}
+          {% assign on_sale = false %}
+          {% assign discount_percent = 0 %}
+          {% if rec_product.compare_at_price > rec_product.price %}
+            {% assign on_sale = true %}
+            {% assign discount = rec_product.compare_at_price | minus: rec_product.price %}
+            {% assign discount_percent = discount | times: 100.0 | divided_by: rec_product.compare_at_price | round %}
+          {% endif %}
+          
+          <!-- Product Card -->
+          <a href="{{ rec_product.url }}" class="ozchic-product-card">
+            
+            {% comment %} Badge - Sale or Sold Out {% endcomment %}
+            {% if rec_product.available == false %}
+              <span class="ozchic-product-badge ozchic-badge-soldout">Sold Out</span>
+            {% elsif on_sale %}
+              <span class="ozchic-product-badge">-{{ discount_percent }}%</span>
+            {% endif %}
+            
+            <!-- Wishlist Button -->
+            <button class="ozchic-wishlist-btn" aria-label="Add to wishlist" data-product-id="{{ rec_product.id }}">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
+            
+            <!-- Product Image -->
+            <div class="ozchic-product-image">
+              {% if rec_product.featured_image %}
+                <img 
+                  src="{{ rec_product.featured_image | image_url: width: 400 }}" 
+                  alt="{{ rec_product.featured_image.alt | escape | default: rec_product.title }}"
+                  loading="lazy"
+                  width="400"
+                  height="533"
+                >
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {% endif %}
+              
+              {% if rec_product.available %}
+                <button type="button" class="ozchic-quick-add" data-product-url="{{ rec_product.url }}">
+                  Quick View
+                </button>
+              {% endif %}
+            </div>
+            
+            <!-- Product Info -->
+            <div class="ozchic-product-info">
+              <h3 class="ozchic-product-name">{{ rec_product.title }}</h3>
+              
+              <div class="ozchic-product-price">
+                <span class="ozchic-price-current">{{ rec_product.price | money }}</span>
+                {% if on_sale %}
+                  <span class="ozchic-price-original">{{ rec_product.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+              
+              {% comment %} Star Rating - If using a reviews app like Judge.me or Loox {% endcomment %}
+              {% if rec_product.metafields.reviews.rating.value != blank %}
+                {% assign rating = rec_product.metafields.reviews.rating.value | round: 1 %}
+                {% assign rating_count = rec_product.metafields.reviews.rating_count.value %}
+                <div class="ozchic-product-rating">
+                  <div class="ozchic-rating-stars">
+                    {% for i in (1..5) %}
+                      {% if i <= rating %}
+                        <svg viewBox="0 0 24 24" class="star-filled"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                      {% else %}
+                        <svg viewBox="0 0 24 24" class="star-empty"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <span class="ozchic-rating-count">({{ rating_count }})</span>
+                </div>
+              {% endif %}
+            </div>
+          </a>
+          
+        {% endif %}
+      {% endfor %}
+      
+    </div>
+    
+  </div>
+</section>
+{% endif %}
+
+<style>
+  /* ============================================
+     OZ-CHIC YOU MIGHT ALSO LIKE - CSS
+     ============================================ */
+  
+  .ozchic-recommendations {
+    --ozchic-navy: #1e3a5f;
+    --ozchic-navy-light: #2a4a73;
+    --ozchic-gold: #c9a961;
+    --ozchic-gold-light: #d4ba7a;
+    --ozchic-cream: #faf8f5;
+    --ozchic-text: #333333;
+    --ozchic-text-light: #666666;
+  }
+  
+  .ozchic-recommendations {
+    background: linear-gradient(180deg, #ffffff 0%, var(--ozchic-cream) 100%);
+    padding: 70px 20px;
+    font-family: 'Jost', sans-serif;
+  }
+  
+  .ozchic-recommendations-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Section Header */
+  .ozchic-recommendations-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .ozchic-recommendations-tagline {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ozchic-gold);
+    margin-bottom: 12px;
+  }
+  
+  .ozchic-recommendations-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 500;
+    color: var(--ozchic-navy);
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Products Grid */
+  .ozchic-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  
+  /* Product Card */
+  .ozchic-product-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(30, 58, 95, 0.06);
+    transition: all 0.3s ease;
+    position: relative;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .ozchic-product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(30, 58, 95, 0.12);
+  }
+  
+  /* Sale Badge */
+  .ozchic-product-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: var(--ozchic-gold);
+    color: #ffffff;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 20px;
+    z-index: 2;
+  }
+  
+  .ozchic-badge-soldout {
+    background: var(--ozchic-text-light);
+  }
+  
+  /* Wishlist Button */
+  .ozchic-wishlist-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 38px;
+    height: 38px;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ozchic-wishlist-btn:hover {
+    background: var(--ozchic-navy);
+    transform: scale(1.1);
+  }
+  
+  .ozchic-wishlist-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--ozchic-navy);
+    stroke-width: 1.8;
+    fill: none;
+    transition: all 0.3s ease;
+  }
+  
+  .ozchic-wishlist-btn:hover svg {
+    stroke: #ffffff;
+  }
+  
+  /* Product Image */
+  .ozchic-product-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: var(--ozchic-cream);
+  }
+  
+  .ozchic-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .ozchic-product-card:hover .ozchic-product-image img {
+    transform: scale(1.08);
+  }
+  
+  /* Quick Add Button */
+  .ozchic-quick-add {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--ozchic-navy);
+    color: #ffffff;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+  }
+  
+  .ozchic-product-card:hover .ozchic-quick-add {
+    transform: translateY(0);
+  }
+  
+  .ozchic-quick-add:hover {
+    background: var(--ozchic-gold);
+  }
+  
+  /* Product Info */
+  .ozchic-product-info {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .ozchic-product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ozchic-navy);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+    transition: color 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .ozchic-product-card:hover .ozchic-product-name {
+    color: var(--ozchic-gold);
+  }
+  
+  .ozchic-product-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .ozchic-price-current {
+    font-family: 'Jost', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--ozchic-navy);
+  }
+  
+  .ozchic-price-original {
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ozchic-text-light);
+    text-decoration: line-through;
+  }
+  
+  /* Product Rating */
+  .ozchic-product-rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  
+  .ozchic-rating-stars {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .ozchic-rating-stars svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .ozchic-rating-stars svg.star-filled {
+    fill: var(--ozchic-gold);
+  }
+  
+  .ozchic-rating-stars svg.star-empty {
+    fill: none;
+    stroke: var(--ozchic-gold);
+    stroke-width: 1.5;
+  }
+  
+  .ozchic-rating-count {
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    color: var(--ozchic-text-light);
+  }
+  
+  /* Placeholder SVG styling */
+  .ozchic-product-image .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    background: var(--ozchic-cream);
+  }
+  
+  /* Responsive - Tablet */
+  @media (max-width: 1024px) {
+    .ozchic-products-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  /* Responsive - Small Tablet */
+  @media (max-width: 768px) {
+    .ozchic-recommendations {
+      padding: 50px 16px;
+    }
+    
+    .ozchic-recommendations-header {
+      margin-bottom: 40px;
+    }
+    
+    .ozchic-products-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    
+    .ozchic-product-info {
+      padding: 16px;
+    }
+    
+    .ozchic-product-name {
+      font-size: 16px;
+    }
+    
+    .ozchic-price-current {
+      font-size: 15px;
+    }
+    
+    .ozchic-quick-add {
+      transform: translateY(0);
+      position: relative;
+      margin-top: -1px;
+      padding: 12px;
+      font-size: 12px;
+    }
+  }
+  
+  /* Responsive - Mobile */
+  @media (max-width: 480px) {
+    .ozchic-products-grid {
+      gap: 12px;
+    }
+    
+    .ozchic-product-badge {
+      font-size: 10px;
+      padding: 5px 10px;
+      top: 10px;
+      left: 10px;
+    }
+    
+    .ozchic-wishlist-btn {
+      width: 32px;
+      height: 32px;
+      top: 10px;
+      right: 10px;
+    }
+    
+    .ozchic-wishlist-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+    
+    .ozchic-product-info {
+      padding: 14px 12px;
+    }
+    
+    .ozchic-product-name {
+      font-size: 14px;
+    }
+    
+    .ozchic-price-current {
+      font-size: 14px;
+    }
+    
+    .ozchic-price-original {
+      font-size: 12px;
+    }
+    
+    .ozchic-product-rating {
+      margin-top: 8px;
+    }
+    
+    .ozchic-rating-stars svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  // Wishlist toggle functionality
+  const wishlistBtns = document.querySelectorAll('.ozchic-wishlist-btn');
+  
+  wishlistBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const svg = this.querySelector('svg');
+      const isFilled = svg.getAttribute('fill') === 'currentColor';
+      
+      if (isFilled) {
+        svg.setAttribute('fill', 'none');
+        svg.style.stroke = '';
+      } else {
+        svg.setAttribute('fill', 'currentColor');
+        svg.style.stroke = 'var(--ozchic-gold)';
+        svg.style.color = 'var(--ozchic-gold)';
+      }
+    });
+  });
+  
+  // Quick View functionality - customize based on your theme
+  const quickAddBtns = document.querySelectorAll('.ozchic-quick-add');
+  
+  quickAddBtns.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const productUrl = this.getAttribute('data-product-url');
+      
+      // Option 1: Navigate to product page
+      window.location.href = productUrl;
+      
+      // Option 2: If you have a quick view modal, trigger it here
+      // Example: window.theme.QuickView.open(productUrl);
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Oz-Chic Recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Curated For You"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "You Might Also Like"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oz-Chic Recommendations"
+    }
+  ]
+}
+{% endschema %}

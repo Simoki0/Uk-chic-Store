@@ -1,0 +1,367 @@
+{% comment %}
+  Product Recommendations - Fixed with 2:3 aspect ratio
+  5 products per row with proper image sizing
+{% endcomment %}
+
+{%- liquid
+  assign current_product = product
+  assign target_collection = ''
+  assign max_products = 10
+  assign per_row = 5
+  
+  # Use 5 per row as requested  
+  assign grid_item_width = 'small--one-half medium-up--one-fifth'
+
+  # Update these to match your actual collection handles
+  assign mens_broad_collection = 'mens-clothes'
+  assign womens_broad_collection = 'womens-clothes'
+  
+  # Find the most specific collection (avoid broad parent collections)
+  assign smallest_count = 9999
+  for collection in current_product.collections
+    assign collection_handle = collection.handle
+    
+    unless collection_handle == mens_broad_collection or collection_handle == womens_broad_collection
+      if collection.products_count < smallest_count and collection.products_count > 1
+        assign target_collection = collection
+        assign smallest_count = collection.products_count
+      endif
+    endunless
+  endfor
+  
+  # Fallback to first specific collection
+  unless target_collection
+    for collection in current_product.collections
+      assign collection_handle = collection.handle
+      unless collection_handle == mens_broad_collection or collection_handle == womens_broad_collection
+        assign target_collection = collection
+        break
+      endunless
+    endfor
+  endunless
+  
+  # Final fallback
+  unless target_collection
+    assign target_collection = current_product.collections.first
+  endunless
+  
+  # Get broader collection for additional products
+  assign broader_collection = ''
+  for collection in current_product.collections
+    if collection.products_count > target_collection.products_count
+      assign broader_collection = collection
+      break
+    endif
+  endfor
+-%}
+
+{%- if target_collection and target_collection.products_count > 1 -%}
+<style>
+  /* 2:3 Portrait Aspect Ratio for Product Images */
+  .grid-product__image-mask {
+    position: relative;
+    display: block;
+    width: 100%;
+    background: #f5f5f5;
+    overflow: hidden;
+  }
+  
+  /* Container for 2:3 aspect ratio */
+  .grid__image-ratio--portrait {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 150%; /* 2:3 ratio */
+    overflow: hidden;
+  }
+  
+  /* Ensure all images are visible and fill the container */
+  .grid__image-ratio--portrait image-element,
+  .grid__image-ratio--portrait img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  .grid__image-ratio--portrait img {
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* Secondary image overlay */
+  .grid-product__secondary-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+  }
+  
+  .grid-product__secondary-image image-element,
+  .grid-product__secondary-image img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* Show secondary image on hover */
+  .grid-product__link:hover .grid-product__secondary-image {
+    opacity: 1 !important;
+  }
+  
+  /* Ensure image-element wrapper doesn't hide content */
+  image-element {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Override any AOS animations that might hide images */
+  [data-aos="image-fade-in"],
+  [data-aos="image-fade-in"] img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+</style>
+
+<div id="RecommendationsSection-product" data-section-type="product-recommendations">
+  <div class="page-width">
+    <div class="section-header">
+      <h2 class="section-header__title">
+        You might also like
+      </h2>
+    </div>
+  </div>
+
+  <div class="page-width page-width--flush-small">
+    <div class="grid-overflow-wrapper">
+      <div class="grid grid--uniform" data-aos="overflow__animation">
+        {%- assign shown_count = 0 -%}
+        {%- assign shown_ids = '' -%}
+        
+        {%- comment -%} STEP 1: Show products from specific collection {%- endcomment -%}
+        {%- for product_item in target_collection.products limit: 30 -%}
+          {%- unless product_item.id == current_product.id -%}
+            {%- if shown_count < max_products -%}
+              <div class="grid__item grid-product {{ grid_item_width }}" data-aos="row-of-{{ per_row }}" data-product-handle="{{ product_item.handle }}" data-product-id="{{ product_item.id }}">
+                <div class="grid-product__content">
+                  <a href="{{ product_item.url | within: target_collection }}" class="grid-product__link">
+                    <div class="grid-product__image-mask">
+                      <div class="grid__image-ratio grid__image-ratio--portrait">
+                        <image-element data-aos="image-fade-in" data-aos-offset="150">
+                          <img src="{{ product_item.featured_image | image_url: width: 1080 }}" 
+                               alt="{{ product_item.featured_image.alt | escape }}"
+                               srcset="{{ product_item.featured_image | image_url: width: 360 }} 360w,
+                                       {{ product_item.featured_image | image_url: width: 540 }} 540w,
+                                       {{ product_item.featured_image | image_url: width: 720 }} 720w,
+                                       {{ product_item.featured_image | image_url: width: 900 }} 900w,
+                                       {{ product_item.featured_image | image_url: width: 1080 }} 1080w"
+                               width="1080" 
+                               height="{{ 1080 | divided_by: product_item.featured_image.aspect_ratio | round }}"
+                               loading="lazy" 
+                               class="image-style--"
+                               sizes="(min-width: 769px) 20vw, 50vw">
+                        </image-element>
+                      </div>
+                      {% if product_item.images[1] %}
+                        <div class="grid-product__secondary-image small--hide">
+                          <image-element data-aos="image-fade-in" data-aos-offset="150">
+                            <img src="{{ product_item.images[1] | image_url: width: 1000 }}" 
+                                 alt="{{ product_item.images[1].alt | escape }}"
+                                 srcset="{{ product_item.images[1] | image_url: width: 360 }} 360w,
+                                         {{ product_item.images[1] | image_url: width: 540 }} 540w,
+                                         {{ product_item.images[1] | image_url: width: 720 }} 720w,
+                                         {{ product_item.images[1] | image_url: width: 1000 }} 1000w"
+                                 width="1000" 
+                                 loading="lazy" 
+                                 class="image-style--"
+                                 sizes="(min-width: 769px) 20vw, 50vw">
+                          </image-element>
+                        </div>
+                      {% endif %}
+                    </div>
+                    <div class="grid-product__meta">
+                      <div class="grid-product__title">{{ product_item.title }}</div>
+                      <div class="grid-product__price">
+                        {% if product_item.compare_at_price > product_item.price %}
+                          <span class="grid-product__price--original">{{ product_item.compare_at_price | money }}</span>
+                          <span class="sale-price">{{ product_item.price | money }}</span>
+                        {% else %}
+                          {{ product_item.price | money }}
+                        {% endif %}
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              {%- assign shown_count = shown_count | plus: 1 -%}
+              {%- assign shown_ids = shown_ids | append: product_item.id | append: ',' -%}
+            {%- endif -%}
+          {%- endunless -%}
+        {%- endfor -%}
+        
+        {%- comment -%} STEP 2: Fill remaining slots from broader collection {%- endcomment -%}
+        {%- if shown_count < max_products and broader_collection != '' -%}
+          {%- for product_item in broader_collection.products limit: 30 -%}
+            {%- unless product_item.id == current_product.id -%}
+              {%- unless shown_ids contains product_item.id -%}
+                {%- if shown_count < max_products -%}
+                  <div class="grid__item grid-product {{ grid_item_width }}" data-aos="row-of-{{ per_row }}" data-product-handle="{{ product_item.handle }}" data-product-id="{{ product_item.id }}">
+                    <div class="grid-product__content">
+                      <a href="{{ product_item.url | within: broader_collection }}" class="grid-product__link">
+                        <div class="grid-product__image-mask">
+                          <div class="grid__image-ratio grid__image-ratio--portrait">
+                            <image-element data-aos="image-fade-in" data-aos-offset="150">
+                              <img src="{{ product_item.featured_image | image_url: width: 1080 }}" 
+                                   alt="{{ product_item.featured_image.alt | escape }}"
+                                   srcset="{{ product_item.featured_image | image_url: width: 360 }} 360w,
+                                           {{ product_item.featured_image | image_url: width: 540 }} 540w,
+                                           {{ product_item.featured_image | image_url: width: 720 }} 720w,
+                                           {{ product_item.featured_image | image_url: width: 900 }} 900w,
+                                           {{ product_item.featured_image | image_url: width: 1080 }} 1080w"
+                                   width="1080" 
+                                   height="{{ 1080 | divided_by: product_item.featured_image.aspect_ratio | round }}"
+                                   loading="lazy" 
+                                   class="image-style--"
+                                   sizes="(min-width: 769px) 20vw, 50vw">
+                            </image-element>
+                          </div>
+                          {% if product_item.images[1] %}
+                            <div class="grid-product__secondary-image small--hide">
+                              <image-element data-aos="image-fade-in" data-aos-offset="150">
+                                <img src="{{ product_item.images[1] | image_url: width: 1000 }}" 
+                                     alt="{{ product_item.images[1].alt | escape }}"
+                                     srcset="{{ product_item.images[1] | image_url: width: 360 }} 360w,
+                                             {{ product_item.images[1] | image_url: width: 540 }} 540w,
+                                             {{ product_item.images[1] | image_url: width: 720 }} 720w,
+                                             {{ product_item.images[1] | image_url: width: 1000 }} 1000w"
+                                     width="1000" 
+                                     loading="lazy" 
+                                     class="image-style--"
+                                     sizes="(min-width: 769px) 20vw, 50vw">
+                              </image-element>
+                            </div>
+                          {% endif %}
+                        </div>
+                        <div class="grid-product__meta">
+                          <div class="grid-product__title">{{ product_item.title }}</div>
+                          <div class="grid-product__price">
+                            {% if product_item.compare_at_price > product_item.price %}
+                              <span class="grid-product__price--original">{{ product_item.compare_at_price | money }}</span>
+                              <span class="sale-price">{{ product_item.price | money }}</span>
+                            {% else %}
+                              {{ product_item.price | money }}
+                            {% endif %}
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                  {%- assign shown_count = shown_count | plus: 1 -%}
+                  {%- assign shown_ids = shown_ids | append: product_item.id | append: ',' -%}
+                {%- endif -%}
+              {%- endunless -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+        
+        {%- comment -%} STEP 3: If still not enough, get from ANY other collection {%- endcomment -%}
+        {%- if shown_count < max_products -%}
+          {%- for collection in current_product.collections -%}
+            {%- unless collection.id == target_collection.id -%}
+              {%- for product_item in collection.products limit: 10 -%}
+                {%- unless product_item.id == current_product.id -%}
+                  {%- unless shown_ids contains product_item.id -%}
+                    {%- if shown_count < max_products -%}
+                      <div class="grid__item grid-product {{ grid_item_width }}" data-aos="row-of-{{ per_row }}" data-product-handle="{{ product_item.handle }}" data-product-id="{{ product_item.id }}">
+                        <div class="grid-product__content">
+                          <a href="{{ product_item.url | within: collection }}" class="grid-product__link">
+                            <div class="grid-product__image-mask">
+                              <div class="grid__image-ratio grid__image-ratio--portrait">
+                                <image-element data-aos="image-fade-in" data-aos-offset="150">
+                                  <img src="{{ product_item.featured_image | image_url: width: 1080 }}" 
+                                       alt="{{ product_item.featured_image.alt | escape }}"
+                                       srcset="{{ product_item.featured_image | image_url: width: 360 }} 360w,
+                                               {{ product_item.featured_image | image_url: width: 540 }} 540w,
+                                               {{ product_item.featured_image | image_url: width: 720 }} 720w,
+                                               {{ product_item.featured_image | image_url: width: 900 }} 900w,
+                                               {{ product_item.featured_image | image_url: width: 1080 }} 1080w"
+                                       width="1080" 
+                                       height="{{ 1080 | divided_by: product_item.featured_image.aspect_ratio | round }}"
+                                       loading="lazy" 
+                                       class="image-style--"
+                                       sizes="(min-width: 769px) 20vw, 50vw">
+                                </image-element>
+                              </div>
+                              {% if product_item.images[1] %}
+                                <div class="grid-product__secondary-image small--hide">
+                                  <image-element data-aos="image-fade-in" data-aos-offset="150">
+                                    <img src="{{ product_item.images[1] | image_url: width: 1000 }}" 
+                                         alt="{{ product_item.images[1].alt | escape }}"
+                                         srcset="{{ product_item.images[1] | image_url: width: 360 }} 360w,
+                                                 {{ product_item.images[1] | image_url: width: 540 }} 540w,
+                                                 {{ product_item.images[1] | image_url: width: 720 }} 720w,
+                                                 {{ product_item.images[1] | image_url: width: 1000 }} 1000w"
+                                         width="1000" 
+                                         loading="lazy" 
+                                         class="image-style--"
+                                         sizes="(min-width: 769px) 20vw, 50vw">
+                                  </image-element>
+                                </div>
+                              {% endif %}
+                            </div>
+                            <div class="grid-product__meta">
+                              <div class="grid-product__title">{{ product_item.title }}</div>
+                              <div class="grid-product__price">
+                                {% if product_item.compare_at_price > product_item.price %}
+                                  <span class="grid-product__price--original">{{ product_item.compare_at_price | money }}</span>
+                                  <span class="sale-price">{{ product_item.price | money }}</span>
+                                {% else %}
+                                  {{ product_item.price | money }}
+                                {% endif %}
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                      {%- assign shown_count = shown_count | plus: 1 -%}
+                      {%- assign shown_ids = shown_ids | append: product_item.id | append: ',' -%}
+                    {%- endif -%}
+                  {%- endunless -%}
+                {%- endunless -%}
+              {%- endfor -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- comment -%} View all button (matching competitor's style) {%- endcomment -%}
+        <div class="grid__item small--hide text-center">
+          <a href="{{ target_collection.url }}" class="btn">{{ 'collections.general.all_of_collection' | t }}</a>
+        </div>
+
+        <div class="grid__item grid__item--view-all text-center {{ grid_item_width }} medium-up--hide">
+          <a href="{{ target_collection.url }}" class="grid-product__see-all">
+            {{ 'collections.general.view_all_products_html' | t: count: target_collection.products_count }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- endif -%}

@@ -1,0 +1,191 @@
+{% form 'product', product, id: form_id, class: 'product-single__form ozchic-product-form' %}
+  {%- assign enable_dynamic_buttons = false -%}
+  {% if show_dynamic_checkout and template != 'product.preorder' %}
+    {%- assign enable_dynamic_buttons = true -%}
+  {% endif %}
+
+  {% if enable_dynamic_buttons %}
+    <div class="payment-buttons ozchic-payment-buttons">
+  {% endif %}
+
+    {%- liquid
+      assign default_text = 'products.product.add_to_cart' | t
+      assign button_text = 'products.product.add_to_cart' | t
+      if template == 'product.preorder'
+        assign default_text = 'products.product.preorder' | t
+        assign button_text = 'products.product.preorder' | t
+      endif
+      unless current_variant.available
+        assign button_text = 'products.product.sold_out' | t
+      endunless
+    -%}
+
+    <button
+      {% if product.empty? %}type="button"{% else %}type="submit"{% endif %}
+      name="add"
+      data-add-to-cart
+      class="btn btn--full add-to-cart ozchic-add-to-cart{% if enable_dynamic_buttons and product.selling_plan_groups.size == 0 %} add-to-cart--secondary{% endif %}"
+      {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+      <span class="ozchic-atc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 6h15l-1.5 9h-12z"></path>
+          <circle cx="9" cy="20" r="1"></circle>
+          <circle cx="18" cy="20" r="1"></circle>
+          <path d="M6 6L5 3H2"></path>
+        </svg>
+      </span>
+      <span data-add-to-cart-text data-default-text="{{ default_text }}" class="ozchic-atc-text">
+        {{ button_text }}
+      </span>
+    </button>
+
+    {% if enable_dynamic_buttons %}
+      {{ form | payment_button }}
+    {% endif %}
+
+  {% if enable_dynamic_buttons %}
+    </div>
+  {% endif %}
+
+  <div class="shopify-payment-terms product__policies">{{ form | payment_terms }}</div>
+
+  <select name="id" data-product-select class="product-single__variants no-js">
+    {%- for variant in product.variants -%}
+      {% if variant.available %}
+        <option {% if variant == product.selected_or_first_available_variant %}
+          selected="selected" {% endif %}
+          value="{{ variant.id }}">
+          {{ variant.title }} - {{ variant.price | money_with_currency }}
+        </option>
+      {% else %}
+        <option disabled="disabled">
+          {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+        </option>
+      {% endif %}
+    {%- endfor -%}
+  </select>
+
+  <textarea data-variant-json class="hide" aria-hidden="true" aria-label="Product JSON">
+    {{ product.variants | json }}
+  </textarea>
+  {% if product.options.size > 1 %}
+    <textarea data-current-variant-json class="hide" aria-hidden="true" aria-label="Variant JSON">
+      {{ current_variant | json }}
+    </textarea>
+  {% endif %}
+{% endform %}
+
+<style>
+.ozchic-product-form {
+  margin: 0;
+}
+
+.ozchic-add-to-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px 32px;
+  background: var(--ozchic-navy, #1e3a5f);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ozchic-add-to-cart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.ozchic-add-to-cart:hover::before {
+  left: 100%;
+}
+
+.ozchic-add-to-cart:hover {
+  background: var(--ozchic-gold, #c9a961);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 169, 97, 0.4);
+}
+
+.ozchic-add-to-cart:active {
+  transform: translateY(0);
+}
+
+.ozchic-add-to-cart[disabled] {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.ozchic-add-to-cart[disabled]:hover {
+  background: #ccc;
+  transform: none;
+  box-shadow: none;
+}
+
+.ozchic-add-to-cart[disabled]::before {
+  display: none;
+}
+
+.ozchic-atc-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ozchic-atc-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #ffffff;
+}
+
+.ozchic-atc-text {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.ozchic-payment-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ozchic-payment-buttons .shopify-payment-button {
+  margin-top: 0;
+}
+
+.ozchic-payment-buttons .shopify-payment-button__button {
+  border-radius: 8px;
+  min-height: 52px;
+}
+
+@media (max-width: 768px) {
+  .ozchic-add-to-cart {
+    padding: 14px 24px;
+  }
+
+  .ozchic-atc-text {
+    font-size: 14px;
+  }
+
+  .ozchic-atc-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+</style>

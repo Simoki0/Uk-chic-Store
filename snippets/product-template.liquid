@@ -1,0 +1,999 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+
+  assign product_zoom_size = '1800x1800'
+  assign product_image_size = '620x'
+  case image_container_width
+    when 'small'
+      assign product_image_width = 'medium-up--two-fifths'
+      assign product_description_width = 'medium-up--three-fifths'
+      assign product_image_size = '480x'
+    when 'medium'
+      assign product_image_width = 'medium-up--one-half'
+      assign product_description_width = 'medium-up--one-half'
+      assign product_image_size = '620x'
+    when 'large'
+      assign product_image_width = 'medium-up--three-fifths'
+      assign product_description_width = 'medium-up--two-fifths'
+      assign product_image_size = '740x'
+  endcase
+
+  unless thumbnail_position
+    assign thumbnail_position = 'beside'
+  endunless
+
+  # Calculate discount percentage
+  assign on_sale = false
+  assign discount_percent = 0
+  if current_variant.compare_at_price > current_variant.price
+    assign on_sale = true
+    assign discount = current_variant.compare_at_price | minus: current_variant.price
+    assign discount_percent = discount | times: 100.0 | divided_by: current_variant.compare_at_price | round
+  endif
+-%}
+
+<div id="ProductSection-{{ section_id }}"
+  class="product-section ozchic-product"
+  data-section-id="{{ section_id }}"
+  data-product-id="{{ product.id }}"
+  data-section-type="product"
+  data-product-title="{{ product.title | escape }}"
+  data-product-handle="{{ product.handle }}"
+  {% unless isModal %}
+    data-history="true"
+  {% endunless %}
+  data-modal="{{ isModal }}">
+
+  {%- render 'product-template-variables', product: product, current_variant: current_variant -%}
+
+  <div class="page-content">
+    <div class="page-width">
+
+      {%- if settings.show_breadcrumbs and isModal != true -%}
+        {%- render 'breadcrumbs' -%}
+      {%- endif -%}
+
+      <div class="grid">
+        <div class="grid__item {{ product_image_width }} product-single__sticky">
+          {%- render 'product-images',
+            section_id: section_id,
+            product: product,
+            isModal: isModal,
+            product_zoom_enable: product_zoom_enable,
+            product_zoom_size: product_zoom_size,
+            product_image_size: product_image_size,
+            thumbnail_position: thumbnail_position,
+            thumbnail_arrows: thumbnail_arrows,
+            video_looping: video_looping,
+            video_style: video_style
+          -%}
+        </div>
+
+        <div class="grid__item {{ product_description_width }}">
+
+          <div class="product-single__meta ozchic-product-meta">
+            
+            {%- comment -%} PRODUCT HEADER {%- endcomment -%}
+            <div class="product-block product-block--header">
+              {%- if settings.vendor_enable -%}
+                <div class="product-single__vendor ozchic-vendor">
+                  {%- assign vendor_handle = product.vendor | handleize -%}
+                  {%- if collections[vendor_handle] != empty -%}
+                    <a href="{{ routes.collections_url }}/{{ collections[vendor_handle].handle }}">
+                      {{ collections[vendor_handle].title }}
+                    </a>
+                  {%- else -%}
+                    {{ product.vendor | link_to_vendor }}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {%- if isModal -%}
+                <p class="h2 product-single__title ozchic-product-title">
+                  {{ product.title }}
+                </p>
+              {%- else -%}
+                <h1 class="h2 product-single__title ozchic-product-title">
+                  {%- unless product.empty? -%}
+                    {{ product.title }}
+                  {%- else -%}
+                    {{ 'home_page.onboarding.product_title' | t }}
+                  {%- endunless -%}
+                </h1>
+              {%- endif -%}
+
+              {%- comment -%} RATING BADGE - Under Title {%- endcomment -%}
+              <div class="ozchic-rating-badge">
+                <div class="ozchic-aus-badge">
+                  <svg class="ozchic-aus-flag" viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+                    <rect fill="#00008B" width="60" height="30"/>
+                    <g>
+                      <path d="M0,0 L24,15 M24,0 L0,15" stroke="#fff" stroke-width="3"/>
+                      <path d="M0,0 L24,15 M24,0 L0,15" stroke="#C8102E" stroke-width="1.5"/>
+                      <path d="M12,0 V15 M0,7.5 H24" stroke="#fff" stroke-width="5"/>
+                      <path d="M12,0 V15 M0,7.5 H24" stroke="#C8102E" stroke-width="3"/>
+                    </g>
+                    <g fill="#fff" transform="translate(12,22)">
+                      <polygon points="0,-4 1,-1.2 4,-1.2 1.6,0.6 2.5,3.5 0,1.5 -2.5,3.5 -1.6,0.6 -4,-1.2 -1,-1.2"/>
+                    </g>
+                    <g fill="#fff">
+                      <polygon points="45,6 45.8,8.5 48.5,8.5 46.3,10 47.1,12.5 45,11 42.9,12.5 43.7,10 41.5,8.5 44.2,8.5" transform="scale(0.7) translate(20,-2)"/>
+                      <polygon points="52,12 52.6,14 55,14 53.2,15.2 53.8,17.2 52,16 50.2,17.2 50.8,15.2 49,14 51.4,14" transform="scale(0.6) translate(38,2)"/>
+                      <polygon points="52,20 52.5,21.5 54,21.5 52.8,22.5 53.3,24 52,23 50.7,24 51.2,22.5 50,21.5 51.5,21.5" transform="scale(0.55) translate(42,10)"/>
+                      <polygon points="45,24 45.5,25.5 47,25.5 45.8,26.5 46.3,28 45,27 43.7,28 44.2,26.5 43,25.5 44.5,25.5" transform="scale(0.5) translate(42,22)"/>
+                      <polygon points="38,18 38.4,19.2 39.8,19.2 38.7,20 39.1,21.2 38,20.4 36.9,21.2 37.3,20 36.2,19.2 37.6,19.2" transform="scale(0.55) translate(22,12)"/>
+                    </g>
+                  </svg>
+                  <span class="ozchic-aus-text">Australian Owned</span>
+                </div>
+                <div class="ozchic-rating-row"><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><svg class="ozchic-star" viewBox="0 0 20 20"><path d="M10 1l2.5 5.5L18 7.5l-4 4.2 1 6.3-5-3-5 3 1-6.3-4-4.2 5.5-1z"/></svg><span class="ozchic-review-text"><span class="ozchic-review-count" id="ozchic-review-count">1,247</span> verified reviews</span></div>
+              </div>
+
+              {%- if sku_enable -%}
+                <p data-sku class="product-single__sku ozchic-sku">
+                  {%- if current_variant.sku -%}
+                    SKU: {{ current_variant.sku }}
+                  {%- endif -%}
+                </p>
+              {%- endif -%}
+            </div>
+
+            <div data-product-blocks>
+              {%- capture form_id -%}AddToCartForm-{{ section_id }}-{{ product.id }}{%- endcapture -%}
+              {%- for block in blocks -%}
+                {%- case block.type -%}
+                  {%- when '@app' -%}
+                    {% render block %}
+                  {%- when 'separator' -%}
+                    <div class="product-block"><hr class="ozchic-separator"></div>
+                  {%- when 'text' -%}
+                    <div {{ block.shopify_attributes }} class="product-block ozchic-text-block">
+                      {{ block.settings.text }}
+                    </div>
+                  {%- when 'tab' -%}
+                    <div class="product-block product-block--tab" {{ block.shopify_attributes }}>
+                      {% assign tab_id = block.id | append: product.id %}
+                      {% capture tab_content %}
+                        {{ block.settings.content }}
+                        {{ block.settings.page.content }}
+                      {% endcapture %}
+                      {%- render 'tab', id: tab_id, title: block.settings.title, content: tab_content -%}
+                    </div>
+                  {%- when 'contact' -%}
+                    <div class="product-block product-block--tab" {{ block.shopify_attributes }}>
+                      {% assign tab_id = block.id | append: product.id %}
+                      {%- render 'tab-contact', id: tab_id, block: block -%}
+                    </div>
+                  {%- when 'description' -%}
+                    <div class="product-block{% if block.settings.is_tab %} product-block--tab{% endif %}" {{ block.shopify_attributes }}>
+                      {%- assign id = block.id | append: product.id -%}
+                      {%- render 'product-description', id: id, product: product, is_tab: block.settings.is_tab -%}
+                    </div>
+                    
+                  {%- when 'price' -%}
+                    <div class="product-block product-block--price ozchic-price-block" {{ block.shopify_attributes }}>
+                      {%- comment -%} PRICE SECTION {%- endcomment -%}
+                      <div class="ozchic-price-wrapper">
+                        <span data-product-price class="ozchic-price-current {% if on_sale %}on-sale{% endif %}">
+                          {%- unless product.empty? -%}
+                            {{ current_variant.price | money }}
+                          {%- else -%}
+                            {{ 1999 | money }}
+                          {%- endunless -%}
+                        </span>
+
+                        {%- if product.compare_at_price_max > product.price -%}
+                          {%- if current_variant.compare_at_price -%}
+                            <span data-compare-price class="ozchic-price-compare">
+                              {{ current_variant.compare_at_price | money }}
+                            </span>
+                          {%- endif -%}
+                        {%- endif -%}
+
+                        {%- if on_sale -%}
+                          <div class="ozchic-sale-badge">
+                            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                            <div class="ozchic-sale-text">
+                              <span class="ozchic-sale-label">SUMMER SALE</span>
+                              <span class="ozchic-sale-percent">SAVE {{ discount_percent }}%</span>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                      </div>
+
+                      {%- comment -%} UNIT PRICE {%- endcomment -%}
+                      <div data-unit-price-wrapper class="product__unit-price ozchic-unit-price{% unless current_variant.unit_price_measurement %} hide{% endunless %}">
+                        {%- capture unit_price_base_unit -%}
+                          <span data-unit-base>
+                            {%- if current_variant.unit_price_measurement -%}
+                              {%- if current_variant.unit_price_measurement.reference_value != 1 -%}
+                                {{ current_variant.unit_price_measurement.reference_value }}
+                              {%- endif -%}
+                              {{ current_variant.unit_price_measurement.reference_unit }}
+                            {%- endif -%}
+                          </span>
+                        {%- endcapture -%}
+                        <span data-unit-price>{{ current_variant.unit_price | money }}</span>/{{ unit_price_base_unit }}
+                      </div>
+
+                      {%- if shop.taxes_included or shop.shipping_policy.body != blank -%}
+                        <div class="product__policies rte ozchic-policies">
+                          {%- if shop.taxes_included -%}
+                            {{ 'products.product.include_taxes' | t }}
+                          {%- endif -%}
+                          {%- if shop.shipping_policy.body != blank -%}
+                            {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                    
+                  {%- when 'quantity_selector' -%}
+                    <div class="product-block ozchic-quantity-block" {{ block.shopify_attributes }}>
+                      <div class="product__quantity ozchic-quantity">
+                        {% assign qty_id = section_id | append: product.id %}
+                        <label for="Quantity-{{ qty_id }}" class="ozchic-quantity-label">{{ 'products.product.quantity' | t }}</label>
+                        {%- render 'quantity-input', form_id: form_id, id: qty_id, qty: 1, min: 1 -%}
+                      </div>
+                    </div>
+                    
+                  {%- when 'variant_picker' -%}
+                    <div class="product-block ozchic-variant-block" {{ block.shopify_attributes }}>
+                      {% unless product.has_only_default_variant %}
+                        {%- for option in product.options_with_values -%}
+
+                          {%- liquid
+                            assign is_color = false
+                            assign is_size = false
+                            assign color_option_index = 0
+                            assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+                            assign color_option_index = forloop.index0
+                            assign downcased_option = option.name | downcase
+
+                            # Detect color options
+                            if downcased_option contains swatch_trigger
+                              assign is_color = true
+                            elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+                              assign is_color = true
+                            elsif downcased_option contains 'color' or downcased_option contains 'colour'
+                              assign is_color = true
+                            endif
+
+                            # Detect size options
+                            if downcased_option contains 'size' or downcased_option contains 'taille'
+                              assign is_size = true
+                            endif
+                          -%}
+
+                          {%- comment -%} Use image swatches for COLOR options, normal buttons for SIZE {%- endcomment -%}
+                          {% if is_color %}
+                            {%- render 'variant-button-image',
+                              product: product,
+                              form_id: form_id,
+                              section_id: section_id,
+                              option: option,
+                              forloop: forloop,
+                              variant_labels: block.settings.variant_labels,
+                              is_color: is_color,
+                              color_option_index: color_option_index
+                            -%}
+                          {% elsif is_size %}
+                            {%- comment -%} Size options with clean button style {%- endcomment -%}
+                            {%- render 'variant-button-size',
+                              product: product,
+                              form_id: form_id,
+                              section_id: section_id,
+                              option: option,
+                              forloop: forloop,
+                              variant_labels: block.settings.variant_labels
+                            -%}
+                          {% elsif block.settings.picker_type == 'button' %}
+                            {%- render 'variant-button',
+                              product: product,
+                              form_id: form_id,
+                              section_id: section_id,
+                              option: option,
+                              forloop: forloop,
+                              variant_labels: block.settings.variant_labels,
+                              is_color: is_color,
+                              color_option_index: color_option_index
+                            -%}
+                          {% else %}
+                            {%- render 'variant-dropdown',
+                              product: product,
+                              form_id: form_id,
+                              section_id: section_id,
+                              option: option,
+                              forloop: forloop,
+                              variant_labels: block.settings.variant_labels
+                            -%}
+                          {% endif %}
+
+                        {%- endfor -%}
+                      {% endunless %}
+                    </div>
+                    
+                  {%- when 'buy_buttons' -%}
+                    <div class="product-block ozchic-buy-block" {{ block.shopify_attributes }}>
+                      {%- unless product.empty? -%}
+                        <div class="product-block">
+                          {%- render 'product-form',
+                            form_id: form_id,
+                            section_id: section_id,
+                            product: product,
+                            show_dynamic_checkout: block.settings.show_dynamic_checkout,
+                            current_variant: current_variant
+                          -%}
+                        </div>
+                      {%- endunless -%}
+
+                      {%- if block.settings.surface_pickup_enable -%}
+                        <div data-store-availability-holder
+                          data-product-name="{{ product.title | escape }}"
+                          data-base-url="{{ shop.url }}{{ routes.root_url }}"
+                          ></div>
+                      {%- endif -%}
+                    </div>
+
+                  {%- when 'sales_point' -%}
+                    {%- unless block.settings.text == blank -%}
+                      <div class="product-block product-block--sales-point ozchic-sales-point" {{ block.shopify_attributes }}>
+                        <ul class="sales-points">
+                          <li class="sales-point">
+                            <span class="icon-and-text">
+                              {% case block.settings.icon %}
+                                {% when 'checkmark' %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-circle-checkmark" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="cls-1" d="M52.68 24.48A22 22 0 1 1 47 15.93M21 32l8.5 8.5L57 13"/></svg>
+                                {% when 'globe' %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-globe" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><circle class="cls-1" cx="33" cy="32" r="22"/><path class="cls-1" d="M14 21h38M11 32h44M14 43h38M33 10c-12 8-12 37 0 44M33 10c12 8 12 37 0 44"/></svg>
+                                {% when 'leaf' %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-leaf" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M51 12L13 50M35 13v15h16"/><path class="cls-1" d="M52 11c6 24-16.72 47.29-33 32C7 22 29 10 52 11z"/></svg>
+                                {% when 'package' %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-package" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="cls-1" d="M32 56L9.05 42.88V22.12L32 9l22.95 13.12v20.76L32 56z"/><path class="cls-1" d="M32 56V35.23l22.95-13.11M32 35.23L9.05 22.12M42.13 14.79L20.52 28.67v8.75"/></svg>
+                                {% when 'lock' %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-lock" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><path id="svg_2" data-name="svg 2" class="cls-1" d="M20.48 24v-3c0-6.6 5.52-11 11.76-11C39 10 44 15.13 44 21v3"/><path id="svg_4" data-name="svg 4" class="cls-1" d="M11.62 24h41.25v29.77H11.62z"/><path class="cls-1" d="M32.24 37v7"/><circle class="cls-1" cx="32.24" cy="35.5" r="1.5"/></svg>
+                                {% when 'truck' %} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-truck" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M17 47.72H7.38V21h33.14v26.72H24.44M45.92 47.72h-5.4V34.9h17.1v12.82h-4.23M57.62 34.9l-6.41-8.56H40.52"/><circle class="cls-1" cx="20.74" cy="48.26" r="3.74"/><path class="cls-1" d="M45.92 47.73a3.82 3.82 0 1 1 0 .37v-.37"/></svg>
+                                {% when 'Gift' %}  
+                                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-gift" viewBox="0 0 64 64">
+                                    <defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs>
+                                    <path class="cls-1" d="M9 20.23h46v8.68H9zm4.34 8.68h36.89v24.3H13.34zm14.48-8.25v32.98m8.09-32.76v32.98"/>
+                                    <path class="cls-1" d="M20.52 11.43a3.73 3.73 0 0 0-.74 2.87 4.57 4.57 0 0 0 .8 2.27C22 18.09 25.15 20 32 20.23a12 12 0 0 0-2.43-7 7.52 7.52 0 0 0-5.66-3.12 4 4 0 0 0-3.39 1.32Z"/>
+                                    <path class="cls-1" d="M43.37 11.43a3.73 3.73 0 0 1 .74 2.87 4.48 4.48 0 0 1-.8 2.27c-1.42 1.52-4.57 3.41-11.42 3.66a12.08 12.08 0 0 1 2.43-7A7.56 7.56 0 0 1 40 10.14a4 4 0 0 1 3.37 1.29Z"/>
+                                  </svg>
+                              {% endcase %}
+                              <span>{{ block.settings.text }}</span>
+                            </span>
+                          </li>
+                        </ul>
+                      </div>
+                    {%- endunless -%}
+                  {%- when 'inventory_status' -%}
+                    <div class="product-block product-block--sales-point ozchic-inventory" {{ block.shopify_attributes }}>
+                      {%- render 'product-inventory', product: product, current_variant: current_variant, block: block -%}
+                    </div>
+                  {%- when 'share' -%}
+                    <div class="product-block ozchic-share" {{ block.shopify_attributes }}>
+                      {%- render 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product -%}
+                    </div>
+                  {%- when 'trust_badge' -%}
+                    <div class="product-block" {{ block.shopify_attributes }}>
+                      <div class="aos-animate" style="max-width: {{ block.settings.trust_image.width }}px; margin: 0 auto;">
+                        <div class="image-wrap " style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.trust_image.aspect_ratio }}%;">
+                          {%- assign img_url = block.settings.trust_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                          <img class="lazyload"
+                              data-src="{{ img_url }}"
+                              data-widths="[360, 540, 700, 1024]"
+                              data-aspectratio="{{ block.settings.trust_image.aspect_ratio }}"
+                              data-sizes="auto"
+                              alt="{{ block.settings.trust_image.alt }}">
+                          <noscript>
+                            <img class="lazyloaded" src="{{ block.settings.trust_image | img_url: '540x' }}" alt="{{ block.settings.trust_image.alt }}">
+                          </noscript>
+                        </div>
+                      </div>
+                    </div>
+                  {%- when 'custom' -%}
+                    <div class="product-block" {{ block.shopify_attributes }}>
+                      {{ block.settings.code }}
+                    </div>
+                {%- endcase -%}
+              {%- else -%}
+                <div data-blocks-holder
+                     data-url="{{ product.url | within: collection }}"
+                     data-template="{{ product.template_suffix }}">
+                  <div class="placeholder-content" style="min-height: 86px;"></div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- comment -%} STICKY ADD TO CART FOR MOBILE {%- endcomment -%}
+<div class="ozchic-sticky-atc" id="ozchic-sticky-atc">
+  <div class="ozchic-sticky-atc-inner">
+    <div class="ozchic-sticky-atc-info">
+      <span class="ozchic-sticky-atc-title">{{ product.title | truncate: 30 }}</span>
+      <span class="ozchic-sticky-atc-price">{{ current_variant.price | money }}</span>
+    </div>
+    <button type="button" class="ozchic-sticky-atc-btn" id="ozchic-sticky-atc-btn">
+      Add to Cart
+    </button>
+  </div>
+</div>
+
+<style>
+/* ============================================
+   OZ-CHIC PRODUCT PAGE STYLES
+   ============================================ */
+
+.ozchic-product {
+  --ozchic-navy: #1e3a5f;
+  --ozchic-navy-light: #2a4a73;
+  --ozchic-gold: #c9a961;
+  --ozchic-gold-light: #d4ba7a;
+  --ozchic-cream: #faf8f5;
+  --ozchic-text: #333333;
+  --ozchic-text-light: #666666;
+  --ozchic-success: #22c55e;
+  --ozchic-error: #ef4444;
+}
+
+/* Product Title */
+.ozchic-product-title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(24px, 5vw, 36px) !important;
+  font-weight: 600 !important;
+  color: var(--ozchic-navy) !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0 !important;
+  margin-top: 5px !important;
+  letter-spacing: -0.5px;
+  text-wrap: balance;
+}
+
+/* Space between images and product info */
+.product-single__photos {
+  margin-bottom: 20px !important;
+}
+
+/* Fix mobile gap */
+@media (max-width: 768px) {
+  .product-single__sticky {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .product-single__meta.ozchic-product-meta {
+    padding-top: 15px !important;
+    margin-top: 0 !important;
+  }
+  .product-block--header {
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+  }
+  .product-single__photos,
+  .product-single__photos--has-thumbnails {
+    margin-bottom: 20px !important;
+    padding-bottom: 0 !important;
+  }
+  .grid__item.product-single__sticky + .grid__item {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .thumbnails-wrapper {
+    margin-bottom: 10px !important;
+  }
+  .product-section.ozchic-product .grid {
+    row-gap: 15px !important;
+  }
+  .product-section.ozchic-product .page-width {
+    padding-top: 0 !important;
+  }
+}
+
+/* Vendor Badge */
+.ozchic-vendor {
+  display: inline-block;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ozchic-gold);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--ozchic-gold);
+}
+
+.ozchic-vendor a {
+  color: var(--ozchic-gold);
+  text-decoration: none;
+}
+
+.ozchic-vendor a:hover {
+  text-decoration: underline;
+}
+
+/* SKU */
+.ozchic-sku {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: var(--ozchic-text-light);
+  margin-top: 8px;
+}
+
+/* Rating Stars */
+.ozchic-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 16px;
+}
+
+.ozchic-stars {
+  display: flex;
+  gap: 3px;
+}
+
+.ozchic-stars svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ozchic-stars svg.star-filled {
+  fill: var(--ozchic-gold);
+}
+
+.ozchic-stars svg.star-empty {
+  fill: none;
+  stroke: var(--ozchic-gold);
+  stroke-width: 1.5;
+}
+
+.ozchic-rating-count {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--ozchic-text-light);
+}
+
+/* Rating Badge */
+.ozchic-rating-badge {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  margin-top: 8px !important;
+  margin-bottom: 0 !important;
+}
+
+.ozchic-aus-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+.ozchic-aus-flag {
+  width: 22px !important;
+  height: 11px !important;
+  border-radius: 2px !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15) !important;
+  flex-shrink: 0 !important;
+}
+
+.ozchic-aus-text {
+  font-family: 'Jost', -apple-system, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #1e3a5f !important;
+  line-height: 1 !important;
+}
+
+.ozchic-rating-row {
+  display: inline !important;
+  white-space: nowrap !important;
+  font-size: 0 !important;
+}
+
+.ozchic-star {
+  width: 14px !important;
+  height: 14px !important;
+  fill: #c9a961 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  margin-right: 1px !important;
+}
+
+.ozchic-review-text {
+  font-family: 'Jost', -apple-system, sans-serif !important;
+  font-size: 13px !important;
+  color: #666 !important;
+  display: inline !important;
+  vertical-align: middle !important;
+  margin-left: 6px !important;
+}
+
+.ozchic-review-count {
+  font-weight: 600 !important;
+  color: #1e3a5f !important;
+}
+
+/* Price Block */
+.ozchic-price-block {
+  padding: 16px 0 !important;
+  border-top: 1px solid #eee !important;
+  border-bottom: none !important;
+  margin: 12px 0 0 0 !important;
+}
+
+.ozchic-price-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 10px !important;
+}
+
+.ozchic-price-current {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: var(--ozchic-navy) !important;
+  line-height: 1 !important;
+}
+
+.ozchic-price-current.on-sale {
+  color: var(--ozchic-navy) !important;
+}
+
+.ozchic-price-compare {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: #999 !important;
+  text-decoration: line-through !important;
+  line-height: 1 !important;
+}
+
+.ozchic-sale-badge {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 5px !important;
+  background: linear-gradient(135deg, #1e3a5f 0%, #2a4a73 100%) !important;
+  color: #fff !important;
+  padding: 5px 10px !important;
+  border-radius: 4px !important;
+  white-space: nowrap !important;
+}
+
+.ozchic-sale-badge svg {
+  width: 12px !important;
+  height: 12px !important;
+  fill: #c9a961 !important;
+  flex-shrink: 0 !important;
+}
+
+.ozchic-sale-text {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+
+.ozchic-sale-label {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px !important;
+  color: #fff !important;
+}
+
+.ozchic-sale-percent {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #c9a961 !important;
+}
+
+@media (max-width: 400px) {
+  .ozchic-price-wrapper {
+    flex-wrap: wrap !important;
+  }
+  .ozchic-price-current {
+    font-size: 24px !important;
+  }
+}
+
+/* Unit Price */
+.ozchic-unit-price {
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  color: var(--ozchic-text-light);
+  margin-top: 8px;
+}
+
+/* Policies */
+.ozchic-policies {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: var(--ozchic-text-light);
+  margin-top: 8px;
+}
+
+.ozchic-policies a {
+  color: var(--ozchic-navy);
+  text-decoration: underline;
+}
+
+/* Separator */
+.ozchic-separator {
+  border: none;
+  height: 1px;
+  background: rgba(30, 58, 95, 0.1);
+  margin: 20px 0;
+}
+
+/* Quantity */
+.ozchic-quantity-block {
+  margin: 16px 0;
+}
+
+.ozchic-quantity-label {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ozchic-navy);
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Variant Block */
+.ozchic-variant-block {
+  margin: 16px 0;
+}
+
+/* Sales Points */
+.ozchic-sales-point .icon-and-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  color: var(--ozchic-text);
+}
+
+.ozchic-sales-point .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.ozchic-sales-point .icon .cls-1 {
+  stroke: var(--ozchic-navy);
+}
+
+/* Inventory */
+.ozchic-inventory {
+  margin: 12px 0;
+}
+
+/* Share */
+.ozchic-share {
+  margin: 16px 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(30, 58, 95, 0.1);
+}
+
+/* Sticky Add to Cart (Mobile) */
+.ozchic-sticky-atc {
+  position: fixed;
+  bottom: -100px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  box-shadow: 0 -4px 20px rgba(30, 58, 95, 0.15);
+  z-index: 999;
+  padding: 12px 16px;
+  transition: bottom 0.3s ease;
+  display: none;
+}
+
+.ozchic-sticky-atc.visible {
+  bottom: 0;
+}
+
+.ozchic-sticky-atc-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ozchic-sticky-atc-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ozchic-sticky-atc-title {
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ozchic-navy);
+}
+
+.ozchic-sticky-atc-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ozchic-navy);
+}
+
+.ozchic-sticky-atc-btn {
+  background: var(--ozchic-navy);
+  color: #ffffff;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.ozchic-sticky-atc-btn:hover {
+  background: var(--ozchic-gold);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .ozchic-sticky-atc {
+    display: block;
+  }
+
+  .ozchic-product-title {
+    font-size: 24px !important;
+  }
+
+  .ozchic-price-current {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ozchic-price-wrapper {
+    gap: 8px;
+  }
+  
+  .ozchic-price-current {
+    font-size: 26px;
+  }
+  
+  .ozchic-price-compare {
+    font-size: 16px;
+  }
+  
+  .ozchic-discount-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+  
+  .ozchic-trust-badge span {
+    font-size: 10px;
+  }
+  
+  .ozchic-sticky-atc-btn {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+}
+</style>
+
+<script>
+(function() {
+  // Sticky Add to Cart functionality
+  const stickyATC = document.getElementById('ozchic-sticky-atc');
+  const stickyBtn = document.getElementById('ozchic-sticky-atc-btn');
+  const addToCartForm = document.querySelector('[data-product-form]');
+  const addToCartBtn = addToCartForm ? addToCartForm.querySelector('[type="submit"]') : null;
+
+  if (stickyATC && addToCartBtn) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          stickyATC.classList.remove('visible');
+        } else {
+          stickyATC.classList.add('visible');
+        }
+      });
+    }, { threshold: 0 });
+
+    observer.observe(addToCartBtn);
+
+    stickyBtn.addEventListener('click', function() {
+      addToCartBtn.click();
+    });
+  }
+
+  // Image Swatch Active State Handler
+  function initImageSwatches() {
+    const swatchInputs = document.querySelectorAll('.variant-input--image-swatch input[type="radio"]');
+
+    swatchInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        // Remove active class from all swatches in this group
+        const fieldset = this.closest('fieldset');
+        if (fieldset) {
+          fieldset.querySelectorAll('.ozchic-image-swatch').forEach(swatch => {
+            swatch.classList.remove('is-active');
+          });
+        }
+
+        // Add active class to selected swatch
+        const label = this.nextElementSibling;
+        if (label && label.classList.contains('ozchic-image-swatch')) {
+          label.classList.add('is-active');
+        }
+
+        // Update the color label
+        const colorLabel = document.querySelector('[data-variant-color-label]');
+        if (colorLabel) {
+          colorLabel.textContent = this.value;
+        }
+      });
+    });
+  }
+
+  initImageSwatches();
+
+  // Size Button Active State Handler
+  function initSizeButtons() {
+    const sizeInputs = document.querySelectorAll('.variant-input--size input[type="radio"]');
+
+    sizeInputs.forEach(input => {
+      input.addEventListener('change', function() {
+        const fieldset = this.closest('fieldset');
+        if (fieldset) {
+          fieldset.querySelectorAll('.ozchic-size-btn').forEach(btn => {
+            btn.classList.remove('is-active');
+          });
+        }
+
+        const label = this.nextElementSibling;
+        if (label && label.classList.contains('ozchic-size-btn')) {
+          label.classList.add('is-active');
+        }
+
+        // Update size label
+        const sizeLabel = document.querySelector('[data-variant-size-label]');
+        if (sizeLabel) {
+          sizeLabel.textContent = this.value;
+        }
+      });
+    });
+  }
+
+  initSizeButtons();
+
+  // Review Count Generator
+  function initReviewCount() {
+    var el = document.getElementById('ozchic-review-count');
+    if (!el) return;
+    var path = window.location.pathname;
+    var stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem('ozReviews') || '{}'); } catch(e) {}
+    if (!stored[path]) {
+      var count = Math.floor(Math.random() * 1200) + 800;
+      var d = count % 10;
+      if (d < 5) count += (5 - d);
+      else if (d > 5 && d < 7) count += (7 - d);
+      else if (d > 7) count = count - d + 15;
+      stored[path] = count;
+      sessionStorage.setItem('ozReviews', JSON.stringify(stored));
+    }
+    el.textContent = stored[path].toLocaleString();
+  }
+  initReviewCount();
+})();
+</script>

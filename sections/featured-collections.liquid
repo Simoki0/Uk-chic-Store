@@ -1,0 +1,676 @@
+{% comment %}
+  ============================================
+  OZ-CHIC COLLECTION LIST SECTION - FIXED V2
+  Place this in: sections/ozchic-collection-list.liquid
+  ============================================
+{% endcomment %}
+
+{% if section.settings.divider %}<div class="section--divider">{% endif %}
+
+<section class="ozchic-collections-section">
+  <div class="ozchic-collections-container">
+
+    {% if section.settings.title != blank or section.settings.tagline != blank %}
+      <div class="ozchic-collections-header">
+        {% if section.settings.tagline != blank %}
+          <span class="ozchic-collections-tagline">{{ section.settings.tagline }}</span>
+        {% endif %}
+        {% if section.settings.title != blank %}
+          <h2 class="ozchic-collections-title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <p class="ozchic-collections-subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ozchic-collections-grid {% if section.settings.enable_gutter %}has-gutter{% endif %}">
+
+      {%- assign isEmpty = true -%}
+
+      {% if section.blocks.size > 0 %}
+        {%- assign isEmpty = false -%}
+      {% endif %}
+
+      {% for block in section.blocks limit: collection_limit %}
+        {%- assign collection = collections[block.settings.collection] -%}
+
+        {% comment %} Determine grid size class {% endcomment %}
+        {% case block.settings.size %}
+          {% when 'square-small' %}
+            {%- assign grid_class = 'ozchic-collection-card--small' -%}
+          {% when 'wide' %}
+            {%- assign grid_class = 'ozchic-collection-card--wide' -%}
+          {% when 'tall' %}
+            {%- assign grid_class = 'ozchic-collection-card--tall' -%}
+          {% when 'square-large' %}
+            {%- assign grid_class = 'ozchic-collection-card--large' -%}
+        {% endcase %}
+
+        {% assign background_position = block.settings.focal_point %}
+
+        <a href="{{ collection.url }}" class="ozchic-collection-card {{ grid_class }}" {{ block.shopify_attributes }}>
+          <div class="ozchic-collection-image" style="background-position: {{ background_position }};">
+            {% if collection.image %}
+              <img
+                src="{{ collection.image | image_url: width: 800 }}"
+                alt="{{ collection.title | escape }}"
+                loading="lazy"
+                width="800"
+                height="800"
+              >
+            {% elsif collection.products.first and collection.products.first.featured_image %}
+              <img
+                src="{{ collection.products.first.featured_image | image_url: width: 800 }}"
+                alt="{{ collection.title | escape }}"
+                loading="lazy"
+                width="800"
+                height="800"
+              >
+            {% else %}
+              <div class="ozchic-collection-placeholder">
+                {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {% endif %}
+            <div class="ozchic-collection-overlay"></div>
+          </div>
+
+          <div class="ozchic-collection-content">
+            <h3 class="ozchic-collection-name">
+              {% if collection.title != blank %}
+                {{ collection.title }}
+              {% else %}
+                {{ 'home_page.onboarding.collection_title' | t }}
+              {% endif %}
+            </h3>
+            {% if section.settings.show_count %}
+              <span class="ozchic-collection-count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'Product', 'Products' }}</span>
+            {% endif %}
+            <span class="ozchic-collection-cta">
+              Shop Now
+              <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </div>
+        </a>
+
+      {% endfor %}
+
+      {% if isEmpty %}
+        <div class="ozchic-collections-empty">
+          <p>{{ 'home_page.onboarding.no_content' | t }}</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+{% if section.settings.divider %}</div>{% endif %}
+
+<style>
+  /* ============================================
+     OZ-CHIC COLLECTION LIST - CSS FIXED V2
+     ============================================ */
+
+  .ozchic-collections-section {
+    --ozchic-navy: #1e3a5f;
+    --ozchic-navy-light: #2a4a73;
+    --ozchic-gold: #c9a961;
+    --ozchic-gold-light: #d4ba7a;
+    --ozchic-cream: #faf8f5;
+    --ozchic-text: #333333;
+    --ozchic-text-light: #666666;
+  }
+
+  .ozchic-collections-section {
+    background: linear-gradient(180deg, #ffffff 0%, var(--ozchic-cream) 100%);
+    padding: 70px 20px;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .ozchic-collections-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Section Header */
+  .ozchic-collections-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .ozchic-collections-tagline {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ozchic-gold);
+    margin-bottom: 12px;
+  }
+
+  .ozchic-collections-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 500;
+    color: var(--ozchic-navy);
+    margin: 0 0 12px 0;
+    letter-spacing: 0.5px;
+  }
+
+  .ozchic-collections-subtitle {
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ozchic-text-light);
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Collections Grid - Desktop */
+  .ozchic-collections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 280px;
+    gap: 4px;
+  }
+
+  .ozchic-collections-grid.has-gutter {
+    gap: 20px;
+    grid-auto-rows: 300px;
+  }
+
+  /* Collection Card */
+  .ozchic-collection-card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--ozchic-navy);
+  }
+
+  .ozchic-collections-grid:not(.has-gutter) .ozchic-collection-card {
+    border-radius: 0;
+  }
+
+  /* Card Size Variations - Desktop */
+  .ozchic-collection-card--small {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .ozchic-collection-card--wide {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .ozchic-collection-card--tall {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  .ozchic-collection-card--large {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+
+  /* Collection Image */
+  .ozchic-collection-image {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .ozchic-collection-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .ozchic-collection-card:hover .ozchic-collection-image img {
+    transform: scale(1.08);
+  }
+
+  /* Overlay */
+  .ozchic-collection-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(30, 58, 95, 0) 0%,
+      rgba(30, 58, 95, 0.2) 50%,
+      rgba(30, 58, 95, 0.7) 100%
+    );
+    transition: background 0.3s ease;
+  }
+
+  .ozchic-collection-card:hover .ozchic-collection-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(30, 58, 95, 0.1) 0%,
+      rgba(30, 58, 95, 0.3) 50%,
+      rgba(30, 58, 95, 0.8) 100%
+    );
+  }
+
+  /* Placeholder */
+  .ozchic-collection-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--ozchic-cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ozchic-collection-placeholder .placeholder-svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  /* Collection Content */
+  .ozchic-collection-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ozchic-collection-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: #ffffff;
+    margin: 0 0 6px 0;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .ozchic-collection-card--large .ozchic-collection-name,
+  .ozchic-collection-card--wide .ozchic-collection-name {
+    font-size: 32px;
+  }
+
+  .ozchic-collection-count {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 12px;
+  }
+
+  .ozchic-collection-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ozchic-gold);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+  }
+
+  .ozchic-collection-cta svg {
+    width: 16px;
+    height: 16px;
+    stroke: var(--ozchic-gold);
+    stroke-width: 2;
+    fill: none;
+    transition: transform 0.3s ease;
+  }
+
+  .ozchic-collection-card:hover .ozchic-collection-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ozchic-collection-card:hover .ozchic-collection-cta svg {
+    transform: translateX(4px);
+  }
+
+  /* Empty State */
+  .ozchic-collections-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--ozchic-text-light);
+    font-family: 'Jost', sans-serif;
+  }
+
+  /* ============================================
+     RESPONSIVE - TABLET
+     ============================================ */
+  @media (max-width: 1024px) {
+    .ozchic-collections-grid {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 260px;
+    }
+
+    .ozchic-collections-grid.has-gutter {
+      gap: 16px;
+    }
+
+    .ozchic-collection-card--tall {
+      grid-row: span 2;
+    }
+  }
+
+  /* ============================================
+     RESPONSIVE - MOBILE (FIXED V2)
+     ============================================ */
+  @media (max-width: 600px) {
+    .ozchic-collections-section {
+      padding: 40px 16px;
+      background: #fff;
+    }
+
+    .ozchic-collections-header {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .ozchic-collections-tagline {
+      font-size: 10px;
+      margin-bottom: 6px;
+    }
+
+    .ozchic-collections-title {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .ozchic-collections-subtitle {
+      font-size: 13px;
+      margin-left: 0;
+    }
+
+    /* Mobile Grid - 2 columns, taller cards */
+    .ozchic-collections-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 220px;
+      gap: 12px;
+    }
+
+    .ozchic-collections-grid.has-gutter {
+      gap: 12px;
+      grid-auto-rows: 220px;
+    }
+
+    /* Reset all sizes on mobile */
+    .ozchic-collection-card--small,
+    .ozchic-collection-card--wide,
+    .ozchic-collection-card--tall,
+    .ozchic-collection-card--large {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
+    /* Make first card span full width as featured */
+    .ozchic-collection-card:first-child {
+      grid-column: span 2;
+      height: 180px;
+    }
+
+    .ozchic-collection-card {
+      border-radius: 8px;
+    }
+
+    .ozchic-collection-content {
+      padding: 12px;
+    }
+
+    /* Smaller titles on mobile */
+    .ozchic-collection-name {
+      font-size: 15px;
+      margin-bottom: 0;
+      line-height: 1.3;
+    }
+
+    /* First card title slightly larger */
+    .ozchic-collection-card:first-child .ozchic-collection-name {
+      font-size: 20px;
+    }
+
+    /* Hide product count on mobile */
+    .ozchic-collection-count {
+      display: none;
+    }
+
+    /* Always show CTA on mobile, smaller */
+    .ozchic-collection-cta {
+      opacity: 1;
+      transform: translateY(0);
+      font-size: 10px;
+      margin-top: 4px;
+    }
+
+    .ozchic-collection-cta svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* Lighter overlay on mobile */
+    .ozchic-collection-overlay {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.1) 40%,
+        rgba(0, 0, 0, 0.6) 100%
+      );
+    }
+  }
+
+  /* ============================================
+     RESPONSIVE - SMALL MOBILE
+     ============================================ */
+  @media (max-width: 380px) {
+    .ozchic-collections-section {
+      padding: 30px 12px;
+    }
+
+    .ozchic-collections-grid {
+      grid-auto-rows: 180px;
+      gap: 10px;
+    }
+
+    .ozchic-collections-grid.has-gutter {
+      gap: 10px;
+      grid-auto-rows: 180px;
+    }
+
+    .ozchic-collection-card:first-child {
+      height: 160px;
+    }
+
+    .ozchic-collection-content {
+      padding: 10px;
+    }
+
+    .ozchic-collection-name {
+      font-size: 14px;
+    }
+
+    .ozchic-collection-card:first-child .ozchic-collection-name {
+      font-size: 18px;
+    }
+
+    .ozchic-collection-cta {
+      font-size: 9px;
+    }
+  }
+</style>
+
+
+{% schema %}
+{
+  "name": "Oz-Chic Collection List",
+  "class": "index-section ozchic-section",
+  "max_blocks": 15,
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Explore"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Our Collections"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Discover our curated selection of vintage-inspired fashion"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "Show section divider",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_gutter",
+      "label": "Add spacing between cards",
+      "default": true
+    }
+  ],
+  "presets": [{
+    "name": "Oz-Chic Collection List",
+    "category": "Collection",
+    "blocks": [
+      {
+        "type": "collection",
+        "settings": {
+          "size": "wide"
+        }
+      },
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection",
+        "settings": {
+          "size": "wide"
+        }
+      }
+    ]
+  }],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "select",
+          "id": "focal_point",
+          "label": "Focal point",
+          "info": "Used to keep the subject of your photo in view.",
+          "default": "center center",
+          "options": [
+            {
+              "value": "top left",
+              "label": "Top left"
+            },
+            {
+              "value": "top center",
+              "label": "Top center"
+            },
+            {
+              "value": "top right",
+              "label": "Top right"
+            },
+            {
+              "value": "center left",
+              "label": "Left"
+            },
+            {
+              "value": "center center",
+              "label": "Center"
+            },
+            {
+              "value": "center right",
+              "label": "Right"
+            },
+            {
+              "value": "bottom left",
+              "label": "Bottom left"
+            },
+            {
+              "value": "bottom center",
+              "label": "Bottom center"
+            },
+            {
+              "value": "bottom right",
+              "label": "Bottom right"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Size",
+          "default": "square-small",
+          "options": [
+            {
+              "label": "Square (small)",
+              "value": "square-small"
+            },
+            {
+              "label": "Wide",
+              "value": "wide"
+            },
+            {
+              "label": "Tall",
+              "value": "tall"
+            },
+            {
+              "label": "Square (large)",
+              "value": "square-large"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

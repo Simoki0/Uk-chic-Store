@@ -873,10 +873,15 @@
   box-sizing:border-box;
 }
 
-body,html{
+html{
   padding:0;
   margin:0;
-  overflow-x:clip;
+  overflow-x:hidden;
+  max-width:100%;
+}
+body{
+  padding:0;
+  margin:0;
   max-width:100%;
 }
 
@@ -1291,8 +1296,7 @@ body,html{
 
 .main-content{
   display:block;
-  min-height:300px;
-  overflow-x:clip
+  min-height:300px
 }
 
 @media only screen and (min-width:590px){

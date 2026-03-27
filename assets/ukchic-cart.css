@@ -1,7 +1,7 @@
 /* =============================================
    UK CHIC CART — BRANDED DESIGN SYSTEM
    Cohesive with product page aesthetic
-   Fonts loaded via <link> in theme.liquid
+   Fonts: fallback to Georgia / sans-serif
    ============================================= */
 
 /* --- Design Tokens --- */
@@ -979,4 +979,3 @@
 }
 
 
-/* Font import is at top of file */

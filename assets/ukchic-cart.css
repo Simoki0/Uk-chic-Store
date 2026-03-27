@@ -359,46 +359,60 @@
 
 
 /* --- Quantity Selector --- */
-.ukchic-qty-wrapper {
+/* Reset base theme absolute positioning */
+.ukchic-qty-wrapper.js-qty__wrapper {
   display: inline-flex !important;
   align-items: center !important;
+  position: relative !important;
+  max-width: none !important;
+  min-width: auto !important;
   border: 1.5px solid var(--ukc-border) !important;
   border-radius: var(--ukc-radius) !important;
   overflow: hidden !important;
   background: var(--ukc-bg) !important;
-  height: 34px !important;
+  height: 36px !important;
   transition: border-color 0.2s ease !important;
 }
 
-.ukchic-qty-wrapper:hover,
-.ukchic-qty-wrapper:focus-within {
+.ukchic-qty-wrapper.js-qty__wrapper:hover,
+.ukchic-qty-wrapper.js-qty__wrapper:focus-within {
   border-color: var(--ukc-navy) !important;
 }
 
-.ukchic-qty-btn {
+/* Override theme's absolute positioning on buttons */
+.ukchic-qty-btn.js-qty__adjust {
+  position: static !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 32px !important;
+  width: 34px !important;
   height: 100% !important;
   padding: 0 !important;
   margin: 0 !important;
   border: none !important;
   background: transparent !important;
   color: var(--ukc-text-light) !important;
+  fill: var(--ukc-text-light) !important;
   cursor: pointer !important;
   transition: background 0.15s ease, color 0.15s ease !important;
   -webkit-appearance: none !important;
   appearance: none !important;
+  flex-shrink: 0 !important;
 }
 
-.ukchic-qty-btn:hover {
+.ukchic-qty-btn.js-qty__adjust:hover {
   background: var(--ukc-cream) !important;
   color: var(--ukc-navy) !important;
+  fill: var(--ukc-navy) !important;
+}
+
+.ukchic-qty-btn.js-qty__adjust:active {
+  background: var(--ukc-border-light) !important;
 }
 
 .ukchic-qty-btn svg {
   pointer-events: none;
+  flex-shrink: 0;
 }
 
 /* Hide the old SVG icons from theme */
@@ -407,8 +421,9 @@
   display: none !important;
 }
 
-.ukchic-qty-input {
-  width: 36px !important;
+/* Input field between buttons */
+.ukchic-qty-input.js-qty__num {
+  width: 38px !important;
   height: 100% !important;
   padding: 0 !important;
   margin: 0 !important;
@@ -417,11 +432,38 @@
   border-right: 1px solid var(--ukc-border-light) !important;
   text-align: center !important;
   font-family: 'Jost', sans-serif !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 600 !important;
   color: var(--ukc-navy) !important;
   background: transparent !important;
   -moz-appearance: textfield !important;
+  flex-shrink: 0 !important;
+  z-index: auto !important;
+  line-height: 36px !important;
+}
+
+/* Drawer-specific overrides to beat theme drawer styles */
+.drawer .ukchic-qty-wrapper.js-qty__wrapper {
+  background-color: var(--ukc-bg) !important;
+  border-color: var(--ukc-border) !important;
+  max-width: none !important;
+}
+
+.drawer .ukchic-qty-input.js-qty__num {
+  color: var(--ukc-navy) !important;
+  border-color: var(--ukc-border-light) !important;
+}
+
+.drawer .ukchic-qty-btn.js-qty__adjust {
+  border-color: transparent !important;
+  color: var(--ukc-text-light) !important;
+  fill: var(--ukc-text-light) !important;
+}
+
+.drawer .ukchic-qty-btn.js-qty__adjust:hover {
+  background-color: var(--ukc-cream) !important;
+  color: var(--ukc-navy) !important;
+  fill: var(--ukc-navy) !important;
 }
 
 .ukchic-qty-input::-webkit-inner-spin-button,

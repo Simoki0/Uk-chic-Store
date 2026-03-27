@@ -4,6 +4,12 @@
    Fonts: fallback to Georgia / sans-serif
    ============================================= */
 
+/* --- Mobile overflow fix --- */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+}
+
 /* --- Design Tokens --- */
 .ukchic-cart-drawer,
 .ukchic-cart-page {
@@ -33,34 +39,10 @@
 .drawer.ukchic-cart-drawer {
   background: var(--ukc-bg) !important;
   color: var(--ukc-text) !important;
-  box-shadow: -8px 0 40px rgba(30, 58, 95, 0.12);
-  width: 380px;
-  right: -380px;
 }
 
 .drawer.ukchic-cart-drawer.drawer--is-open {
-  transform: translateX(-380px);
-}
-
-@media only screen and (min-width: 590px) {
-  .drawer.ukchic-cart-drawer {
-    width: 440px;
-    right: -440px;
-  }
-  .drawer.ukchic-cart-drawer.drawer--is-open {
-    transform: translateX(-440px);
-  }
-}
-
-@media only screen and (max-width: 420px) {
-  .drawer.ukchic-cart-drawer {
-    width: 100%;
-    right: -100%;
-    max-width: 100%;
-  }
-  .drawer.ukchic-cart-drawer.drawer--is-open {
-    transform: translateX(-100%);
-  }
+  box-shadow: -8px 0 40px rgba(30, 58, 95, 0.12);
 }
 
 /* Drawer links & inputs */

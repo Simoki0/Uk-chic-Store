@@ -8,6 +8,8 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <link rel="preconnect" href="https://cdn.shopify.com">
   <link rel="preconnect" href="https://fonts.shopifycdn.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
   <link rel="dns-prefetch" href="https://ajax.googleapis.com">
   <link rel="dns-prefetch" href="https://maps.googleapis.com">
@@ -27,6 +29,7 @@
 
   {%- render 'font-face' -%}
   {{ 'theme.css' | asset_url | stylesheet_tag }}
+  {{ 'ukchic-cart.css' | asset_url | stylesheet_tag }}
   {%- render 'css-variables' -%}
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){

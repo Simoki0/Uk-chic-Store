@@ -1,38 +1,70 @@
 {% if settings.cart_type == 'drawer' %}
-  <div id="CartDrawer" class="drawer drawer--right">
+  <div id="CartDrawer" class="drawer drawer--right ukchic-cart-drawer">
     <form id="CartDrawerForm" action="{{ routes.cart_url }}" method="post" novalidate class="drawer__contents">
       <div class="drawer__fixed-header">
         <div class="drawer__header appear-animation appear-delay-1">
-          <div class="drawer__title">{{ 'cart.general.title' | t }}</div>
+          <div class="drawer__title ukchic-drawer-title">
+            <svg class="ukchic-cart-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            {{ 'cart.general.title' | t }}
+            <span class="ukchic-cart-count" data-cart-drawer-count>{{ cart.item_count }}</span>
+          </div>
           <div class="drawer__close">
-            <button type="button" class="drawer__close-button js-drawer-close">
-              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+            <button type="button" class="drawer__close-button js-drawer-close ukchic-close-btn">
+              <svg aria-hidden="true" focusable="false" role="presentation" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               <span class="icon__fallback-text">{{ 'cart.general.close_cart' | t }}</span>
             </button>
           </div>
         </div>
       </div>
 
+      {%- comment -%} Free Shipping Progress Bar {%- endcomment -%}
+      {%- assign free_shipping_threshold = 5000 -%}
+      {%- assign cart_total = cart.total_price -%}
+      {%- assign shipping_remainder = free_shipping_threshold | minus: cart_total -%}
+      {%- if shipping_remainder < 0 -%}{%- assign shipping_remainder = 0 -%}{%- endif -%}
+      {%- assign shipping_progress = cart_total | times: 100 | divided_by: free_shipping_threshold -%}
+      {%- if shipping_progress > 100 -%}{%- assign shipping_progress = 100 -%}{%- endif -%}
+
+      <div class="ukchic-shipping-bar appear-animation appear-delay-2" data-shipping-bar>
+        {%- if shipping_remainder == 0 -%}
+          <div class="ukchic-shipping-msg ukchic-shipping-msg--success">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            You qualify for <strong>free UK shipping</strong>
+          </div>
+        {%- else -%}
+          <div class="ukchic-shipping-msg">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            Add <strong>{{ shipping_remainder | money }}</strong> more for free UK shipping
+          </div>
+        {%- endif -%}
+        <div class="ukchic-shipping-track">
+          <div class="ukchic-shipping-fill" style="width: {{ shipping_progress }}%;"></div>
+        </div>
+      </div>
+
       <div class="drawer__inner">
         <div class="drawer__scrollable">
-          <div data-products class="appear-animation appear-delay-2"></div>
+          <div data-products class="appear-animation appear-delay-3"></div>
 
           {% if settings.cart_notes_enable %}
-            <div class="appear-animation appear-delay-3">
-              <label for="CartNoteDrawer">{{ 'cart.general.note' | t }}</label>
-              <textarea name="note" class="input-full cart-notes" id="CartNoteDrawer">{{ cart.note }}</textarea>
+            <div class="appear-animation appear-delay-4 ukchic-note-wrap">
+              <label for="CartNoteDrawer" class="ukchic-note-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                {{ 'cart.general.note' | t }}
+              </label>
+              <textarea name="note" class="input-full cart-notes ukchic-note-textarea" id="CartNoteDrawer" placeholder="Special instructions for your order...">{{ cart.note }}</textarea>
             </div>
           {% endif %}
         </div>
 
-        <div class="drawer__footer appear-animation appear-delay-4">
+        <div class="drawer__footer appear-animation appear-delay-5">
           <div data-discounts>
             {% if cart.cart_level_discount_applications != blank %}
-              <div class="cart__item-sub cart__item-row">
+              <div class="cart__item-sub cart__item-row ukchic-discount-row">
                 <div>{{ 'cart.general.discounts' | t }}</div>
                 <div class="text-right">
                   {% for cart_discount in cart.cart_level_discount_applications %}
-                    <div>
+                    <div class="ukchic-discount-amount">
                       {{ cart_discount.title }} (-{{ cart_discount.total_allocated_amount | money }})
                     </div>
                   {% endfor %}
@@ -41,23 +73,21 @@
             {% endif %}
           </div>
 
-          <div class="cart__item-sub cart__item-row">
-            <div class="cart__subtotal">{{ 'cart.general.subtotal' | t }}</div>
-            <div data-subtotal>{{ cart.total_price | money }}</div>
+          <div class="cart__item-sub cart__item-row ukchic-subtotal-row">
+            <div class="cart__subtotal ukchic-subtotal-label">{{ 'cart.general.subtotal' | t }}</div>
+            <div data-subtotal class="ukchic-subtotal-price">{{ cart.total_price | money }}</div>
           </div>
 
           <div class="cart__item-row cart__savings text-center hide" data-savings></div>
 
-          <div class="cart__item-row text-center ajaxcart__note">
-            <small>
-              {{ 'cart.general.shipping_at_checkout' | t }}<br />
-            </small>
+          <div class="ukchic-shipping-note">
+            {{ 'cart.general.shipping_at_checkout' | t }}
           </div>
 
           {% if settings.cart_terms_conditions_enable %}
-            <div class="cart__item-row cart__terms">
-              <input type="checkbox" id="CartTermsDrawer" class="cart__terms-checkbox">
-              <label for="CartTermsDrawer">
+            <div class="cart__item-row cart__terms ukchic-terms">
+              <input type="checkbox" id="CartTermsDrawer" class="cart__terms-checkbox ukchic-terms-checkbox">
+              <label for="CartTermsDrawer" class="ukchic-terms-label">
                 {% if settings.cart_terms_conditions_page != blank %}
                   {{ 'cart.general.terms_html' | t: url: settings.cart_terms_conditions_page.url }}
                 {% else %}
@@ -67,8 +97,9 @@
             </div>
           {% endif %}
 
-          <div class="cart__checkout-wrapper">
-            <button type="submit" name="checkout" data-terms-required="{{ settings.cart_terms_conditions_enable }}" class="btn cart__checkout">
+          <div class="cart__checkout-wrapper ukchic-checkout-wrap">
+            <button type="submit" name="checkout" data-terms-required="{{ settings.cart_terms_conditions_enable }}" class="btn cart__checkout ukchic-checkout-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
               {{ 'cart.general.checkout' | t }}
             </button>
 
@@ -76,12 +107,35 @@
               <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
             {% endif %}
           </div>
+
+          <div class="ukchic-trust-row">
+            <div class="ukchic-trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              <span>Secure checkout</span>
+            </div>
+            <div class="ukchic-trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>UK shipping</span>
+            </div>
+            <div class="ukchic-trust-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+              <span>Gift wrapping</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="drawer__cart-empty appear-animation appear-delay-2">
-        <div class="drawer__scrollable">
-          {{ 'cart.general.empty' | t }}
+        <div class="drawer__scrollable ukchic-empty-state">
+          <div class="ukchic-empty-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <p class="ukchic-empty-title">Your bag is empty</p>
+          <p class="ukchic-empty-subtitle">Discover our curated UK collection</p>
+          <a href="{{ routes.all_products_collection_url }}" class="ukchic-empty-cta">
+            Continue Shopping
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
         </div>
       </div>
     </form>

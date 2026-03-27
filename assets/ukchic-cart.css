@@ -1,0 +1,943 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap');
+
+/* =============================================
+   UK CHIC CART — BRANDED DESIGN SYSTEM
+   Cohesive with product page aesthetic
+   ============================================= */
+
+/* --- Design Tokens --- */
+.ukchic-cart-drawer,
+.ukchic-cart-page {
+  --ukc-navy: #1e3a5f;
+  --ukc-navy-light: #2a4a73;
+  --ukc-gold: #c9a961;
+  --ukc-gold-light: #d4ba7a;
+  --ukc-cream: #faf8f5;
+  --ukc-bg: #ffffff;
+  --ukc-text: #333333;
+  --ukc-text-light: #666666;
+  --ukc-text-muted: #999999;
+  --ukc-border: #eae6e0;
+  --ukc-border-light: #f2eeea;
+  --ukc-success: #22c55e;
+  --ukc-error: #ef4444;
+  --ukc-radius: 8px;
+  --ukc-radius-sm: 4px;
+}
+
+
+/* =============================================
+   CART DRAWER OVERRIDES
+   ============================================= */
+
+/* Drawer container */
+.drawer.ukchic-cart-drawer {
+  background: var(--ukc-bg) !important;
+  color: var(--ukc-text) !important;
+  box-shadow: -8px 0 40px rgba(30, 58, 95, 0.12);
+  width: 380px;
+  right: -380px;
+}
+
+.drawer.ukchic-cart-drawer.drawer--is-open {
+  transform: translateX(-380px);
+}
+
+@media only screen and (min-width: 590px) {
+  .drawer.ukchic-cart-drawer {
+    width: 440px;
+    right: -440px;
+  }
+  .drawer.ukchic-cart-drawer.drawer--is-open {
+    transform: translateX(-440px);
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .drawer.ukchic-cart-drawer {
+    width: 100%;
+    right: -100%;
+    max-width: 100%;
+  }
+  .drawer.ukchic-cart-drawer.drawer--is-open {
+    transform: translateX(-100%);
+  }
+}
+
+/* Drawer links & inputs */
+.drawer.ukchic-cart-drawer a:not(.btn) {
+  color: var(--ukc-navy) !important;
+}
+.drawer.ukchic-cart-drawer a:not(.btn):hover {
+  color: var(--ukc-gold) !important;
+}
+.drawer.ukchic-cart-drawer input,
+.drawer.ukchic-cart-drawer textarea {
+  border-color: var(--ukc-border) !important;
+  color: var(--ukc-text) !important;
+  background: var(--ukc-cream) !important;
+}
+
+
+/* --- Drawer Header --- */
+.ukchic-cart-drawer .drawer__header {
+  border-bottom: 2px solid var(--ukc-navy) !important;
+  height: auto !important;
+  padding: 18px 0 !important;
+}
+
+.ukchic-cart-drawer .drawer__fixed-header {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.ukchic-drawer-title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 22px !important;
+  font-weight: 600 !important;
+  color: var(--ukc-navy) !important;
+  letter-spacing: -0.3px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  text-transform: none !important;
+}
+
+.ukchic-cart-icon {
+  color: var(--ukc-gold);
+  flex-shrink: 0;
+}
+
+.ukchic-cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 11px;
+  background: var(--ukc-navy);
+  color: #fff;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.ukchic-close-btn {
+  color: var(--ukc-text-light) !important;
+  transition: color 0.2s ease, transform 0.2s ease !important;
+  padding: 8px !important;
+}
+.ukchic-close-btn:hover {
+  color: var(--ukc-navy) !important;
+  transform: rotate(90deg);
+}
+.ukchic-close-btn:active {
+  background: transparent !important;
+}
+
+
+/* --- Free Shipping Bar --- */
+.ukchic-shipping-bar {
+  padding: 12px 25px;
+  background: var(--ukc-cream);
+  border-bottom: 1px solid var(--ukc-border-light);
+}
+
+@media only screen and (min-width: 590px) {
+  .ukchic-shipping-bar {
+    padding: 14px 40px;
+  }
+}
+
+.ukchic-shipping-msg {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  color: var(--ukc-text);
+  margin-bottom: 8px;
+}
+
+.ukchic-shipping-msg strong {
+  color: var(--ukc-navy);
+  font-weight: 600;
+}
+
+.ukchic-shipping-msg svg {
+  color: var(--ukc-gold);
+  flex-shrink: 0;
+}
+
+.ukchic-shipping-msg--success {
+  color: var(--ukc-navy);
+  font-weight: 500;
+}
+
+.ukchic-shipping-msg--success svg {
+  color: var(--ukc-success);
+}
+
+.ukchic-shipping-track {
+  width: 100%;
+  height: 4px;
+  background: var(--ukc-border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ukchic-shipping-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ukc-gold) 0%, var(--ukc-gold-light) 100%);
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 3%;
+}
+
+/* Page cart shipping bar */
+.ukchic-shipping-bar--page {
+  padding: 14px 20px;
+  border-radius: var(--ukc-radius);
+  border: 1px solid var(--ukc-border-light);
+  margin-bottom: 24px;
+}
+
+
+/* --- Drawer Scrollable --- */
+.ukchic-cart-drawer .drawer__scrollable {
+  padding-top: 16px !important;
+  background: var(--ukc-bg);
+}
+
+@media only screen and (min-width: 590px) {
+  .ukchic-cart-drawer .drawer__scrollable {
+    padding-top: 20px !important;
+  }
+}
+
+
+/* --- Drawer Footer --- */
+.ukchic-cart-drawer .drawer__footer {
+  background: var(--ukc-bg);
+  padding-top: 16px !important;
+  border-top: none !important;
+  position: relative;
+}
+
+.ukchic-cart-drawer .drawer__footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25px;
+  right: 25px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ukc-border), transparent);
+}
+
+@media only screen and (min-width: 590px) {
+  .ukchic-cart-drawer .drawer__footer::before {
+    left: 40px;
+    right: 40px;
+  }
+}
+
+
+/* =============================================
+   CART ITEM STYLING
+   ============================================= */
+
+.ukchic-cart-item {
+  padding-bottom: 16px !important;
+  margin-bottom: 16px !important;
+  border-bottom: 1px solid var(--ukc-border-light) !important;
+  transition: opacity 0.2s ease;
+}
+
+.ukchic-cart-item:last-child {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
+
+/* Image */
+.ukchic-item-image {
+  border-radius: var(--ukc-radius) !important;
+  overflow: hidden !important;
+}
+
+.ukchic-item-image .image-wrap {
+  border-radius: var(--ukc-radius) !important;
+  overflow: hidden !important;
+  background: var(--ukc-cream) !important;
+}
+
+.ukchic-item-image img {
+  border-radius: var(--ukc-radius) !important;
+}
+
+/* Product Name */
+.ukchic-product-link {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--ukc-navy) !important;
+  text-decoration: none !important;
+  line-height: 1.3 !important;
+  transition: color 0.2s ease !important;
+}
+
+.ukchic-product-link:hover {
+  color: var(--ukc-gold) !important;
+}
+
+/* Variant Meta */
+.ukchic-variant-meta {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 12px !important;
+  color: var(--ukc-text-muted) !important;
+  margin-top: 2px !important;
+  margin-bottom: 4px !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Line price (visible in drawer / mobile) */
+.ukchic-line-price {
+  display: none;
+  margin-top: 6px;
+  font-family: 'Jost', sans-serif;
+  font-size: 14px;
+}
+
+.drawer .ukchic-line-price {
+  display: block;
+}
+
+@media only screen and (max-width: 589px) {
+  .ukchic-line-price {
+    display: block;
+  }
+}
+
+.ukchic-line-price-regular {
+  font-weight: 600;
+  color: var(--ukc-navy);
+}
+
+.ukchic-line-price-sale {
+  font-weight: 600;
+  color: var(--ukc-navy);
+  margin-right: 6px;
+}
+
+.ukchic-line-price-compare {
+  font-weight: 400;
+  color: var(--ukc-text-muted);
+  text-decoration: line-through;
+  font-size: 12px;
+}
+
+/* Properties */
+.ukchic-properties {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: var(--ukc-text-light);
+  margin-top: 4px;
+}
+
+.ukchic-property {
+  display: block;
+}
+
+.ukchic-selling-plan {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: var(--ukc-gold);
+  font-weight: 500;
+}
+
+
+/* --- Quantity Selector --- */
+.ukchic-qty-wrapper {
+  display: inline-flex !important;
+  align-items: center !important;
+  border: 1.5px solid var(--ukc-border) !important;
+  border-radius: var(--ukc-radius) !important;
+  overflow: hidden !important;
+  background: var(--ukc-bg) !important;
+  height: 34px !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.ukchic-qty-wrapper:hover,
+.ukchic-qty-wrapper:focus-within {
+  border-color: var(--ukc-navy) !important;
+}
+
+.ukchic-qty-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 32px !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--ukc-text-light) !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+.ukchic-qty-btn:hover {
+  background: var(--ukc-cream) !important;
+  color: var(--ukc-navy) !important;
+}
+
+.ukchic-qty-btn svg {
+  pointer-events: none;
+}
+
+/* Hide the old SVG icons from theme */
+.ukchic-qty-btn .icon,
+.ukchic-qty-btn .icon__fallback-text {
+  display: none !important;
+}
+
+.ukchic-qty-input {
+  width: 36px !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-left: 1px solid var(--ukc-border-light) !important;
+  border-right: 1px solid var(--ukc-border-light) !important;
+  text-align: center !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--ukc-navy) !important;
+  background: transparent !important;
+  -moz-appearance: textfield !important;
+}
+
+.ukchic-qty-input::-webkit-inner-spin-button,
+.ukchic-qty-input::-webkit-outer-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+
+/* --- Item Price / Total Column --- */
+.ukchic-item-total {
+  font-family: 'Jost', sans-serif !important;
+}
+
+.ukchic-price-regular {
+  font-weight: 600 !important;
+  color: var(--ukc-navy) !important;
+  font-size: 15px !important;
+}
+
+.ukchic-price-now {
+  font-weight: 600 !important;
+  color: var(--ukc-navy) !important;
+  font-size: 15px !important;
+}
+
+.ukchic-price-was {
+  color: var(--ukc-text-muted) !important;
+  font-size: 12px !important;
+}
+
+.ukchic-line-discount {
+  display: inline-block !important;
+  margin-top: 4px !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--ukc-gold) !important;
+  background: rgba(201, 169, 97, 0.1);
+  padding: 2px 6px;
+  border-radius: var(--ukc-radius-sm);
+}
+
+
+/* =============================================
+   FOOTER SECTION
+   ============================================= */
+
+/* Subtotal */
+.ukchic-subtotal-row {
+  padding: 12px 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.ukchic-subtotal-label {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--ukc-text-light) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+}
+
+.ukchic-subtotal-price {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: var(--ukc-navy) !important;
+}
+
+/* Discount row */
+.ukchic-discount-row {
+  padding: 8px 0 !important;
+}
+
+.ukchic-discount-amount {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 13px !important;
+  color: var(--ukc-gold) !important;
+  font-weight: 500 !important;
+}
+
+/* Shipping note */
+.ukchic-shipping-note {
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  color: var(--ukc-text-muted);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.ukchic-cart-page .ukchic-shipping-note {
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+/* Terms */
+.ukchic-terms {
+  margin-bottom: 12px !important;
+}
+
+.ukchic-terms-checkbox {
+  accent-color: var(--ukc-navy);
+}
+
+.ukchic-terms-label {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 12px !important;
+  color: var(--ukc-text-light) !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+
+/* --- Checkout Button --- */
+.ukchic-checkout-btn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 14px 24px !important;
+  background: var(--ukc-navy) !important;
+  color: #ffffff !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  border: none !important;
+  border-radius: var(--ukc-radius) !important;
+  cursor: pointer !important;
+  transition: background 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease !important;
+}
+
+.ukchic-checkout-btn:hover {
+  background: var(--ukc-gold) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 16px rgba(201, 169, 97, 0.3) !important;
+  transform: translateY(-1px);
+}
+
+.ukchic-checkout-btn:active {
+  transform: translateY(0) !important;
+}
+
+.ukchic-checkout-btn svg {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+/* Drawer-specific button override */
+.drawer.ukchic-cart-drawer .btn,
+.drawer.ukchic-cart-drawer .cart__checkout {
+  background: var(--ukc-navy) !important;
+  color: #ffffff !important;
+  border-radius: var(--ukc-radius) !important;
+}
+
+.drawer.ukchic-cart-drawer .btn:hover,
+.drawer.ukchic-cart-drawer .cart__checkout:hover {
+  background: var(--ukc-gold) !important;
+}
+
+
+/* --- Trust Row --- */
+.ukchic-trust-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--ukc-border-light);
+}
+
+.ukchic-trust-row--page {
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.ukchic-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: var(--ukc-text-muted);
+  white-space: nowrap;
+}
+
+.ukchic-trust-item svg {
+  color: var(--ukc-gold);
+  flex-shrink: 0;
+}
+
+
+/* =============================================
+   EMPTY STATE
+   ============================================= */
+
+.ukchic-empty-state {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  padding: 60px 30px !important;
+}
+
+.ukchic-empty-icon {
+  color: var(--ukc-border);
+  margin-bottom: 20px;
+}
+
+.ukchic-empty-icon svg {
+  opacity: 0.5;
+}
+
+.ukchic-empty-title {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  color: var(--ukc-navy) !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.ukchic-empty-subtitle {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 14px !important;
+  color: var(--ukc-text-muted) !important;
+  margin: 0 0 24px 0 !important;
+}
+
+.ukchic-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Jost', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff !important;
+  background: var(--ukc-navy);
+  padding: 12px 28px;
+  border-radius: var(--ukc-radius);
+  text-decoration: none !important;
+  transition: background 0.3s ease, transform 0.15s ease;
+}
+
+.ukchic-empty-cta:hover {
+  background: var(--ukc-gold);
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+
+/* =============================================
+   PAGE CART SPECIFIC
+   ============================================= */
+
+.ukchic-cart-page {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.ukchic-cart-header {
+  text-align: left !important;
+  margin-bottom: 24px !important;
+  padding-bottom: 16px !important;
+  border-bottom: 2px solid var(--ukc-navy) !important;
+}
+
+.ukchic-cart-page-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-size: clamp(26px, 4vw, 34px) !important;
+  font-weight: 600 !important;
+  color: var(--ukc-navy) !important;
+  letter-spacing: -0.3px !important;
+  text-transform: none !important;
+  margin-bottom: 4px !important;
+}
+
+.ukchic-cart-page-icon {
+  color: var(--ukc-gold);
+  flex-shrink: 0;
+}
+
+.ukchic-cart-page-count {
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ukc-text-light);
+}
+
+.ukchic-cart-continue {
+  text-align: left !important;
+}
+
+.ukchic-cart-continue p {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 14px !important;
+  color: var(--ukc-text-light) !important;
+}
+
+.ukchic-cart-continue a {
+  color: var(--ukc-navy) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px !important;
+}
+
+.ukchic-cart-continue a:hover {
+  color: var(--ukc-gold) !important;
+}
+
+/* Cart headers row */
+.ukchic-cart-headers {
+  border-bottom-color: var(--ukc-border) !important;
+  padding-bottom: 12px !important;
+  margin-bottom: 20px !important;
+}
+
+.ukchic-header-product,
+.ukchic-header-qty,
+.ukchic-header-total {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  color: var(--ukc-text-muted) !important;
+}
+
+/* Page cart footer */
+.ukchic-cart-footer {
+  border-top-color: var(--ukc-border) !important;
+  margin-top: 8px !important;
+  padding-top: 24px !important;
+}
+
+/* Page cart empty state */
+.ukchic-page-empty {
+  display: none;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.is-empty .ukchic-page-empty {
+  display: block;
+}
+
+.ukchic-page-empty .ukchic-empty-icon {
+  margin-bottom: 24px;
+}
+
+
+/* --- Order Note --- */
+.ukchic-note-wrap {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ukc-border-light);
+}
+
+.ukchic-note-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.8px !important;
+  text-transform: uppercase !important;
+  color: var(--ukc-text-light) !important;
+  margin-bottom: 8px !important;
+}
+
+.ukchic-note-label svg {
+  color: var(--ukc-gold);
+}
+
+.ukchic-note-textarea {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 13px !important;
+  color: var(--ukc-text) !important;
+  background: var(--ukc-cream) !important;
+  border: 1.5px solid var(--ukc-border) !important;
+  border-radius: var(--ukc-radius) !important;
+  padding: 10px 12px !important;
+  min-height: 70px !important;
+  resize: vertical !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.ukchic-note-textarea:focus {
+  outline: none !important;
+  border-color: var(--ukc-navy) !important;
+}
+
+.ukchic-note-textarea::placeholder {
+  color: var(--ukc-text-muted);
+  font-style: italic;
+}
+
+
+/* =============================================
+   DRAWER ITEM GRID OVERRIDES
+   ============================================= */
+
+/* Drawer: better image sizing */
+.drawer.ukchic-cart-drawer .cart__item {
+  grid-template-columns: 85px 1fr !important;
+  grid-gap: 14px !important;
+  padding-bottom: 16px !important;
+  margin-bottom: 16px !important;
+}
+
+@media only screen and (max-width: 420px) {
+  .drawer.ukchic-cart-drawer .cart__item {
+    grid-template-columns: 72px 1fr !important;
+    grid-gap: 12px !important;
+  }
+}
+
+
+/* =============================================
+   ANIMATIONS
+   ============================================= */
+
+/* Smooth drawer transition */
+.drawer.ukchic-cart-drawer {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Staggered appear for items */
+.ukchic-cart-drawer .appear-animation {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: ukchicFadeUp 0.4s ease forwards;
+}
+
+.ukchic-cart-drawer .appear-delay-1 { animation-delay: 0.05s; }
+.ukchic-cart-drawer .appear-delay-2 { animation-delay: 0.1s; }
+.ukchic-cart-drawer .appear-delay-3 { animation-delay: 0.15s; }
+.ukchic-cart-drawer .appear-delay-4 { animation-delay: 0.2s; }
+.ukchic-cart-drawer .appear-delay-5 { animation-delay: 0.25s; }
+
+@keyframes ukchicFadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Item hover state (page cart) */
+.ukchic-cart-page .ukchic-cart-item:hover {
+  background: var(--ukc-cream);
+  border-radius: var(--ukc-radius);
+  margin-left: -8px;
+  margin-right: -8px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+
+@media only screen and (max-width: 589px) {
+  /* Page cart mobile */
+  .ukchic-cart-page .ukchic-cart-item {
+    padding-bottom: 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .ukchic-cart-header {
+    padding-bottom: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .ukchic-trust-row {
+    gap: 10px;
+  }
+
+  .ukchic-trust-item span {
+    font-size: 10px;
+  }
+
+  .ukchic-subtotal-price {
+    font-size: 20px !important;
+  }
+
+  .ukchic-checkout-btn {
+    padding: 12px 20px !important;
+    font-size: 13px !important;
+  }
+
+  .ukchic-shipping-bar--page {
+    padding: 12px 14px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .ukchic-trust-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ukchic-drawer-title {
+    font-size: 19px !important;
+  }
+}
+
+
+/* Font import is at top of file */

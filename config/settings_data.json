@@ -49,7 +49,7 @@
     "vendor_enable": false,
     "product_save_amount": false,
     "product_save_type": "percent",
-    "product_grid_image_size": "natural",
+    "product_grid_image_size": "square",
     "product_grid_image_fill": true,
     "quick_shop_enable": false,
     "cart_type": "drawer",

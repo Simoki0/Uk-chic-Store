@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap');
-
 /* =============================================
    UK CHIC CART — BRANDED DESIGN SYSTEM
    Cohesive with product page aesthetic
+   Fonts loaded via <link> in theme.liquid
    ============================================= */
 
 /* --- Design Tokens --- */
@@ -921,14 +920,12 @@
   }
 }
 
-/* Item hover state (page cart) */
-.ukchic-cart-page .ukchic-cart-item:hover {
-  background: var(--ukc-cream);
-  border-radius: var(--ukc-radius);
-  margin-left: -8px;
-  margin-right: -8px;
-  padding-left: 8px;
-  padding-right: 8px;
+/* Item hover state (page cart, desktop only) */
+@media only screen and (min-width: 590px) {
+  .ukchic-cart-page .ukchic-cart-item:hover {
+    background: var(--ukc-cream);
+    border-radius: var(--ukc-radius);
+  }
 }
 
 

@@ -265,6 +265,7 @@
       "block_order": [
         "liquid_aCT3hY"
       ],
+      "disabled": true,
       "custom_css": [
         "{margin-top: -40px;}"
       ],
@@ -285,6 +286,7 @@
     },
     "best_sellers_JXEfQb": {
       "type": "best-sellers",
+      "disabled": true,
       "name": "Best Sellers",
       "settings": {
         "heading": "Women's Dresses",
